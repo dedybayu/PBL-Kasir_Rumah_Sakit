@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Kasir_RS{
+public class KasirRS{
     public static void main(String[] args){
         boolean berhasil;
         berhasil = false;
@@ -18,9 +18,9 @@ public class Kasir_RS{
         String password= input.nextLine();
      
         //Deklarasi Password
-        if ((username.equals("rscintajava")) && (password.equals("javasejati"))){
+        if ((username.equals("alek")) && (password.equals("alek"))){
         berhasil = true;
-            String kamar;
+            int kamar;
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|           Selamat Datang di Kasir           |");
             System.out.println("|           Rumah Sakit Cina Sejati           |");
@@ -32,11 +32,12 @@ public class Kasir_RS{
             System.out.println("|             3. BPJS                         |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.print("Masukan  Pilihan: ");
-            kamar = input.nextLine();
+            kamar = input.nextInt();
 
-            int lamaInapVIP, lamaInapReg, lamaInapBPJS, obat, konsumsi, total; 
-
-            if (kamar.equals ("1")){
+            int lamaInapVIP, lamaInapReg, lamaInapBPJS, obat, konsumsi, total, bayar, kembalian; 
+            
+            switch (kamar){
+            case 1:
                 System.out.print("Lama Menginap (Hari)     : ");
                 lamaInapVIP = input.nextInt();
                 System.out.print("Layanan Obat per Perhari : ");
@@ -47,8 +48,13 @@ public class Kasir_RS{
                 total = (1000000*lamaInapVIP) + (obat*100000*lamaInapVIP) + (konsumsi*50000*lamaInapVIP);
 
                 System.out.println("Total Tagihan            : " + total);
-            }
-            else if (kamar.equals ("2")){
+                System.out.print("Bayar Sekarang           : ");
+                bayar = input.nextInt();
+                kembalian = bayar - total;
+                System.out.print("Kembalian                : " + kembalian);
+            break;
+
+            case 2:
                 System.out.print("Lama Menginap (Hari)     : ");
                 lamaInapReg = input.nextInt();
                 System.out.print("Layanan Obat per Perhari : ");
@@ -59,8 +65,13 @@ public class Kasir_RS{
                 total = (700000*lamaInapReg) + (obat*100000*lamaInapReg) + (konsumsi*50000*lamaInapReg);
 
                 System.out.println("Total Tagihan            : " + total);
-            }
-            else if (kamar.equals ("3")){
+                System.out.print("Bayar Sekarang           : ");
+                bayar = input.nextInt();
+                kembalian = bayar - total;
+                System.out.print("Kembalian                : " + kembalian);
+            break;
+
+            case 3:
                 System.out.print("Lama Menginap (Hari)     : ");
                 lamaInapBPJS = input.nextInt();
                 System.out.print("Layanan Obat per Perhari : ");
@@ -70,10 +81,15 @@ public class Kasir_RS{
                 
                 total = (500000*lamaInapBPJS) + (obat*100000*lamaInapBPJS) + (konsumsi*50000*lamaInapBPJS);
 
-                System.out.println("Total Tagihan            : " + total);            
-            }
-            else{
-                System.out.println("eror");
+                System.out.println("Total Tagihan            : " + total);  
+                System.out.print("Bayar Sekarang           : ");
+                bayar = input.nextInt();
+                kembalian = bayar - total;
+                System.out.print("Kembalian                : " + kembalian);          
+            break;
+            
+            default:
+                System.out.println("Errorrr");
             }
 
         }
