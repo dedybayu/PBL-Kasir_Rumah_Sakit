@@ -155,7 +155,7 @@ public class KasirRS{
                         System.out.println(" ");
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                         System.out.println("|        Username Atau Passwordmu Salah       |");
-                        System.out.println("|              Masukan yang Benar             |");
+                        System.out.println("|              Masukan yang Benar             |"); 
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++"); 
                     }
 
@@ -168,7 +168,7 @@ public class KasirRS{
             break;
 
             default:
-            System.out.println("Masukan Angka 1 atau 2");
+            System.out.println("Masukan Angka 1 atau 2"); // Input harus angka 1 atau 2
         }
 
         
