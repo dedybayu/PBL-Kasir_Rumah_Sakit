@@ -57,7 +57,9 @@ public class KasirRS{
                             System.out.print("Masukan  Pilihan: ");
                             int kamar = inputAdm.nextInt();
 
-                            int lamaInapVIP, lamaInapReg, lamaInapBPJS, obat, konsumsi, total, bayar, kembalian; 
+                            int lamaInapVIP, lamaInapReg, lamaInapBPJS, obat, konsumsi, total, bayar, kembalian;
+                            int donasi=0, kembalianAkir=0; 
+                            // String apaDonasi;
 
                             switch (kamar){
                             case 1:
@@ -75,9 +77,62 @@ public class KasirRS{
                                 bayar = inputAdm.nextInt();
                                 kembalian = bayar - total;
                                 System.out.println("Kembalian                : " + kembalian);
+                                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                String bug = inputAdm.nextLine();
 
-                                System.out.println("Nama Pasien " + namaPasien);
-                                System.out.println("Nomer HP Pasien " + nomerhpPasien);
+                                //Donasi Kemanusiaan
+                                System.out.print("Donasikan Kembalian  y/n : ");
+                                String apaDonasi = inputAdm.nextLine();
+
+                                if (apaDonasi.equalsIgnoreCase("y")){
+                                    System.out.print("Donasikan Semuanya? y/n  : ");
+                                    String apaDonasiSemua = inputAdm.nextLine();
+
+                                    if (apaDonasiSemua.equalsIgnoreCase("y")){
+                                        donasi = kembalian;
+                                    } 
+                                    else if (apaDonasiSemua.equalsIgnoreCase("n")){
+                                        System.out.print("Masukan Besar Donasi     :");
+                                        donasi = inputAdm.nextInt();                                        
+                                    }
+                                        kembalianAkir = kembalian - donasi;
+
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("|              Bukti Pembayaran               |");
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("| => Nama Pasien     : " + namaPasien);
+                                        System.out.println("| => Alamat Pasien   : " + alamatPasien);
+                                        System.out.println("| => Nomer HP Pasien : " + nomerhpPasien);
+                                        System.out.println("| => Penyakit Pasien : " + penyakitPasien);
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("| => Total Tagihan   : " + total);
+                                        System.out.println("| => Total Bayar     : " + bayar);
+                                        System.out.println("| => Total Kembalian : " + kembalian);
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("| => Total Donasi    : " + donasi);
+                                        System.out.println("| => Kembalian Akhir : " + kembalianAkir);
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("|              Bukti Pembayaran               |");
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+
+                                } 
+                                else if (apaDonasi.equalsIgnoreCase("n")) {
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("|              Bukti Pembayaran               |");
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("| => Nama Pasien     : " + namaPasien);
+                                        System.out.println("| => Alamat Pasien   : " + alamatPasien);
+                                        System.out.println("| => Nomer HP Pasien : " + nomerhpPasien);
+                                        System.out.println("| => Penyakit Pasien : " + penyakitPasien);
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("| => Total Tagihan   : " + total);
+                                        System.out.println("| => Total Bayar     : " + bayar);
+                                        System.out.println("| => Total Kembalian : " + kembalian);
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                        System.out.println("|              Bukti Pembayaran               |");
+                                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                }
+                                                                
                             break;
 
                             case 2:
@@ -115,7 +170,7 @@ public class KasirRS{
                             break;
                         
                             default:
-                                System.out.println("Errorrr");
+                                System.out.println("Input tidak sesuai");
                             }
 
                         }
