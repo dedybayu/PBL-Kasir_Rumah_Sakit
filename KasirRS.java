@@ -36,8 +36,11 @@ public class KasirRS{
                             System.out.println("|            Selamat Datang Admin             |");
                             System.out.println("|           Rumah Sakit Cina Sejati           |");
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.println("|          1. Masukan Biodata Pasien          |");
+                            System.out.println("|          1. Daftarkan Pasien                |");
+                            System.out.println("|          2. Cek Ketersediaan Kamar          |");
+                            System.out.println("|          3. Logout                          |");
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                            //Bakale enek Switch Case
                             System.out.print("=> Nama Pasien          : ");
                             String namaPasien = inputAdm.nextLine();
                             System.out.print("=> Alamat               : ");
@@ -47,7 +50,7 @@ public class KasirRS{
                             System.out.print("=> Penyakit             : ");
                             String penyakitPasien = inputAdm.nextLine();
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.print("=> Perlu Rawat Inap y/n :");
+                            System.out.print("=> Perlu Rawat Inap y/n : ");
                             String perluInap = inputAdm.nextLine();
 
                             //Jika Perlu Rawat Inap
@@ -64,7 +67,7 @@ public class KasirRS{
 
                                 int lamaInapVIP, lamaInapReg, lamaInapBersama, obat, konsumsi, total, bayar, kembalian;
                                 int donasi=0, kembalianAkir=0; 
-                                // String apaDonasi;
+                                String apaDonasi, apaDonasiSemua;
 
                                 switch (kamar){
                                 case 1:
@@ -83,15 +86,15 @@ public class KasirRS{
                                     kembalian = bayar - total;
                                     System.out.println("Kembalian                : " + kembalian);
                                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                                    String bug = inputAdm.nextLine();
+                                    inputAdm.nextLine(); // TAMBAL BUGGGGGG
 
                                     //Donasi Kemanusiaan
                                     System.out.print("Donasikan Kembalian  y/n : ");
-                                    String apaDonasi = inputAdm.nextLine();
+                                    apaDonasi = inputAdm.nextLine();
 
                                     if (apaDonasi.equalsIgnoreCase("y")){
                                         System.out.print("Donasikan Semuanya? y/n  : ");
-                                        String apaDonasiSemua = inputAdm.nextLine();
+                                        apaDonasiSemua = inputAdm.nextLine();
 
                                         if (apaDonasiSemua.equalsIgnoreCase("y")){
                                             donasi = kembalian;
@@ -101,7 +104,11 @@ public class KasirRS{
                                             donasi = inputAdm.nextInt();                                        
                                         }
                                             kembalianAkir = kembalian - donasi;
+                                    } 
 
+                                    else if (apaDonasi.equalsIgnoreCase("n")) {
+                                        donasi = 0;
+                                    }
                                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                                             System.out.println("|              Bukti Pembayaran               |");
                                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
@@ -118,26 +125,7 @@ public class KasirRS{
                                             System.out.println("| => Kembalian Akhir : " + kembalianAkir);
                                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                                             System.out.println("|              Bukti Pembayaran               |");
-                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-
-                                    } 
-                                    else if (apaDonasi.equalsIgnoreCase("n")) {
-                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                                            System.out.println("|              Bukti Pembayaran               |");
-                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                                            System.out.println("| => Nama Pasien     : " + namaPasien);
-                                            System.out.println("| => Alamat Pasien   : " + alamatPasien);
-                                            System.out.println("| => Nomer HP Pasien : " + nomerhpPasien);
-                                            System.out.println("| => Penyakit Pasien : " + penyakitPasien);
-                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                                            System.out.println("| => Total Tagihan   : " + total);
-                                            System.out.println("| => Total Bayar     : " + bayar);
-                                            System.out.println("| => Total Kembalian : " + kembalian);
-                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                                            System.out.println("|              Bukti Pembayaran               |");
-                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                                    }
-                                                                    
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");                         
                                 break;
 
                                 case 2:
@@ -155,6 +143,47 @@ public class KasirRS{
                                     bayar = inputAdm.nextInt();
                                     kembalian = bayar - total;
                                     System.out.println("Kembalian                : " + kembalian);
+                                    inputAdm.nextLine(); // TAMBAL BUGGGGGG
+
+                                    //Donasi Kemanusiaan
+                                    System.out.print("Donasikan Kembalian  y/n : ");
+                                    apaDonasi = inputAdm.nextLine();
+
+                                    if (apaDonasi.equalsIgnoreCase("y")){
+                                        System.out.print("Donasikan Semuanya? y/n  : ");
+                                        apaDonasiSemua = inputAdm.nextLine();
+
+                                        if (apaDonasiSemua.equalsIgnoreCase("y")){
+                                            donasi = kembalian;
+                                        } 
+                                        else if (apaDonasiSemua.equalsIgnoreCase("n")){
+                                            System.out.print("Masukan Besar Donasi     : ");
+                                            donasi = inputAdm.nextInt();                                        
+                                        }
+                                            kembalianAkir = kembalian - donasi;
+                                    } 
+
+                                    else if (apaDonasi.equalsIgnoreCase("n")) {
+                                        donasi = 0;
+                                    }
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("|              Bukti Pembayaran               |");
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("| => Nama Pasien     : " + namaPasien);
+                                            System.out.println("| => Alamat Pasien   : " + alamatPasien);
+                                            System.out.println("| => Nomer HP Pasien : " + nomerhpPasien);
+                                            System.out.println("| => Penyakit Pasien : " + penyakitPasien);
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("| => Total Tagihan   : " + total);
+                                            System.out.println("| => Total Bayar     : " + bayar);
+                                            System.out.println("| => Total Kembalian : " + kembalian);
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("| => Total Donasi    : " + donasi);
+                                            System.out.println("| => Kembalian Akhir : " + kembalianAkir);
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("|              Bukti Pembayaran               |");
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                    
                                 break;
 
                                 case 3:
@@ -171,10 +200,51 @@ public class KasirRS{
                                     System.out.print("Bayar Sekarang           : ");
                                     bayar = inputAdm.nextInt();
                                     kembalian = bayar - total;
-                                    System.out.println("Kembalian                : " + kembalian);          
+                                    System.out.println("Kembalian                : " + kembalian);
+                                    inputAdm.nextLine(); // TAMBAL BUGGGGGG
+
+                                    //Donasi Kemanusiaan
+                                    System.out.print("Donasikan Kembalian  y/n : ");
+                                    apaDonasi = inputAdm.nextLine();
+
+                                    if (apaDonasi.equalsIgnoreCase("y")){
+                                        System.out.print("Donasikan Semuanya? y/n  : ");
+                                        apaDonasiSemua = inputAdm.nextLine();
+
+                                        if (apaDonasiSemua.equalsIgnoreCase("y")){
+                                            donasi = kembalian;
+                                        } 
+                                        else if (apaDonasiSemua.equalsIgnoreCase("n")){
+                                            System.out.print("Masukan Besar Donasi     : ");
+                                            donasi = inputAdm.nextInt();                                        
+                                        }
+                                            kembalianAkir = kembalian - donasi;
+                                    } 
+
+                                    else if (apaDonasi.equalsIgnoreCase("n")) {
+                                        donasi = 0;
+                                    }
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("|              Bukti Pembayaran               |");
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("| => Nama Pasien     : " + namaPasien);
+                                            System.out.println("| => Alamat Pasien   : " + alamatPasien);
+                                            System.out.println("| => Nomer HP Pasien : " + nomerhpPasien);
+                                            System.out.println("| => Penyakit Pasien : " + penyakitPasien);
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("| => Total Tagihan   : " + total);
+                                            System.out.println("| => Total Bayar     : " + bayar);
+                                            System.out.println("| => Total Kembalian : " + kembalian);
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("| => Total Donasi    : " + donasi);
+                                            System.out.println("| => Kembalian Akhir : " + kembalianAkir);
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                            System.out.println("|              Bukti Pembayaran               |");
+                                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");          
                                 break;
-                            
+
                                 default:
+                                
                                     System.out.println("Input tidak sesuai");
                                 }
                                 
@@ -220,7 +290,25 @@ public class KasirRS{
                         System.out.println("|           Selamat Datang Manager            |");
                         System.out.println("|           Rumah Sakit Cina Sejati           |");
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                        System.out.println("|                  Pilih Menu                 |");
+                        System.out.println("|              1. Laporan Keuangan            |");
+                        System.out.println("|              2. Riwayat Transaksi           |");
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                        System.out.print("Pilih Menu : ");
+                        int menuMnjr = inputMnjr.nextInt();
 
+                        switch (menuMnjr) {
+                            case 1:
+                                System.out.println("Ini Nanti ada Laporan Keuangan");
+                                break;
+                            case 2:
+                                System.out.println("Ini Nanti ada Menu Riwayat Pasien");
+                                break;
+                            default:
+                                System.out.println("Input Salah");
+                                break;
+                        }
+                        
                     } else{  //Jika Password Manager Salah
                         System.out.println(" ");
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
