@@ -5,7 +5,7 @@ public class KasirRS{
 
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("|           Selamat Datang di Kasir           |");
-        System.out.println("|            Rumah Sakit Cina Java            |");
+        System.out.println("|           Rumah Sakit Cinta Java            |");
         System.out.println("|                Silahkan Login               |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("|           1. Login Sebagai Admin            |"); 
@@ -20,14 +20,18 @@ public class KasirRS{
                 System.out.println("Input Invalid, Masukan Lagi");
             }
         } while (!((loginSbg == 1)||(loginSbg ==2)));
-        
+
         //Pilihan Login Sebagai Admin atau Manager
         switch (loginSbg){
             case 1:
-                System.out.println("\nAnda Admin");
+                //System.out.println("\nAnda Admin");
+                System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
+                System.out.println("|        Anda akan login sebagai Admin        |");
+                System.out.println("|    Silahkan masukan Username dan Password   |");
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                 Scanner inputAdm = new Scanner(System.in);  // Variable Scanner untuk Admin
-                String userAdm;
-                String passAdm;
+
+                String userAdm, passAdm;
                 int attemptAdmin = 0;
                     do {
                         System.out.print("=> Masukan Username : ");
@@ -51,9 +55,9 @@ public class KasirRS{
                         System.exit(0);
                     }
   
-                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println("|            Selamat Datang Admin             |");
-                    System.out.println("|           Rumah Sakit Cina Sejati           |");
+                    System.out.println("|           Rumah Sakit Cinta Java            |");
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println("|          1. Daftarkan Pasien                |");
                     System.out.println("|          2. Bayar Tagihan Pasien            |");            
@@ -233,7 +237,8 @@ public class KasirRS{
                                     donasi = 0;
                                 }
                             }
-                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                            //Nota/Bukti Pembayaran
+                            System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("|              Bukti Pembayaran               |");
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("| => Nama Pasien     : " + namaPasien);
@@ -251,7 +256,6 @@ public class KasirRS{
                             System.out.println("|              Bukti Pembayaran               |");
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
 
-                            
 
                         //Tidak Rawat Inap
                         } else if (perluInap.equalsIgnoreCase("n")){
@@ -274,9 +278,15 @@ public class KasirRS{
                     }
             break;
 
+
+            
             case 2:  //Login Sebagai Manager
                 Scanner inputMnjr = new Scanner(System.in);
-                System.out.println("Anda Manager");
+                //System.out.println("Anda Manager");
+                System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
+                System.out.println("|       Anda akan login sebagai Manager       |");
+                System.out.println("|    Silahkan masukan Username dan Password   |");
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                 String userMan, passMan;
 
                 int attemptManager = 0;
@@ -304,7 +314,7 @@ public class KasirRS{
                 
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println("|           Selamat Datang Manager            |");
-                    System.out.println("|           Rumah Sakit Cina Sejati           |");
+                    System.out.println("|           Rumah Sakit Cinta Java            |");
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.println("|                  Pilih Menu                 |");
                     System.out.println("|              1. Laporan Keuangan            |");
