@@ -11,9 +11,16 @@ public class KasirRS{
         System.out.println("|           1. Login Sebagai Admin            |"); 
         System.out.println("|           2. Login Sebagai Manager          |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.print("=> Login Sebagai : ");
-        int loginSbg = input.nextInt();
-
+        int loginSbg;
+        
+        do {
+            System.out.print("=> Login Sebagai : ");
+            loginSbg = input.nextInt();
+            if (!((loginSbg == 1)||(loginSbg ==2))){
+                System.out.println("Input Invalid, Masukan Lagi");
+            }
+        } while (!((loginSbg == 1)||(loginSbg ==2)));
+        
         //Pilihan Login Sebagai Admin atau Manager
         switch (loginSbg){
             case 1:
@@ -27,13 +34,15 @@ public class KasirRS{
                         userAdm = inputAdm.nextLine();
                         System.out.print("=> Masukan Password : ");
                         passAdm = inputAdm.nextLine();
-
+                        
                         if(!((userAdm.equals("alek")) && (passAdm.equals("alek")))){
                             attemptAdmin++;
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("|        Username Atau Passwordmu Salah       |");
                             System.out.println("|              Masukan yang Benar             |"); 
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++"); 
+                        } else {
+                            break;
                         }
 
                     } while (attemptAdmin < 3);
@@ -90,10 +99,10 @@ public class KasirRS{
                             do {
                                 System.out.print("=> Masukan  Pilihan: ");
                                 kamar = inputAdm.nextInt();
-                                if (!((kamar >= 1)&&(kamar <= 3))) {
+                                if (!((kamar >= 1)&&(kamar <= 4))) {
                                     System.out.printf("Pilihan %d Tidak tersedia Masukan Lagi!\n", kamar);
                                 }
-                            } while (!((kamar >= 1)&&(kamar <= 3)));
+                            } while (!((kamar >= 1)&&(kamar <= 4)));
 
                             int lamaInapVIP, lamaInapReg, lamaInapBersama, obat, konsumsi, total=0, bayar=0, kembalian=0;
                             int donasi=0, kembalianAkir=0; 
@@ -283,6 +292,8 @@ public class KasirRS{
                             System.out.println("|        Username Atau Passwordmu Salah       |");
                             System.out.println("|              Masukan yang Benar             |"); 
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++"); 
+                        } else {
+                            break;
                         }
 
                     } while (attemptManager < 3);
@@ -291,29 +302,37 @@ public class KasirRS{
                         System.exit(0);
                     }
                 
-                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                        System.out.println("|           Selamat Datang Manager            |");
-                        System.out.println("|           Rumah Sakit Cina Sejati           |");
-                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                        System.out.println("|                  Pilih Menu                 |");
-                        System.out.println("|              1. Laporan Keuangan            |");
-                        System.out.println("|              2. Riwayat Transaksi           |");
-                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                        System.out.print("Pilih Menu : ");
-                        int menuMnjr = inputMnjr.nextInt();
-
-                        switch (menuMnjr) {
-                            case 1:
-                                System.out.println("Ini Nanti ada Laporan Keuangan");
-                                break;
-                            case 2:
-                                System.out.println("Ini Nanti ada Menu Riwayat Pasien");
-                                break;
-                            default:
-                                System.out.println("Input Salah");
-                                break;
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("|           Selamat Datang Manager            |");
+                    System.out.println("|           Rumah Sakit Cina Sejati           |");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("|                  Pilih Menu                 |");
+                    System.out.println("|              1. Laporan Keuangan            |");
+                    System.out.println("|              2. Riwayat Transaksi           |");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                    int menuMnjr;
+                    do {
+                        System.out.print("=> Pilih Menu : ");
+                        menuMnjr = inputMnjr.nextInt();
+                        
+                        if (!((menuMnjr == 1)||(menuMnjr==2))){
+                            System.out.println("Input Salah, Masukan Lagi");
                         }
+                    } while (!((menuMnjr == 1)||(menuMnjr==2)));
 
+
+                    switch (menuMnjr) {
+                        case 1:
+                            System.out.println("Ini Nanti ada Laporan Keuangan");
+                            break;
+                        case 2:
+                            System.out.println("Ini Nanti ada Menu Riwayat Transaksi");
+                            break;
+                        default:
+                            System.out.println("Input Salah");
+                            break;
+                    }
+                        
             break;
 
             default:
