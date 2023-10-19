@@ -86,8 +86,17 @@ public class KasirRS{
                         System.out.print("=> Penyakit             : ");
                         String penyakitPasien = inputAdm.nextLine();
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                        System.out.print("=> Perlu Rawat Inap y/n : ");
-                        String perluInap = inputAdm.nextLine();
+                        String perluInap;
+                        do {
+                            System.out.print("=> Perlu Rawat Inap y/n : ");
+                            perluInap = inputAdm.nextLine();
+
+                            if (!((perluInap.equalsIgnoreCase("y")||(perluInap.equalsIgnoreCase("n"))))) {
+                                System.out.printf("Input %s Invalid masukan Y/N!\n", perluInap);
+                            }
+                        } while (!((perluInap.equalsIgnoreCase("y")||(perluInap.equalsIgnoreCase("n")))));
+
+                        
 
                         //Jika Perlu Rawat Inap
                         if (perluInap.equalsIgnoreCase("y")){
@@ -119,44 +128,51 @@ public class KasirRS{
                                 System.out.println("|          => Rp. 100.000,00   /Obat          |");
                                 System.out.println("|          => Rp. 50.000,00    /Konsumsi      |");
                                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                                    System.out.print("=> Lama Menginap (Hari)     : ");
-                                    lamaInapVIP = inputAdm.nextInt();
-                                    System.out.print("=> Layanan Obat per Perhari : ");
-                                    obat = inputAdm.nextInt();
-                                    System.out.print("=> Layanan Konsumsi Perhari : ");
-                                    konsumsi = inputAdm.nextInt();
-                                
-                                    total = (1000000*lamaInapVIP) + (obat*100000*lamaInapVIP) + (konsumsi*50000*lamaInapVIP);
+                                System.out.print("=> Lama Menginap (Hari)     : ");
+                                lamaInapVIP = inputAdm.nextInt();
+                                System.out.print("=> Layanan Obat per Perhari : ");
+                                obat = inputAdm.nextInt();
+                                System.out.print("=> Layanan Konsumsi Perhari : ");
+                                konsumsi = inputAdm.nextInt();
+                            
+                                total = (1000000*lamaInapVIP) + (obat*100000*lamaInapVIP) + (konsumsi*50000*lamaInapVIP);
 
-                                    System.out.println("== Total Tagihan            : " + total);
-                                    System.out.print("=> Bayar Sekarang           : ");
-                                    bayar = inputAdm.nextInt();
-                                    kembalian = bayar - total;
-                                    System.out.println("== Kembalian                : " + kembalian);
-                                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                                    inputAdm.nextLine(); // TAMBAL BUGGGGGG
+                                System.out.println("== Total Tagihan            : " + total);
+                                System.out.print("=> Bayar Sekarang           : ");
+                                bayar = inputAdm.nextInt();
+                                kembalian = bayar - total;
+                                System.out.println("== Kembalian                : " + kembalian);
+                                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                                inputAdm.nextLine(); // TAMBAL BUGGGGGG
 
-                                    //Donasi Kemanusiaan
-                                    System.out.print("=> Donasikan Kembalian  y/n : ");
+                                //Donasi Kemanusiaan
+                                do {
+                                   System.out.print("=> Donasikan Kembalian  y/n : ");
                                     apaDonasi = inputAdm.nextLine();
-
-                                    if (apaDonasi.equalsIgnoreCase("y")){
-                                        System.out.print("=> Donasikan Semuanya? y/n  : ");
-                                        apaDonasiSemua = inputAdm.nextLine();
-
-                                        if (apaDonasiSemua.equalsIgnoreCase("y")){
-                                            donasi = kembalian;
-                                        } 
-                                        else if (apaDonasiSemua.equalsIgnoreCase("n")){
-                                            System.out.print("=> Masukan Besar Donasi     : ");
-                                            donasi = inputAdm.nextInt();                                        
-                                        }
-                                            kembalianAkir = kembalian - donasi;
-                                    } 
-
-                                    else if (apaDonasi.equalsIgnoreCase("n")) {
-                                        donasi = 0;
+                                    if (!((apaDonasi.equalsIgnoreCase("y")||(apaDonasi.equalsIgnoreCase("n"))))) {
+                                        System.out.printf("Input %s Invalid masukan Y/N!\n", perluInap);
                                     }
+
+                                } while (!((apaDonasi.equalsIgnoreCase("y"))||(apaDonasi.equalsIgnoreCase("n"))));
+                                
+
+                                if (apaDonasi.equalsIgnoreCase("y")){
+                                    System.out.print("=> Donasikan Semuanya? y/n  : ");
+                                    apaDonasiSemua = inputAdm.nextLine();
+
+                                    if (apaDonasiSemua.equalsIgnoreCase("y")){
+                                        donasi = kembalian;
+                                    } 
+                                    else if (apaDonasiSemua.equalsIgnoreCase("n")){
+                                        System.out.print("=> Masukan Besar Donasi     : ");
+                                        donasi = inputAdm.nextInt();                                        
+                                    }
+                                        kembalianAkir = kembalian - donasi;
+                                } 
+
+                                else if (apaDonasi.equalsIgnoreCase("n")) {
+                                    donasi = 0;
+                                }
 
                             } else if (kamar == 2){
                                 System.out.print("=> Lama Menginap (Hari)     : ");
@@ -333,7 +349,10 @@ public class KasirRS{
 
                     switch (menuMnjr) {
                         case 1:
-                            System.out.println("Ini Nanti ada Laporan Keuangan");
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                            System.out.println("|       Anda akan login sebagai Manager       |");
+                            System.out.println("|    Silahkan masukan Username dan Password   |");
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                             break;
                         case 2:
                             System.out.println("Ini Nanti ada Menu Riwayat Transaksi");
