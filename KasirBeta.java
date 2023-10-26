@@ -17,15 +17,7 @@ public class KasirBeta {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int loginSbg;
 
-            // do {
-            // System.out.print("=> Login Sebagai : ");
-            // loginSbg = input.nextInt();
-            // if (!((loginSbg == 1) || (loginSbg == 2))) {
-            // System.out.println("Input Invalid, Masukan Lagi");
-            // }
-            // } while (!((loginSbg == 1) || (loginSbg == 2)));
-
-            do {
+            do { // Looping jika input tidak sesuai
                 System.out.print("=> Login Sebagai : ");
                 if (input.hasNextInt()) {
                     loginSbg = input.nextInt();
@@ -53,7 +45,7 @@ public class KasirBeta {
                     break;
 
                 case 3:
-                System.out.print("Konfirmasi Keluar y/n : ");
+                    System.out.print("Konfirmasi Keluar y/n : ");
                     char exit = input.nextLine().charAt(0);
 
                     if ((exit == 'n') || (exit == 'N')) {
@@ -61,12 +53,11 @@ public class KasirBeta {
                     } else if ((exit == 'y') || (exit == 'Y')) {
                         System.exit(0);
                     }
-                    
-                    
+
                     // break;
 
                 default:
-                    System.out.println("Masukan Angka 1 atau 2");
+                    System.out.println("Pilihan Tidak Tersedia");
             }
         }
     }
@@ -110,11 +101,7 @@ public class KasirBeta {
             System.out.println("Anda gagal login sebanyak 3 kali. Program keluar.");
             System.exit(0);
         }
-        // String[] namaPasien = new String[10], alamatPasien = new String[10],
-        // nomerhpPasien = new String[10];
-        // String[] penyakitPasien = new String[10];
 
-        // int idx = 1;
         while (idx < namaPasien.length) {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|            Selamat Datang Admin             |");
@@ -128,7 +115,7 @@ public class KasirBeta {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int menuAdmin;
 
-            do {
+            do { // Looping jika input tidak sesuai
                 System.out.print("=> Pilih Menu : ");
                 if (inputAdm.hasNextInt()) {
                     menuAdmin = inputAdm.nextInt();
@@ -183,13 +170,21 @@ public class KasirBeta {
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                         int kamar;
 
-                        do {
-                            System.out.print("=> Masukan  Pilihan: ");
-                            kamar = inputAdm.nextInt();
-                            if (!((kamar >= 1) && (kamar <= 4))) {
-                                System.out.printf("Pilihan %d Tidak tersedia Masukan Lagi!\n", kamar);
+                        do { // Looping jika input tidak sesuai
+                            System.out.print("=> Masukan Pilihan : ");
+                            if (inputAdm.hasNextInt()) {
+                                kamar = inputAdm.nextInt();
+                                if (kamar >= 1 && kamar <= 3) {
+                                    break; // Keluar dari perulangan jika masukan sesuai
+                                } else {
+                                    System.out.println("Tidak Tersedia. Masukan Angka 1 - 3 Sesuai Menu");
+                                }
+                            } else {
+                                inputAdm.next(); // Membersihkan masukan yang tidak valid
+                                System.out.println("Input Invalid. Harap masukkan angka.");
                             }
-                        } while (!((kamar >= 1) && (kamar <= 4)));
+                        } while (true);
+                        inputAdm.nextLine();
 
                         int lamaInapVIP, lamaInapReg, lamaInapBersama, obat, konsumsi, total = 0, bayar = 0,
                                 kembalian = 0;
@@ -331,10 +326,10 @@ public class KasirBeta {
                         System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
                         System.out.println("|              Bukti Pembayaran               |");
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                        System.out.println("| => Nama Pasien     : " + namaPasien);
-                        System.out.println("| => Alamat Pasien   : " + alamatPasien);
-                        System.out.println("| => Nomer HP Pasien : " + nomerhpPasien);
-                        System.out.println("| => Penyakit Pasien : " + penyakitPasien);
+                        System.out.println("| => Nama Pasien     : " + namaPasien[idx]);
+                        System.out.println("| => Alamat Pasien   : " + alamatPasien[idx]);
+                        System.out.println("| => Nomer HP Pasien : " + nomerhpPasien[idx]);
+                        System.out.println("| => Penyakit Pasien : " + penyakitPasien[idx]);
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                         System.out.println("| => Total Tagihan   : " + total);
                         System.out.println("| => Total Bayar     : " + bayar);
@@ -344,7 +339,7 @@ public class KasirBeta {
                         System.out.println("| => Kembalian Akhir : " + kembalianAkir);
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                         System.out.println("|              Bukti Pembayaran               |");
-                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++\n");
 
                         // Tidak Rawat Inap
                     } else if (perluInap.equalsIgnoreCase("n")) {
@@ -442,7 +437,7 @@ public class KasirBeta {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int menuManager;
 
-            do {
+            do { // Looping jika input tidak sesuai
                 System.out.print("=> Pilih Menu : ");
                 if (inputMnjr.hasNextInt()) {
                     menuManager = inputMnjr.nextInt();
