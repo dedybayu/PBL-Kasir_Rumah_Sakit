@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class KasirBeta {
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
@@ -12,16 +13,25 @@ public class KasirBeta {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|           1. Login Sebagai Admin            |");
             System.out.println("|           2. Login Sebagai Manager          |");
+            System.out.println("|           3. Keluar                         |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int loginSbg;
 
-            do {
+            do { // Looping jika input tidak sesuai
                 System.out.print("=> Login Sebagai : ");
-                loginSbg = input.nextInt();
-                if (!((loginSbg == 1) || (loginSbg == 2))) {
-                    System.out.println("Input Invalid, Masukan Lagi");
+                if (input.hasNextInt()) {
+                    loginSbg = input.nextInt();
+                    if (loginSbg >= 1 && loginSbg <= 3) {
+                        break; // Keluar dari perulangan jika masukan sesuai
+                    } else {
+                        System.out.println("Tidak Tersedia. Masukan Angka 1, 2 atau 3 Sesuai Menu");
+                    }
+                } else {
+                    input.next(); // Membersihkan masukan yang tidak valid
+                    System.out.println("Input Invalid. Harap masukkan angka.");
                 }
-            } while (!((loginSbg == 1) || (loginSbg == 2)));
+            } while (true);
+            input.nextLine();
 
             switch (loginSbg) {
                 case 1:
@@ -34,11 +44,30 @@ public class KasirBeta {
                     loginManager(input);
                     break;
 
+                case 3:
+                    System.out.print("Konfirmasi Keluar y/n : ");
+                    char exit = input.nextLine().charAt(0);
+
+                    if ((exit == 'n') || (exit == 'N')) {
+                        break;
+                    } else if ((exit == 'y') || (exit == 'Y')) {
+                        System.exit(0);
+                    }
+
+                    // break;
+
                 default:
-                    System.out.println("Masukan Angka 1 atau 2");
+                    System.out.println("Pilihan Tidak Tersedia");
             }
         }
     }
+
+    // Deklarasi Variable Array untuk Menyimpan Data Pasien
+    private static String[] namaPasien = new String[10];
+    private static String[] alamatPasien = new String[10];
+    private static String[] nomerhpPasien = new String[10];
+    private static String[] penyakitPasien = new String[10];
+    private static int idx = 0;
 
     // Method untuk login sebagai Admin
     private static void loginAdmin(Scanner input) {
@@ -73,7 +102,7 @@ public class KasirBeta {
             System.exit(0);
         }
 
-        while (true) {
+        while (idx < namaPasien.length) {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|            Selamat Datang Admin             |");
             System.out.println("|           Rumah Sakit Cinta Java            |");
@@ -81,33 +110,46 @@ public class KasirBeta {
             System.out.println("|          1. Daftarkan Pasien                |");
             System.out.println("|          2. Bayar Tagihan Pasien            |");
             System.out.println("|          3. Cek Ketersediaan Kamar          |");
-            System.out.println("|          4. Logout                          |");
+            System.out.println("|          4. Data Pasien                     |");
+            System.out.println("|          5. Logout                          |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int menuAdmin;
 
-            do {
+            do { // Looping jika input tidak sesuai
                 System.out.print("=> Pilih Menu : ");
-                menuAdmin = input.nextInt();
-                if (!((menuAdmin == 1) || (menuAdmin == 2) || (menuAdmin == 3) || (menuAdmin == 4))) {
-                    System.out.println("Pilihan Tidak Tersedia, Masukan Angka 1, 2, 3, atau 4 Sesuai Menu");
+                if (inputAdm.hasNextInt()) {
+                    menuAdmin = inputAdm.nextInt();
+                    if (menuAdmin >= 1 && menuAdmin <= 5) {
+                        break; // Keluar dari perulangan jika masukan sesuai
+                    } else {
+                        System.out.println("Tidak Tersedia. Masukan Angka 1 - 5 Sesuai Menu");
+                    }
+                } else {
+                    inputAdm.next(); // Membersihkan masukan yang tidak valid
+                    System.out.println("Input Invalid. Harap masukkan angka.");
                 }
-            } while (!((menuAdmin == 1) || (menuAdmin == 2) || (menuAdmin == 3) || (menuAdmin == 4)));
+            } while (true);
+            inputAdm.nextLine();
 
             switch (menuAdmin) {
+
                 case 1:
                     // Menu Daftarkan Pasien
-                    // Implementasi logika menu ini di sini
-                    inputAdm.nextLine();
+                    // inputAdm.nextLine();
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("|               Daftarkan Pasien              |");
+                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                     System.out.print("=> Nama Pasien          : ");
-                    String namaPasien = inputAdm.nextLine();
+                    namaPasien[idx] = inputAdm.nextLine();
                     System.out.print("=> Alamat               : ");
-                    String alamatPasien = inputAdm.nextLine();
+                    alamatPasien[idx] = inputAdm.nextLine();
                     System.out.print("=> Nomor HP             : ");
-                    String nomerhpPasien = inputAdm.nextLine();
+                    nomerhpPasien[idx] = inputAdm.nextLine();
                     System.out.print("=> Penyakit             : ");
-                    String penyakitPasien = inputAdm.nextLine();
+                    penyakitPasien[idx] = inputAdm.nextLine();
                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                     String perluInap;
+
                     do {
                         System.out.print("=> Perlu Rawat Inap y/n : ");
                         perluInap = inputAdm.nextLine();
@@ -128,13 +170,21 @@ public class KasirBeta {
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                         int kamar;
 
-                        do {
-                            System.out.print("=> Masukan  Pilihan: ");
-                            kamar = inputAdm.nextInt();
-                            if (!((kamar >= 1) && (kamar <= 4))) {
-                                System.out.printf("Pilihan %d Tidak tersedia Masukan Lagi!\n", kamar);
+                        do { // Looping jika input tidak sesuai
+                            System.out.print("=> Masukan Pilihan : ");
+                            if (inputAdm.hasNextInt()) {
+                                kamar = inputAdm.nextInt();
+                                if (kamar >= 1 && kamar <= 3) {
+                                    break; // Keluar dari perulangan jika masukan sesuai
+                                } else {
+                                    System.out.println("Tidak Tersedia. Masukan Angka 1 - 3 Sesuai Menu");
+                                }
+                            } else {
+                                inputAdm.next(); // Membersihkan masukan yang tidak valid
+                                System.out.println("Input Invalid. Harap masukkan angka.");
                             }
-                        } while (!((kamar >= 1) && (kamar <= 4)));
+                        } while (true);
+                        inputAdm.nextLine();
 
                         int lamaInapVIP, lamaInapReg, lamaInapBersama, obat, konsumsi, total = 0, bayar = 0,
                                 kembalian = 0;
@@ -153,6 +203,7 @@ public class KasirBeta {
                             System.out.print("=> Layanan Obat per Perhari : ");
                             obat = inputAdm.nextInt();
                             System.out.print("=> Layanan Konsumsi Perhari : ");
+                            inputAdm.nextLine();
                             konsumsi = inputAdm.nextInt();
 
                             total = (1000000 * lamaInapVIP) + (obat * 100000 * lamaInapVIP)
@@ -275,10 +326,10 @@ public class KasirBeta {
                         System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
                         System.out.println("|              Bukti Pembayaran               |");
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                        System.out.println("| => Nama Pasien     : " + namaPasien);
-                        System.out.println("| => Alamat Pasien   : " + alamatPasien);
-                        System.out.println("| => Nomer HP Pasien : " + nomerhpPasien);
-                        System.out.println("| => Penyakit Pasien : " + penyakitPasien);
+                        System.out.println("| => Nama Pasien     : " + namaPasien[idx]);
+                        System.out.println("| => Alamat Pasien   : " + alamatPasien[idx]);
+                        System.out.println("| => Nomer HP Pasien : " + nomerhpPasien[idx]);
+                        System.out.println("| => Penyakit Pasien : " + penyakitPasien[idx]);
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                         System.out.println("| => Total Tagihan   : " + total);
                         System.out.println("| => Total Bayar     : " + bayar);
@@ -288,7 +339,7 @@ public class KasirBeta {
                         System.out.println("| => Kembalian Akhir : " + kembalianAkir);
                         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                         System.out.println("|              Bukti Pembayaran               |");
-                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++\n");
 
                         // Tidak Rawat Inap
                     } else if (perluInap.equalsIgnoreCase("n")) {
@@ -297,29 +348,48 @@ public class KasirBeta {
                     } else { // Jika Input "Apakah Rawat Inap" Salah
                         System.out.println("Input salah");
                     }
+
+                    idx++;
                     break;
 
                 case 2:
                     // Menu Bayar Tagihan Pasien
                     System.out.println("Menu 2 Bayar tagihan");
                     break;
+
                 case 3:
                     // Menu Cek Ketersediaan Kamar
                     System.out.println("Menu 3");
+
                     break;
+
                 case 4:
+                    // Menu Riwayat Pasien
+                    for (int i = 0; i < idx; i++) {
+                        System.out.println("=====================================");
+                        System.out.println("+       Pasien Nomor " + i);
+                        System.out.println("=> Nama Pasien     : " + namaPasien[i]);
+                        System.out.println("=> Alamat Pasien   : " + alamatPasien[i]);
+                        System.out.println("=> Nomer HP        : " + nomerhpPasien[i]);
+                        System.out.println("=> Penyakit Pasien : " + penyakitPasien[i]);
+                        System.out.println("=====================================\n");
+                    }
+                    break;
+
+                case 5:
                     // Logout dan kembali ke menu login
                     System.out.print("Konfirmasi Logout y/n : ");
                     char logout = inputAdm.nextLine().charAt(0);
 
-                    if ((logout == 'n')||(logout == 'N')) {
+                    if ((logout == 'n') || (logout == 'N')) {
                         break;
-                    } else if ((logout == 'y')||(logout == 'Y')) {
+                    } else if ((logout == 'y') || (logout == 'Y')) {
                         return;
                     }
 
                 default:
                     System.out.println("Pilihan Tidak Tersedia");
+
             }
         }
     }
@@ -367,13 +437,21 @@ public class KasirBeta {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int menuManager;
 
-            do {
+            do { // Looping jika input tidak sesuai
                 System.out.print("=> Pilih Menu : ");
-                menuManager = input.nextInt();
-                if (!((menuManager == 1) || (menuManager == 2) || (menuManager == 3))) {
-                    System.out.println("Pilihan Tidak Tersedia, Masukan Angka 1, 2, atau 3 Sesuai Menu");
+                if (inputMnjr.hasNextInt()) {
+                    menuManager = inputMnjr.nextInt();
+                    if (menuManager >= 1 && menuManager <= 3) {
+                        break; // Keluar dari perulangan jika masukan sesuai
+                    } else {
+                        System.out.println("Tidak Tersedia. Masukan Angka 1 - 3 Sesuai Menu");
+                    }
+                } else {
+                    inputMnjr.next(); // Membersihkan masukan yang tidak valid
+                    System.out.println("Input Invalid. Harap masukkan angka.");
                 }
-            } while (!((menuManager == 1) || (menuManager == 2) || (menuManager == 3)));
+            } while (true);
+            inputMnjr.nextLine();
 
             switch (menuManager) {
                 case 1:
@@ -382,15 +460,24 @@ public class KasirBeta {
                     break;
                 case 2:
                     // Menu Riwayat Transaksi
-                    System.out.println("Menu Riwayat Transaksi");
+                    System.out.println("Menu Data Pasien");
+                    for (int i = 0; i < idx; i++) {
+                        System.out.println("=====================================");
+                        System.out.println("+       Pasien Nomor " + i);
+                        System.out.println("=> Nama Pasien     : " + namaPasien[i]);
+                        System.out.println("=> Alamat Pasien   : " + alamatPasien[i]);
+                        System.out.println("=> Nomer HP        : " + nomerhpPasien[i]);
+                        System.out.println("=> Penyakit Pasien : " + penyakitPasien[i]);
+                        System.out.println("=====================================\n");
+                    }
                     break;
                 case 3:
                     System.out.print("Konfirmasi Logout y/n : ");
                     char logout = inputMnjr.nextLine().charAt(0);
 
-                    if ((logout == 'n')||(logout == 'N')) {
+                    if ((logout == 'n') || (logout == 'N')) {
                         break;
-                    } else if ((logout == 'y')||(logout == 'Y')) {
+                    } else if ((logout == 'y') || (logout == 'Y')) {
                         return;
                     }
                 default:
