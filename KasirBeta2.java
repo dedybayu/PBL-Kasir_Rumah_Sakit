@@ -51,6 +51,7 @@ public class KasirBeta2 {
                     if ((exit == 'n') || (exit == 'N')) {
                         break;
                     } else if ((exit == 'y') || (exit == 'Y')) {
+                        System.out.println("Terimakasih Telah Menggunakan Aplikasi Ini");
                         System.exit(0);
                     }
 
@@ -65,20 +66,20 @@ public class KasirBeta2 {
     // Deklarasi Variable Array untuk Menyimpan Data Pasien
     private static String[][] biodataPasien = new String[10][6];
 
-    // Deklarasi Untuk Riwayat Pasien 
+    // Deklarasi Untuk Riwayat Pasien
     private static String[][] riwayatTransaksi = new String[50][6];
 
     // Deklarasi Untuk Pasien yang menginab
-    private static String[][] kamarVIP = new String[5][6];      // Ada 5 Kamar VIP
-    private static String[][] kamarBiasa = new String[10][6];   // Ada 10 Kamar Reguler
+    private static String[][] kamarVIP = new String[5][6]; // Ada 5 Kamar VIP
+    private static String[][] kamarBiasa = new String[10][6]; // Ada 10 Kamar Reguler
     private static String[][] kamarBersama = new String[15][6]; // Ada 15 Kamar Bersama
 
-    // Deklarasi untuk Transaksi
+    // Deklarasi untuk Riwayat Transaksi
     private static int[] uangMasuk = new int[20];
+    private static int penghasilan = 0;
 
     // Deklarasi untuk looping
-    private static int idx = 0;
-    private static int transaksi = 0;
+    private static int riwayat = 0; // untuk loping smua riwayat riwayat
 
     // Method untuk login sebagai Admin
     private static void loginAdmin(Scanner input) {
@@ -114,7 +115,7 @@ public class KasirBeta2 {
         }
 
         while (true) {
-            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|            Selamat Datang Admin             |");
             System.out.println("|           Rumah Sakit Cinta Java            |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
@@ -146,10 +147,11 @@ public class KasirBeta2 {
 
                 case 1:
                     // Menu Daftarkan Pasien
+                    int idx = 0;
                     while (idx < biodataPasien.length) {
                         if (biodataPasien[idx][0] == null) {
 
-                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                            System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("|               Daftarkan Pasien              |");
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.print("=> Nama Pasien          : ");
@@ -160,23 +162,45 @@ public class KasirBeta2 {
                             biodataPasien[idx][2] = inputAdm.nextLine(); // 2 : Nomor HP
                             System.out.print("=> Penyakit Pasien      : ");
                             biodataPasien[idx][3] = inputAdm.nextLine(); // 3 : Penyakit Pasien
-                            System.out.print("=> Punya BPJS           : ");
-                            biodataPasien[idx][4] = inputAdm.nextLine(); // 4 : Penyakit Pasien
 
-                            biodataPasien[idx][5] = Integer.toString((idx + 1)); // 5 : Kode Pasien
-                            System.out.println("=> Kode Pasien Adalah   : " + (biodataPasien[idx][4]));
+                            while (true) { //Perulangan jika input bukan y/n
+                                System.out.print("=> Punya BPJS (y/n)     : ");
+                                biodataPasien[idx][4] = inputAdm.nextLine(); // 4 : BPJS Pasien
+
+                                if (biodataPasien[idx][4].equalsIgnoreCase("y")
+                                        || biodataPasien[idx][4].equalsIgnoreCase("n")) {
+                                    break;
+                                } else {
+                                    System.out.println("Masukan y atau n");
+                                }
+                            }
+
+                            biodataPasien[idx][5] = Integer.toString((idx + 1)); //menrubah int menjadi String
+                            System.out.println("=> Kode Pasien Adalah   : " + (biodataPasien[idx][5])); // 5 : Kode Pasien
                             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.print("=> Daftarkan Pasien lagi: ");
-                            char daftarLagi = inputAdm.nextLine().charAt(0);
+
+                            char daftarLagi;
+                            while (true) { //Perulangan jika input bukan y/n
+                                System.out.print("=> Daftarkan Lagi (y/n): ");
+                                daftarLagi = inputAdm.nextLine().charAt(0);
+                                if ((daftarLagi == 'y' || daftarLagi == 'Y')
+                                        || (daftarLagi == 'n' || daftarLagi == 'N')) { //Apakah ingin mendaftarkan lagi
+                                    break;
+                                } else {
+                                    System.out.println("input invalid Masukan y/n");
+                                }
+                            }
+
                             if (daftarLagi == 'n' || daftarLagi == 'N') {
                                 break;
                             }
+
                             idx++;
-                        } 
-                        else {
+
+                        } else {
                             System.out.println("Pasien Penuh");
                         }
-                        
+
                     }
 
                     break;
@@ -192,12 +216,12 @@ public class KasirBeta2 {
 
                     if (adaPasien == true) {
                         do {
-                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.println("|            Bayar Tagihan Pasien               |");
-                            System.out.println("|-----------------------------------------------|");
-                            System.out.println("| ? Ketik (cari) untuk mencari nomor urut pasien|");
-                            System.out.println("| ? Ketik (kembali) untuk kembali ke menu       |");
-                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                            System.out.println("|            Bayar Tagihan Pasien             |");
+                            System.out.println("|---------------------------------------------|");
+                            System.out.println("| (?) Ketik (cari) untuk mencari Kode Pasien  |");
+                            System.out.println("| (?) Ketik (kembali) untuk kembali ke menu   |");
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.print("=> Masukan Kode Pasien : ");
                             String bayarPasien = inputAdm.nextLine();
 
@@ -209,7 +233,7 @@ public class KasirBeta2 {
                                 for (int i = 0; i < biodataPasien.length; i++) {
                                     if (biodataPasien[i][0] != null
                                             && biodataPasien[i][0].equalsIgnoreCase(cariPasien)) {
-                                        // System.out.printf("Nomor Pasien %s adalah %d\n", cariPasien, i);
+
                                         System.out.println("=====================================");
                                         System.out.println("|       Pasien Nomor " + biodataPasien[i][5]);
                                         System.out.println("|=> Nama Pasien     : " + biodataPasien[i][0]);
@@ -232,7 +256,7 @@ public class KasirBeta2 {
                             } else if (bayarPasien.matches("\\d+")) { // JIKA angka Maka kesini
                                 int kodePasien = Integer.parseInt(bayarPasien); // Jika Kode ditemukan
                                 if (kodePasien >= 1 && kodePasien <= biodataPasien.length
-                                        && biodataPasien[kodePasien - 1] != null) {
+                                        && biodataPasien[kodePasien - 1][0] != null) {
 
                                     System.out.println("=====================================");
                                     System.out.println("| Bayar Tagihan Pasien Nomor " + kodePasien);
@@ -281,12 +305,12 @@ public class KasirBeta2 {
 
                     if (adaPasien3 == true) {
                         do {
-                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.println("|            Daftarkan Kamar Pasien             |");
-                            System.out.println("|-----------------------------------------------|");
-                            System.out.println("| ? Ketik (cari) untuk mencari nomor urut pasien|");
-                            System.out.println("| ? Ketik (kembali) untuk kembali ke menu       |");
-                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++");
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                            System.out.println("|            Daftarkan Kamar Pasien           |");
+                            System.out.println("|---------------------------------------------|");
+                            System.out.println("| (?) Ketik (cari) untuk mencari Kode Pasien  |");
+                            System.out.println("| (?) Ketik (kembali) untuk kembali ke menu   |");
+                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.print("=> Masukan Kode Pasien : ");
                             String bayarPasien = inputAdm.nextLine();
 
@@ -321,7 +345,7 @@ public class KasirBeta2 {
                             } else if (bayarPasien.matches("\\d+")) { // JIKA angka Maka kesini
                                 int kodePasien = Integer.parseInt(bayarPasien); // Jika Kode ditemukan
                                 if (kodePasien >= 1 && kodePasien <= biodataPasien.length
-                                        && biodataPasien[kodePasien - 1] != null) {
+                                        && biodataPasien[kodePasien - 1][0] != null) {
 
                                     System.out.println("=====================================");
                                     System.out.println("| Bayar Tagihan Pasien Nomor " + kodePasien);
@@ -362,7 +386,7 @@ public class KasirBeta2 {
                     // Menu Riwayat Pasien
                     boolean semuaKosong = true;
                     for (int i = 0; i < biodataPasien.length; i++) {
-                        if (biodataPasien[i] != null) {
+                        if (biodataPasien[i][0] != null) {
                             System.out.println("=====================================");
                             System.out.println("|       Pasien Nomor " + biodataPasien[i][5]);
                             System.out.println("|=> Nama Pasien     : " + biodataPasien[i][0]);
@@ -469,10 +493,10 @@ public class KasirBeta2 {
 
                 case 2:
                     // Menu Riwayat Transaksi
-                    System.out.println("Menu Data Pasien");
+                    // System.out.println("Menu Data Pasien");
                     boolean semuaKosong = true;
                     for (int i = 0; i < biodataPasien.length; i++) {
-                        if (biodataPasien[i] != null) {
+                        if (biodataPasien[i][0] != null) {
                             System.out.println("=====================================");
                             System.out.println("|       Pasien Nomor " + biodataPasien[i][5]);
                             System.out.println("|=> Nama Pasien     : " + biodataPasien[i][0]);
