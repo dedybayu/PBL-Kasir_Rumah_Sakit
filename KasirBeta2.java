@@ -9,7 +9,7 @@ public class KasirBeta2 {
         Scanner input = new Scanner(System.in);
 
         while (true) {
-            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|           Selamat Datang di Kasir           |");
             System.out.println("|           Rumah Sakit Cinta Java            |");
             System.out.println("|                Silahkan Login               |");
@@ -185,7 +185,7 @@ public class KasirBeta2 {
 
                             LocalDate tanggalMasuk = inputTanggal("Tanggal Masuk : ", formatter, inputAdm);
                             biodataPasien[idx][5] = tanggalMasuk.format(formatter); // 5 Tanggal Masuk 6 Tanggal
-                                                                                        // Keluar
+                                                                                    // Keluar
                             // System.out.print("=> Masukan Tanggal Masuk : ");
                             // biodataPasien[idx][5] = inputAdm.nextLine();
 
@@ -407,8 +407,8 @@ public class KasirBeta2 {
                                     } else if (pilihKamar == 3) {
                                         biodataPasien[kodePasien - 1][8] = "Bersama";
 
-                                        //Sek Mikir Logikane
-                                        
+                                        // Sek Mikir Logikane
+
                                     } else if (pilihKamar == 4) {
                                         System.out.println("=====================================");
                                         System.out.println("|          Informasi Kamar          |");
@@ -465,17 +465,21 @@ public class KasirBeta2 {
 
                 case 6:
                     // Logout dan kembali ke menu login
-                    System.out.print("Konfirmasi Logout y/n : ");
-                    char logout = inputAdm.nextLine().charAt(0);
+                    do {
+                        System.out.print("Konfirmasi Logout y/n : ");
+                        char logout = inputAdm.nextLine().charAt(0);
 
-                    if ((logout == 'n') || (logout == 'N')) {
-                        break;
-                    } else if ((logout == 'y') || (logout == 'Y')) {
-                        return;
-                    }
+                        if ((logout == 'n') || (logout == 'N')) {
+                            break;
+                        } else if ((logout == 'y') || (logout == 'Y')) {
+                            return;
+                        } else {
+                            System.out.println("Input invalid masukan y/n");
+                        }
+                    } while (true);
 
-                default:
-                    System.out.println("Pilihan Tidak Tersedia");
+                // default:
+                //     System.out.println("Pilihan Tidak Tersedia");
 
             }
         }
@@ -511,7 +515,7 @@ public class KasirBeta2 {
         }
 
         while (true) {
-            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|           Selamat Datang Manager            |");
             System.out.println("|           Rumah Sakit Cinta Java            |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
@@ -561,17 +565,22 @@ public class KasirBeta2 {
                     break;
 
                 case 3:
-                    System.out.print("Konfirmasi Logout y/n : ");
-                    char logout = inputMnjr.nextLine().charAt(0);
+                    // Logout dan kembali ke menu login
+                    do {
+                        System.out.print("Konfirmasi Logout y/n : ");
+                        char logout = inputMnjr.nextLine().charAt(0);
 
-                    if ((logout == 'n') || (logout == 'N')) {
-                        break;
-                    } else if ((logout == 'y') || (logout == 'Y')) {
-                        return;
-                    }
+                        if ((logout == 'n') || (logout == 'N')) {
+                            break;
+                        } else if ((logout == 'y') || (logout == 'Y')) {
+                            return;
+                        } else {
+                            System.out.println("Input invalid masukan y/n");
+                        }
+                    } while (true);
 
-                default:
-                    System.out.println("Pilihan Tidak Tersedia");
+                // default:
+                //     System.out.println("Pilihan Tidak Tersedia");
             }
         }
     }
