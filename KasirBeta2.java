@@ -125,6 +125,15 @@ public class KasirBeta2 {
             System.exit(0);
         }
 
+        // Pemberian Pasien Awal Buat Uji Coba
+        biodataPasien[0][0] = "Alek";
+        biodataPasien[0][1] = "Banyuwangi";
+        biodataPasien[0][2] = "08212432";
+        biodataPasien[0][3] = "batuk";
+        biodataPasien[0][4] = "y";
+        biodataPasien[0][5] = "11-12-2023";
+        biodataPasien[0][7] = "1";
+
         while (true) {
             System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|            Selamat Datang Admin             |");
@@ -134,7 +143,7 @@ public class KasirBeta2 {
             System.out.println("|          2. Bayar Tagihan Pasien            |");
             System.out.println("|          3. Pesankan Kamar Pasien           |");
             System.out.println("|          4. Data Pasien                     |");
-            System.out.println("|          5. Cek Kamar                       |");
+            System.out.println("|          5. Cek Ketersediaan Kamar          |");
             System.out.println("|          6. Logout                          |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int menuAdmin;
@@ -146,7 +155,7 @@ public class KasirBeta2 {
                     if (menuAdmin >= 1 && menuAdmin <= 6) {
                         break; // Keluar dari perulangan jika masukan sesuai
                     } else {
-                        System.out.println("Tidak Tersedia. Masukan Angka 1 - 5 Sesuai Menu");
+                        System.out.println("Tidak Tersedia. Masukan Angka 1 - 6 Sesuai Menu");
                     }
                 } else {
                     input.next(); // Membersihkan masukan yang tidak valid
@@ -231,7 +240,7 @@ public class KasirBeta2 {
 
                     if (adaPasien == true) {
                         do {
-                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                            System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
                             System.out.println("|            Bayar Tagihan Pasien             |");
                             System.out.println("|---------------------------------------------|");
                             System.out.println("| (?) Ketik (cari) untuk mencari Kode Pasien  |");
@@ -271,7 +280,13 @@ public class KasirBeta2 {
                                     printBioKodePasien();
 
                                     // Engko Ditambahi Tagian Pasien
+                                    // Deklarasi variabel buat logika Pembayaran
+                                    int obat = 0, hargaObat = 0, hargaKatPenyakit = 0;
+                                    int kemebalian = 0, bayar = 0;
+                                    double keringanan = 0, tagihan = 0;
+                                    String penyakit;
 
+                                    // Blok Jika pasien Rawat Inap
                                     if (biodataPasien[kodePasien - 1][8] != null) {
                                         LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
                                         biodataPasien[kodePasien - 1][6] = tanggalKeluar.format(formatter);
@@ -286,9 +301,9 @@ public class KasirBeta2 {
                                         System.out.println("Selisih Hari = " + selisihHari);
                                     }
 
+                                    // Blok Jika Pasien Tidak Rawat Inap
                                     else if (biodataPasien[kodePasien - 1][8] == null) {
-                                        int obat, tagihan, bayar, kmebalian;
-                                        String penyakit;
+
                                         do {
                                             System.out.println("Kategori Penyakit   : ");
                                             penyakit = input.nextLine();
@@ -314,11 +329,33 @@ public class KasirBeta2 {
                                             }
                                         } while (true);
 
-                                        // Logika Tagihan
+                                        if (biodataPasien[kodePasien - 1][4].equalsIgnoreCase("y")) {
+                                            keringanan = 0.7;
+                                        } else if (biodataPasien[kodePasien - 1][4].equalsIgnoreCase("n")) {
+                                            keringanan = 1;
+                                        }
 
-                                        System.out.println("=> Total Tagihan            : ");
+                                        if (penyakit.equalsIgnoreCase("biasa")) {
+                                            hargaKatPenyakit = 50000;
+                                            hargaObat = 30000;
+                                        } else if (penyakit.equalsIgnoreCase("sedang")) {
+                                            hargaKatPenyakit = 100000;
+                                            hargaObat = 50000;
+                                        } else if (penyakit.equalsIgnoreCase("berat")) {
+                                            hargaKatPenyakit = 200000;
+                                            hargaObat = 100000;
+                                        }
+
+                                        // Logika Tagihan
+                                        tagihan = ((obat * hargaObat) + hargaKatPenyakit) * keringanan;
+
+                                        System.out.println("=> Total Tagihan            : " + tagihan);
                                         System.out.print("=> Bayar Sekarang           : ");
-                                        System.out.println("== Kembalian                : ");
+                                        bayar = input.nextInt();
+                                        kemebalian = bayar - (int) tagihan;
+                                        System.out.println("== Kembalian                : " + kemebalian);
+
+                                        input.nextLine();
                                     }
 
                                 } else {
@@ -557,6 +594,98 @@ public class KasirBeta2 {
 
                 case 5:
                     System.out.println("Cek Kamar");
+                    boolean backToMenu = false;
+                    do {
+                        System.out.println("\n========================================");
+                        System.out.println("|      Cek Ketersediaan Kamar Pasien   |");
+                        System.out.println("|--------------------------------------|");
+                        System.out.println("|        1. Kamar VIP                  |");
+                        System.out.println("|        2. Kamar Reguler              |");
+                        System.out.println("|        3. Kamar Bersama              |");
+                        System.out.println("|        4. Kembali                    |");
+                        System.out.println("========================================");
+                        // System.out.print("=> Masukan Pilihan : ");
+                        int cekKamar; // = input.nextInt();
+
+                        do { // Looping jika input tidak sesuai
+                            System.out.print("=> Masukan Pilihan : ");
+                            if (input.hasNextInt()) {
+                                cekKamar = input.nextInt();
+                                if (cekKamar >= 1 && cekKamar <= 4) {
+                                    break; // Keluar dari perulangan jika masukan sesuai
+                                } else {
+                                    System.out.println("Tidak Tersedia. Masukan Angka 1 - 4 Sesuai Menu");
+                                }
+                            } else {
+                                input.next(); // Membersihkan masukan yang tidak valid
+                                System.out.println("Input Invalid. Harap masukkan angka.");
+                            }
+                        } while (true);
+                        input.nextLine();
+
+                        boolean adaYangInap = false;
+                        switch (cekKamar) {
+                            case 1:
+                                for (int i = 0; i < kamarVIP.length; i++) {
+                                    if (kamarVIP[i][0] != null) {
+                                        System.out.println("Nama Pasien : " + kamarVIP[i][0]);
+                                        adaYangInap = true;
+                                    }
+                                }
+
+                                if (adaYangInap == false) {
+                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                }
+                                break;
+
+                            case 2:
+                                for (int i = 0; i < kamarReguler.length; i++) {
+                                    if (kamarReguler[i][0] != null) {
+                                        System.out.println("Nama Pasien : " + kamarReguler[i][0]);
+                                        adaYangInap = true;
+                                    }
+                                }
+
+                                if (adaYangInap == false) {
+                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                }
+                                break;
+
+                            case 3:
+                                for (int i = 0; i > kamarBersama.length; i++) {
+                                    for (int j = 0; j > kamarBersama[i].length; j++) {
+                                        if (kamarBersama[i][j][0] != null) {
+                                            System.out.println("Nama Pasien : " + kamarBersama[i][j][0]);
+                                            adaYangInap = true;
+                                        }
+                                    }
+                                }
+
+                                if (adaYangInap == false) {
+                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                }
+                                break;
+
+                            case 4:
+                                // input.nextLine();
+                                char kembali;
+                                while (true) { // Perulangan jika input bukan y/n
+                                    System.out.print("=> Konfirmasi Kembali (y/n): ");
+                                    kembali = input.nextLine().charAt(0);
+                                    if ((kembali == 'y' || kembali == 'Y')
+                                            || (kembali == 'n' || kembali == 'N')) { // Apakah ingin mendaftarkan lagi
+                                        break;
+                                    } else {
+                                        System.out.println("input invalid Masukan y/n");
+                                    }
+                                }
+
+                                if (kembali == 'y' || kembali == 'Y') {
+                                    backToMenu = true;
+                                }
+                                break;
+                        }
+                    } while (backToMenu == false);
 
                     break;
 
@@ -642,11 +771,13 @@ public class KasirBeta2 {
                 case 1:
                     // Menu Laporan Keuangan
                     System.out.println("Menu Laporan Keuangan");
+                    System.out.println("Masih Belum Dibuat");
                     break;
 
                 case 2:
                     // Menu Riwayat Transaksi
-                    // System.out.println("Menu Data Pasien");
+                    System.out.println("Menu Riwayat Transaksi");
+
                     boolean semuaKosong = true;
                     for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
                         if (biodataPasien[iGlobal][0] != null) {
