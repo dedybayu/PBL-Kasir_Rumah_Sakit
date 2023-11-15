@@ -126,7 +126,7 @@ public class KasirBeta2 {
         }
 
         // Pemberian Pasien Awal Buat Uji Coba
-        biodataPasien[0][0] = "Alek";
+        biodataPasien[0][0] = "alek";
         biodataPasien[0][1] = "Banyuwangi";
         biodataPasien[0][2] = "08212432";
         biodataPasien[0][3] = "batuk";
@@ -305,7 +305,7 @@ public class KasirBeta2 {
                                     else if (biodataPasien[kodePasien - 1][8] == null) {
 
                                         do {
-                                            System.out.println("Kategori Penyakit   : ");
+                                            System.out.print("Kategori Penyakit   : ");
                                             penyakit = input.nextLine();
                                             if (penyakit.equalsIgnoreCase("biasa")
                                                     || penyakit.equalsIgnoreCase("sedang")
@@ -535,8 +535,8 @@ public class KasirBeta2 {
                                                 }
                                             }
 
-                                            if (adaKamarReg == false) {
-                                                System.out.println("Kamar Reguler Penuh");
+                                            if (adaKamarBersm == false) {
+                                                System.out.println("Kamar Bersama Penuh");
                                             } else if (adaKamarBersm == true) {
                                                 break;
                                             }
