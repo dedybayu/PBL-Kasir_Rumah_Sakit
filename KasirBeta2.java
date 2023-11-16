@@ -528,9 +528,6 @@ public class KasirBeta2 {
                                                         System.out.println(
                                                                 "Pasien didaftarkan di KamarBersama " + (i + 1));
 
-                                                        // for (int k = 0; k < kamarBersama[i][j].length; k++) {
-                                                        //     System.out.println(kamarBersama[i][j][k]);
-                                                        // }
                                                         break;
                                                     }
                                                 }
