@@ -282,9 +282,10 @@ public class KasirBeta2 {
                                     // Engko Ditambahi Tagian Pasien
                                     // Deklarasi variabel buat logika Pembayaran
                                     int obat = 0, hargaObat = 0, hargaKatPenyakit = 0;
-                                    int kemebalian = 0, bayar = 0;
+                                    int kembalian = 0, bayar = 0;
                                     double keringanan = 0, tagihan = 0;
-                                    String penyakit;
+                                    int donasi = 0, kembalianAkhir = 0;
+                                    String penyakit, apaDonasi, apaDonasiSemua;
 
                                     // Blok Jika pasien Rawat Inap
                                     if (biodataPasien[kodePasien - 1][8] != null) {
@@ -352,10 +353,44 @@ public class KasirBeta2 {
                                         System.out.println("=> Total Tagihan            : " + tagihan);
                                         System.out.print("=> Bayar Sekarang           : ");
                                         bayar = input.nextInt();
-                                        kemebalian = bayar - (int) tagihan;
-                                        System.out.println("== Kembalian                : " + kemebalian);
-
+                                        kembalian = bayar - (int) tagihan;
+                                        System.out.println("== Kembalian                : " + kembalian);
                                         input.nextLine();
+                                        // uangMasuk[iUangMasuk][0] = Integer.toString((int)tagihan);
+                                        // uangMasuk[iUangMasuk][1] = biodataPasien[kodePasien - 1][5];
+
+                                        // iUangMasuk++;
+
+                                        do {
+                                            System.out.print("=> Donasikan Kembalian  y/n : ");
+                                            apaDonasi = input.nextLine();
+                                            if (apaDonasi.equalsIgnoreCase("y") || apaDonasi.equalsIgnoreCase("n")) {
+                                                break;
+                                            } else {
+                                                System.out.println("Input Invalid");
+                                            }
+            
+                                        } while (true);
+                                        
+                                        if (apaDonasi.equalsIgnoreCase("y")) {
+                                            System.out.print("=> Donasikan Semuanya? y/n  : ");
+                                            apaDonasiSemua = input.nextLine();
+            
+                                            if (apaDonasiSemua.equalsIgnoreCase("y")) {
+                                                donasi = kembalian;
+                                            } else if (apaDonasiSemua.equalsIgnoreCase("n")) {
+                                                System.out.print("=> Masukan Besar Donasi     : ");
+                                                donasi = input.nextInt();
+                                            }
+                                            kembalianAkhir = kembalian - donasi;
+                                        }
+            
+                                        else if (apaDonasi.equalsIgnoreCase("n")) {
+                                            donasi = 0;
+                                        }
+
+                                        System.out.println(donasi);
+                                        
                                     }
 
                                 } else {
@@ -379,6 +414,7 @@ public class KasirBeta2 {
                     }
 
                     break;
+
 
                 case 3:
                     // Pesankan Kamar Pasien
