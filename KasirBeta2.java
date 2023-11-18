@@ -73,8 +73,7 @@ public class KasirBeta2 {
     private static String[][] biodataPasien = new String[100][10];
 
     // Deklarasi Untuk Riwayat Pasien
-    private static String[][] riwayatTransaksi = new String[100][15];
-    private static String[][] riwayatKeuangan = new String[100][5];
+    private static String[][] riwayatTransaksiPasienBio = new String[100][15];
     // [0]nama [1]alamat [2]nohp [3]pnykt [4]bpjs [5]tglmsk [6]tglkluar [7]lmainap
     // [8]obat
     // [9]konsum [10]diskonbpjs [11]tagihan [12]donasi
@@ -87,14 +86,13 @@ public class KasirBeta2 {
     // Penjelasan Array[kamar][pasien 1,2][biodata pasien] untuk 3D
 
     // Deklarasi untuk Riwayat Transaksi
-    private static String[][] uangMasuk = new String[100][2];
+    private static int[] uangMasuk = new int[20];
     private static int penghasilan = 0;
-    // private static String[][] donasi = new String[][];
+    private static int donasi = 0;
 
     // Deklarasi untuk looping
     private static int riwayat = 0; // untuk loping smua riwayat riwayat
     private static int iGlobal, kodePasien;
-    private static int iUangMasuk = 0;
     // private static Char
 
     // Method untuk login sebagai Admin
@@ -416,6 +414,7 @@ public class KasirBeta2 {
                     }
 
                     break;
+
 
                 case 3:
                     // Pesankan Kamar Pasien
@@ -882,10 +881,6 @@ public class KasirBeta2 {
         System.out.println("|=> Penyakit Pasien : " + biodataPasien[kodePasien - 1][3]);
         System.out.println("|=> Kode Pasien     : " + biodataPasien[kodePasien - 1][7]);
         System.out.println("========================================");
-    }
-    
-    private static void donasiKemanusiaan(Scanner input){
-
     }
 
     private static long hitungSelisihHari(LocalDate tanggalCheskIn, LocalDate tanggalCheckOut) {
