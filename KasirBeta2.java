@@ -564,6 +564,7 @@ public class KasirBeta2 {
                                                         }
                                                         System.out.println(
                                                                 "Pasien didaftarkan di KamarBersama " + (i + 1));
+
                                                         break;
                                                     }
                                                 }
@@ -689,8 +690,8 @@ public class KasirBeta2 {
                                 break;
 
                             case 3:
-                                for (int i = 0; i > kamarBersama.length; i++) {
-                                    for (int j = 0; j > kamarBersama[i].length; j++) {
+                                for (int i = 0; i < kamarBersama.length; i++) {
+                                    for (int j = 0; j < kamarBersama[i].length; j++) {
                                         if (kamarBersama[i][j][0] != null) {
                                             System.out.println("Nama Pasien : " + kamarBersama[i][j][0]);
                                             adaYangInap = true;
