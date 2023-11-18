@@ -73,7 +73,8 @@ public class KasirBeta2 {
     private static String[][] biodataPasien = new String[100][10];
 
     // Deklarasi Untuk Riwayat Pasien
-    private static String[][] riwayatTransaksiPasienBio = new String[100][15];
+    private static String[][] riwayatTransaksi = new String[100][15];
+    private static String[][] riwayatKeuangan = new String[100][5];
     // [0]nama [1]alamat [2]nohp [3]pnykt [4]bpjs [5]tglmsk [6]tglkluar [7]lmainap
     // [8]obat
     // [9]konsum [10]diskonbpjs [11]tagihan [12]donasi
@@ -86,13 +87,14 @@ public class KasirBeta2 {
     // Penjelasan Array[kamar][pasien 1,2][biodata pasien] untuk 3D
 
     // Deklarasi untuk Riwayat Transaksi
-    private static int[] uangMasuk = new int[20];
+    private static String[][] uangMasuk = new String[100][2];
     private static int penghasilan = 0;
-    private static int donasi = 0;
+    // private static String[][] donasi = new String[][];
 
     // Deklarasi untuk looping
     private static int riwayat = 0; // untuk loping smua riwayat riwayat
     private static int iGlobal, kodePasien;
+    private static int iUangMasuk = 0;
     // private static Char
 
     // Method untuk login sebagai Admin
@@ -282,9 +284,10 @@ public class KasirBeta2 {
                                     // Engko Ditambahi Tagian Pasien
                                     // Deklarasi variabel buat logika Pembayaran
                                     int obat = 0, hargaObat = 0, hargaKatPenyakit = 0;
-                                    int kemebalian = 0, bayar = 0;
+                                    int kembalian = 0, bayar = 0;
                                     double keringanan = 0, tagihan = 0;
-                                    String penyakit;
+                                    int donasi = 0, kembalianAkhir = 0;
+                                    String penyakit, apaDonasi, apaDonasiSemua;
 
                                     // Blok Jika pasien Rawat Inap
                                     if (biodataPasien[kodePasien - 1][8] != null) {
@@ -352,10 +355,44 @@ public class KasirBeta2 {
                                         System.out.println("=> Total Tagihan            : " + tagihan);
                                         System.out.print("=> Bayar Sekarang           : ");
                                         bayar = input.nextInt();
-                                        kemebalian = bayar - (int) tagihan;
-                                        System.out.println("== Kembalian                : " + kemebalian);
-
+                                        kembalian = bayar - (int) tagihan;
+                                        System.out.println("== Kembalian                : " + kembalian);
                                         input.nextLine();
+                                        // uangMasuk[iUangMasuk][0] = Integer.toString((int)tagihan);
+                                        // uangMasuk[iUangMasuk][1] = biodataPasien[kodePasien - 1][5];
+
+                                        // iUangMasuk++;
+
+                                        do {
+                                            System.out.print("=> Donasikan Kembalian  y/n : ");
+                                            apaDonasi = input.nextLine();
+                                            if (apaDonasi.equalsIgnoreCase("y") || apaDonasi.equalsIgnoreCase("n")) {
+                                                break;
+                                            } else {
+                                                System.out.println("Input Invalid");
+                                            }
+            
+                                        } while (true);
+                                        
+                                        if (apaDonasi.equalsIgnoreCase("y")) {
+                                            System.out.print("=> Donasikan Semuanya? y/n  : ");
+                                            apaDonasiSemua = input.nextLine();
+            
+                                            if (apaDonasiSemua.equalsIgnoreCase("y")) {
+                                                donasi = kembalian;
+                                            } else if (apaDonasiSemua.equalsIgnoreCase("n")) {
+                                                System.out.print("=> Masukan Besar Donasi     : ");
+                                                donasi = input.nextInt();
+                                            }
+                                            kembalianAkhir = kembalian - donasi;
+                                        }
+            
+                                        else if (apaDonasi.equalsIgnoreCase("n")) {
+                                            donasi = 0;
+                                        }
+
+                                        System.out.println(donasi);
+                                        
                                     }
 
                                 } else {
@@ -844,6 +881,10 @@ public class KasirBeta2 {
         System.out.println("|=> Penyakit Pasien : " + biodataPasien[kodePasien - 1][3]);
         System.out.println("|=> Kode Pasien     : " + biodataPasien[kodePasien - 1][7]);
         System.out.println("========================================");
+    }
+    
+    private static void donasiKemanusiaan(Scanner input){
+
     }
 
     private static long hitungSelisihHari(LocalDate tanggalCheskIn, LocalDate tanggalCheckOut) {
