@@ -807,8 +807,10 @@ public class KasirBeta2 {
             switch (menuManager) {
                 case 1:
                     // Menu Laporan Keuangan
+                    System.out.println();
                     System.out.println("Menu Laporan Keuangan");
-                    System.out.println("Masih Belum Dibuat");
+                    System.out.println("Masukan kode pasien :");
+                    input.kodePasien
                     break;
 
                 case 2:
