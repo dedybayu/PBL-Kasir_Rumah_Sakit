@@ -808,7 +808,19 @@ public class KasirBeta2 {
                 case 1:
                     // Menu Laporan Keuangan
                     System.out.println("Menu Laporan Keuangan");
-                    System.out.println("Masih Belum Dibuat");
+                    System.out.println("========================================");
+                    System.out.println("Masukan kode pasien : ");
+                    System.out.println("========================================");
+                     String bayarPasien = input.nextLine();
+                    System.out.println("========================================");
+                    System.out.println("|       Pasien Nomor " + biodataPasien[iGlobal][7]);
+                        System.out.println("|=> Nama Pasien     : " + biodataPasien[iGlobal][0]);
+                        System.out.println("|=> Alamat Pasien   : " + biodataPasien[iGlobal][1]);
+                        System.out.println("|=> Nomer HP        : " + biodataPasien[iGlobal][2]);
+                        System.out.println("|=> Penyakit Pasien : " + biodataPasien[iGlobal][3]);
+                        System.out.println("|=> Kode Pasien     : " + biodataPasien[iGlobal][7]);
+                        System.out.println("========================================\n");
+                    
                     break;
 
                 case 2:
