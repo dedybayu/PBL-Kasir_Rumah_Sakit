@@ -781,7 +781,7 @@ public class KasirBeta2 {
 
                     boolean semuaKosong = true;
                     for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
-                        if (biodataPasien[iGlobal][0] != null) {
+                        if (biodataPasien[iGlobal][0 ] != null) {
                             printBiodataPasien();
                             semuaKosong = false;
                         }
