@@ -88,12 +88,18 @@ public class KasirBeta2 {
     // Deklarasi untuk Riwayat Transaksi
     private static int[] uangMasuk = new int[20];
     private static int penghasilan = 0;
-    private static int donasi = 0;
 
     // Deklarasi untuk looping
     private static int riwayat = 0; // untuk loping smua riwayat riwayat
     private static int iGlobal, kodePasien;
     // private static Char
+
+    // Deklarasi Untuk Pembayaran
+    // Deklarasi variabel buat logika Pembayaran
+    private static int obat = 0, hargaObat = 0, hargaKatPenyakit = 0, kembalian = 0, bayar = 0;
+    private static double keringanan = 0, tagihan = 0;
+    private static int donasi = 0, kembalianAkhir = 0;
+    private static String penyakit, apaDonasi, apaDonasiSemua;
 
     // Method untuk login sebagai Admin
     private static void loginAdmin(Scanner input) {
@@ -231,190 +237,275 @@ public class KasirBeta2 {
 
                 case 2: // Menu Bayar Tagihan Pasien
 
-                    boolean adaPasien = false;
-                    for (int i = 0; i < biodataPasien.length; i++) {
-                        if (biodataPasien[i][0] != null) {
-                            adaPasien = true;
+                boolean adaPasien = false;
+                for (int i = 0; i < biodataPasien.length; i++) {
+                    if (biodataPasien[i][0] != null) {
+                        adaPasien = true;
+                    }
+                }
+
+                if (adaPasien == true) {
+                    do {
+                        System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
+                        System.out.println("|            Bayar Tagihan Pasien             |");
+                        System.out.println("|---------------------------------------------|");
+                        System.out.println("| (?) Ketik (cari) untuk mencari Kode Pasien  |");
+                        System.out.println("| (?) Ketik (kembali) untuk kembali ke menu   |");
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+                        System.out.print("=> Masukan Kode Pasien : ");
+                        String bayarPasien = input.nextLine();
+
+                        if (bayarPasien.equalsIgnoreCase("cari")) {
+                            System.out.print("=> Masukan Nama Pasien : ");
+                            String cariPasien = input.nextLine();
+
+                            boolean ditemukan = false;
+                            for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
+                                if (biodataPasien[iGlobal][0] != null
+                                        && biodataPasien[iGlobal][0].contains(cariPasien)) { // Diganti contains
+
+                                    printBiodataPasien();
+
+                                    ditemukan = true;
+                                }
+                            }
+
+                            if (!ditemukan) {
+                                System.out.println("Pasien Tidak ditemukan");
+                            }
+
+                        } else if (bayarPasien.equalsIgnoreCase("kembali")) {
+                            break;
+
+                        } else if (bayarPasien.matches("\\d+")) { // JIKA angka Maka kesini
+                            kodePasien = Integer.parseInt(bayarPasien); // Jika Kode ditemukan
+                            if (kodePasien >= 1 && kodePasien <= biodataPasien.length
+                                    && biodataPasien[kodePasien - 1][0] != null) {
+                                System.out.println("========================================");
+                                System.out.println("|  Bayar Tagihan Pasien Nomor " + kodePasien);
+                                printBioKodePasien();
+
+                                // Engko Ditambahi Tagian Pasien
+                                // Deklarasi variabel buat logika Pembayaran
+                                // int obat = 0, hargaObat = 0, hargaKatPenyakit = 0, kembalian = 0, bayar = 0;
+                                // double keringanan = 0, tagihan = 0;
+                                // int donasi = 0, kembalianAkhir = 0;
+                                // String penyakit, apaDonasi, apaDonasiSemua;
+
+                                // Blok Jika pasien Rawat Inap
+                                if (biodataPasien[kodePasien - 1][8] != null) {
+                                    LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
+                                    biodataPasien[kodePasien - 1][6] = tanggalKeluar.format(formatter);
+
+                                    LocalDate tanggalCheskIn = LocalDate.parse(biodataPasien[kodePasien - 1][5],
+                                            formatter);
+                                    LocalDate tanggalCheckOut = LocalDate.parse(biodataPasien[kodePasien - 1][6],
+                                            formatter);
+
+                                    long selisihHari = hitungSelisihHari(tanggalCheskIn, tanggalCheckOut);
+
+                                    System.out.println("Selisih Hari = " + selisihHari);
+
+                                    do {
+                                        System.out.print("Kategori Penyakit   : ");
+                                        penyakit = input.nextLine();
+                                        if (penyakit.equalsIgnoreCase("sedang")
+                                                || penyakit.equalsIgnoreCase("berat")
+                                                || penyakit.equalsIgnoreCase("kronis")) {
+                                            break;
+                                        } else {
+                                            System.out.println("Kategori Penyakit Salah (sedang/berat/kronis)");
+                                        }
+
+                                    } while (true);
+
+                                    do {
+                                        System.out.print("=> Jumlah Layanan Obat  : ");
+                                        if (input.hasNextInt()) {
+                                            obat = input.nextInt();
+                                            break;
+
+                                        } else {
+                                            input.next(); // Membersihkan masukan yang tidak valid
+                                            System.out.println("Input Invalid. Harap masukkan angka.");
+                                        }
+                                    } while (true);
+
+                                    if (biodataPasien[kodePasien - 1][4].equalsIgnoreCase("y")) {
+                                        keringanan = 0.7;
+                                    } else if (biodataPasien[kodePasien - 1][4].equalsIgnoreCase("n")) {
+                                        keringanan = 1;
+                                    }
+
+                                    if (penyakit.equalsIgnoreCase("sedang")) {
+                                        hargaKatPenyakit = 50000;
+                                        hargaObat = 30000;
+                                    } else if (penyakit.equalsIgnoreCase("berat")) {
+                                        hargaKatPenyakit = 100000;
+                                        hargaObat = 50000;
+                                    } else if (penyakit.equalsIgnoreCase("kronis")) {
+                                        hargaKatPenyakit = 200000;
+                                        hargaObat = 100000;
+                                    }
+
+                                    // Logika Tagihan
+                                    tagihan = ((obat * hargaObat) + hargaKatPenyakit) * keringanan;
+
+                                    System.out.println("=> Total Tagihan            : " + tagihan);
+                                    System.out.print("=> Bayar Sekarang           : ");
+                                    bayar = input.nextInt();
+                                    kembalian = bayar - (int) tagihan;
+                                    System.out.println("== Kembalian                : " + kembalian);
+                                    input.nextLine();
+                                    // uangMasuk[iUangMasuk][0] = Integer.toString((int)tagihan);
+                                    // uangMasuk[iUangMasuk][1] = biodataPasien[kodePasien - 1][5];
+
+                                    // iUangMasuk++;
+
+                                    do {
+                                        System.out.print("=> Donasikan Kembalian  y/n : ");
+                                        apaDonasi = input.nextLine();
+                                        if (apaDonasi.equalsIgnoreCase("y") || apaDonasi.equalsIgnoreCase("n")) {
+                                            break;
+                                        } else {
+                                            System.out.println("Input Invalid");
+                                        }
+
+                                    } while (true);
+
+                                    if (apaDonasi.equalsIgnoreCase("y")) {
+                                        System.out.print("=> Donasikan Semuanya? y/n  : ");
+                                        apaDonasiSemua = input.nextLine();
+
+                                        if (apaDonasiSemua.equalsIgnoreCase("y")) {
+                                            donasi = kembalian;
+                                        } else if (apaDonasiSemua.equalsIgnoreCase("n")) {
+                                            System.out.print("=> Masukan Besar Donasi     : ");
+                                            donasi = input.nextInt();
+                                        }
+                                        kembalianAkhir = kembalian - donasi;
+                                    }
+
+                                    else if (apaDonasi.equalsIgnoreCase("n")) {
+                                        donasi = 0;
+                                    }
+
+                                    System.out.println(donasi);
+                                    // input.nextLine();
+                                }
+
+                                // Blok Jika Pasien Tidak Rawat Inap
+                                else if (biodataPasien[kodePasien - 1][8] == null) {
+
+                                    do {
+                                        System.out.print("Kategori Penyakit   : ");
+                                        penyakit = input.nextLine();
+                                        if (penyakit.equalsIgnoreCase("biasa")
+                                                || penyakit.equalsIgnoreCase("sedang")
+                                                || penyakit.equalsIgnoreCase("berat")) {
+                                            break;
+                                        } else {
+                                            System.out.println("Kategori Penyakit Salah (biasa/sedang/berat)");
+                                        }
+
+                                    } while (true);
+
+                                    do {
+                                        System.out.print("=> Jumlah Layanan Obat  : ");
+                                        if (input.hasNextInt()) {
+                                            obat = input.nextInt();
+                                            break;
+
+                                        } else {
+                                            input.next(); // Membersihkan masukan yang tidak valid
+                                            System.out.println("Input Invalid. Harap masukkan angka.");
+                                        }
+                                    } while (true);
+
+                                    if (biodataPasien[kodePasien - 1][4].equalsIgnoreCase("y")) {
+                                        keringanan = 0.7;
+                                    } else if (biodataPasien[kodePasien - 1][4].equalsIgnoreCase("n")) {
+                                        keringanan = 1;
+                                    }
+
+                                    if (penyakit.equalsIgnoreCase("biasa")) {
+                                        hargaKatPenyakit = 50000;
+                                        hargaObat = 30000;
+                                    } else if (penyakit.equalsIgnoreCase("sedang")) {
+                                        hargaKatPenyakit = 100000;
+                                        hargaObat = 50000;
+                                    } else if (penyakit.equalsIgnoreCase("berat")) {
+                                        hargaKatPenyakit = 200000;
+                                        hargaObat = 100000;
+                                    }
+
+                                    // Logika Tagihan
+                                    tagihan = ((obat * hargaObat) + hargaKatPenyakit) * keringanan;
+
+                                    System.out.println("=> Total Tagihan            : " + tagihan);
+                                    System.out.print("=> Bayar Sekarang           : ");
+                                    bayar = input.nextInt();
+                                    kembalian = bayar - (int) tagihan;
+                                    System.out.println("== Kembalian                : " + kembalian);
+                                    input.nextLine();
+                                    // uangMasuk[iUangMasuk][0] = Integer.toString((int)tagihan);
+                                    // uangMasuk[iUangMasuk][1] = biodataPasien[kodePasien - 1][5];
+
+                                    // iUangMasuk++;
+
+                                    do {
+                                        System.out.print("=> Donasikan Kembalian  y/n : ");
+                                        apaDonasi = input.nextLine();
+                                        if (apaDonasi.equalsIgnoreCase("y") || apaDonasi.equalsIgnoreCase("n")) {
+                                            break;
+                                        } else {
+                                            System.out.println("Input Invalid");
+                                        }
+
+                                    } while (true);
+
+                                    if (apaDonasi.equalsIgnoreCase("y")) {
+                                        System.out.print("=> Donasikan Semuanya? y/n  : ");
+                                        apaDonasiSemua = input.nextLine();
+
+                                        if (apaDonasiSemua.equalsIgnoreCase("y")) {
+                                            donasi = kembalian;
+                                        } else if (apaDonasiSemua.equalsIgnoreCase("n")) {
+                                            System.out.print("=> Masukan Besar Donasi     : ");
+                                            donasi = input.nextInt();
+                                        }
+                                        kembalianAkhir = kembalian - donasi;
+                                    }
+
+                                    else if (apaDonasi.equalsIgnoreCase("n")) {
+                                        donasi = 0;
+                                    }
+
+                                    System.out.println(donasi);
+
+                                }
+
+                            } else {
+                                System.out.println("Kode Pasien tidak valid"); // JIKA kode tidak ditemukan
+                            }
+
                         }
-                    }
 
-                    if (adaPasien == true) {
-                        do {
-                            System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.println("|            Bayar Tagihan Pasien             |");
-                            System.out.println("|---------------------------------------------|");
-                            System.out.println("| (?) Ketik (cari) untuk mencari Kode Pasien  |");
-                            System.out.println("| (?) Ketik (kembali) untuk kembali ke menu   |");
-                            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                            System.out.print("=> Masukan Kode Pasien : ");
-                            String bayarPasien = input.nextLine();
+                        else {
+                            System.out.println("Input Invalid\n");
 
-                            if (bayarPasien.equalsIgnoreCase("cari")) {
-                                System.out.print("=> Masukan Nama Pasien : ");
-                                String cariPasien = input.nextLine();
+                        }
 
-                                boolean ditemukan = false;
-                                for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
-                                    if (biodataPasien[iGlobal][0] != null
-                                            && biodataPasien[iGlobal][0].contains(cariPasien)) { // Diganti contains
+                    } while (true);
 
-                                        printBiodataPasien();
+                }
 
-                                        ditemukan = true;
-                                    }
-                                }
+                else if (adaPasien == false) {
+                    noActivePasien();
 
-                                if (!ditemukan) {
-                                    System.out.println("Pasien Tidak ditemukan");
-                                }
+                }
 
-                            } else if (bayarPasien.equalsIgnoreCase("kembali")) {
-                                break;
-
-                            } else if (bayarPasien.matches("\\d+")) { // JIKA angka Maka kesini
-                                kodePasien = Integer.parseInt(bayarPasien); // Jika Kode ditemukan
-                                if (kodePasien >= 1 && kodePasien <= biodataPasien.length
-                                        && biodataPasien[kodePasien - 1][0] != null) {
-                                    System.out.println("========================================");
-                                    System.out.println("|  Bayar Tagihan Pasien Nomor " + kodePasien);
-                                    printBioKodePasien();
-
-                                    // Engko Ditambahi Tagian Pasien
-                                    // Deklarasi variabel buat logika Pembayaran
-                                    int obat = 0, hargaObat = 0, hargaKatPenyakit = 0;
-                                    int kembalian = 0, bayar = 0;
-                                    double keringanan = 0, tagihan = 0;
-                                    int donasi = 0, kembalianAkhir = 0;
-                                    String penyakit, apaDonasi, apaDonasiSemua;
-
-                                    // Blok Jika pasien Rawat Inap
-                                    if (biodataPasien[kodePasien - 1][8] != null) {
-                                        LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
-                                        biodataPasien[kodePasien - 1][6] = tanggalKeluar.format(formatter);
-
-                                        LocalDate tanggalCheskIn = LocalDate.parse(biodataPasien[kodePasien - 1][5],
-                                                formatter);
-                                        LocalDate tanggalCheckOut = LocalDate.parse(biodataPasien[kodePasien - 1][6],
-                                                formatter);
-
-                                        long selisihHari = hitungSelisihHari(tanggalCheskIn, tanggalCheckOut);
-
-                                        System.out.println("Selisih Hari = " + selisihHari);
-                                    }
-
-                                    // Blok Jika Pasien Tidak Rawat Inap
-                                    else if (biodataPasien[kodePasien - 1][8] == null) {
-
-                                        do {
-                                            System.out.print("Kategori Penyakit   : ");
-                                            penyakit = input.nextLine();
-                                            if (penyakit.equalsIgnoreCase("biasa")
-                                                    || penyakit.equalsIgnoreCase("sedang")
-                                                    || penyakit.equalsIgnoreCase("berat")) {
-                                                break;
-                                            } else {
-                                                System.out.println("Kategori Penyakit Salah (biasa/sedang/berat)");
-                                            }
-
-                                        } while (true);
-
-                                        do {
-                                            System.out.print("=> Jumlah Layanan Obat  : ");
-                                            if (input.hasNextInt()) {
-                                                obat = input.nextInt();
-                                                break;
-
-                                            } else {
-                                                input.next(); // Membersihkan masukan yang tidak valid
-                                                System.out.println("Input Invalid. Harap masukkan angka.");
-                                            }
-                                        } while (true);
-
-                                        if (biodataPasien[kodePasien - 1][4].equalsIgnoreCase("y")) {
-                                            keringanan = 0.7;
-                                        } else if (biodataPasien[kodePasien - 1][4].equalsIgnoreCase("n")) {
-                                            keringanan = 1;
-                                        }
-
-                                        if (penyakit.equalsIgnoreCase("biasa")) {
-                                            hargaKatPenyakit = 50000;
-                                            hargaObat = 30000;
-                                        } else if (penyakit.equalsIgnoreCase("sedang")) {
-                                            hargaKatPenyakit = 100000;
-                                            hargaObat = 50000;
-                                        } else if (penyakit.equalsIgnoreCase("berat")) {
-                                            hargaKatPenyakit = 200000;
-                                            hargaObat = 100000;
-                                        }
-
-                                        // Logika Tagihan
-                                        tagihan = ((obat * hargaObat) + hargaKatPenyakit) * keringanan;
-
-                                        System.out.println("=> Total Tagihan            : " + tagihan);
-                                        System.out.print("=> Bayar Sekarang           : ");
-                                        bayar = input.nextInt();
-                                        kembalian = bayar - (int) tagihan;
-                                        System.out.println("== Kembalian                : " + kembalian);
-                                        input.nextLine();
-                                        // uangMasuk[iUangMasuk][0] = Integer.toString((int)tagihan);
-                                        // uangMasuk[iUangMasuk][1] = biodataPasien[kodePasien - 1][5];
-
-                                        // iUangMasuk++;
-
-                                        do {
-                                            System.out.print("=> Donasikan Kembalian  y/n : ");
-                                            apaDonasi = input.nextLine();
-                                            if (apaDonasi.equalsIgnoreCase("y") || apaDonasi.equalsIgnoreCase("n")) {
-                                                break;
-                                            } else {
-                                                System.out.println("Input Invalid");
-                                            }
-            
-                                        } while (true);
-                                        
-                                        if (apaDonasi.equalsIgnoreCase("y")) {
-                                            System.out.print("=> Donasikan Semuanya? y/n  : ");
-                                            apaDonasiSemua = input.nextLine();
-            
-                                            if (apaDonasiSemua.equalsIgnoreCase("y")) {
-                                                donasi = kembalian;
-                                            } else if (apaDonasiSemua.equalsIgnoreCase("n")) {
-                                                System.out.print("=> Masukan Besar Donasi     : ");
-                                                donasi = input.nextInt();
-                                            }
-                                            kembalianAkhir = kembalian - donasi;
-                                        }
-            
-                                        else if (apaDonasi.equalsIgnoreCase("n")) {
-                                            donasi = 0;
-                                        }
-
-                                        System.out.println(donasi);
-                                        
-                                    }
-
-                                } else {
-                                    System.out.println("Kode Pasien tidak valid"); // JIKA kode tidak ditemukan
-                                }
-
-                            }
-
-                            else {
-                                System.out.println("Input Invalid\n");
-
-                            }
-
-                        } while (true);
-
-                    }
-
-                    else if (adaPasien == false) {
-                        noActivePasien();
-
-                    }
-
-                    break;
-
+                break;
 
                 case 3:
                     // Pesankan Kamar Pasien
