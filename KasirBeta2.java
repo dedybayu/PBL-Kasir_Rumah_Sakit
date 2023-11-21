@@ -567,10 +567,9 @@ public class KasirBeta2 {
 
                                     while (biodataPasien[kodePasien - 1][8] == null) {
                                         System.out.println("\n========================================");
-                                        System.out.println("|       1. VIP                         |");
-                                        System.out.println("|       2. Reguler                     |");
-                                        System.out.println("|       3. Bersama                     |");
-                                        System.out.println("|       4. Informasi Harga Kamar       |");
+                                        System.out.println("|       1. VIP     (1.500.000,00/malam)|");
+                                        System.out.println("|       2. Reguler (800.000,00/malam  )|");
+                                        System.out.println("|       3. Bersama (400.000,00/malam  )|");
                                         System.out.println("========================================");
                                         // Engko Logika Pesan Kamar Pasien array ke 8 Kamar Pasien
                                         int pilihKamar;
@@ -596,7 +595,7 @@ public class KasirBeta2 {
                                         } while (true);
 
                                         if (pilihKamar == 1) {
-                                            System.out.println("Kamar VIO");
+                                            System.out.println("Kamar VIP");
 
                                             for (int i = 0; i < kamarVIP.length; i++) {
                                                 if (kamarVIP[i][0] == null) {
@@ -669,16 +668,7 @@ public class KasirBeta2 {
                                                 break;
                                             }
 
-                                        } else if (pilihKamar == 4) {
-                                            System.out.println("========================================");
-                                            System.out.println("|          bbInformasi Kamar           |");
-                                            System.out.println("|======================================|");
-                                            System.out.println("|   VIP      Rp1.500.000,00/malam      |");
-                                            System.out.println("|   Reguler  Rp800.000,00/malam        |");
-                                            System.out.println("|   Bersama  Rp400.000,00/malam        |");
-                                            System.out.println("========================================");
-                                            // break;
-                                        }
+                                        } 
                                     }
 
                                 } else {
