@@ -85,9 +85,14 @@ public class KasirBeta2 {
     // Penjelasan Array [kamar][biodata pasien] untuk 2D
     // Penjelasan Array[kamar][pasien 1,2][biodata pasien] untuk 3D
 
-    // Deklarasi untuk Riwayat Transaksi
+    // Deklarasi untuk Pembayaran
     private static int[] uangMasuk = new int[20];
     private static int penghasilan = 0;
+
+    // Deklarasi Untuk Total Transaksi
+    private static double[][] transactions = new double[biodataPasien.length][4]; 
+    // [][0] = total tagihan, [][1] = jumlah yang dibayar, [][2] = kembalian, [][3] = donasi
+
 
     // Deklarasi untuk looping
     private static int riwayat = 0; // untuk loping smua riwayat riwayat
@@ -362,6 +367,12 @@ public class KasirBeta2 {
 
                                     // iUangMasuk++;
 
+                                    //Menyimpan transaksi
+                                    transactions[kodePasien - 1][0] = tagihan;
+                                    transactions[kodePasien - 1][1] = bayar;
+                                    transactions[kodePasien - 1][2] = kembalian;
+
+
                                     do {
                                         System.out.print("=> Donasikan Kembalian  y/n : ");
                                         apaDonasi = input.nextLine();
@@ -379,6 +390,7 @@ public class KasirBeta2 {
 
                                         if (apaDonasiSemua.equalsIgnoreCase("y")) {
                                             donasi = kembalian;
+                                            transactions[kodePasien - 1][3] = donasi;   
                                         } else if (apaDonasiSemua.equalsIgnoreCase("n")) {
                                             System.out.print("=> Masukan Besar Donasi     : ");
                                             donasi = input.nextInt();
@@ -387,7 +399,8 @@ public class KasirBeta2 {
                                     }
 
                                     else if (apaDonasi.equalsIgnoreCase("n")) {
-                                        donasi = 0;
+                                        transactions[kodePasien - 1][3] = 0;
+                                        kembalianAkhir = kembalian;
                                     }
 
                                     System.out.println(donasi);
@@ -453,6 +466,11 @@ public class KasirBeta2 {
 
                                     // iUangMasuk++;
 
+                                    //Menyimpan transaksi
+                                    transactions[kodePasien - 1][0] = tagihan;
+                                    transactions[kodePasien - 1][1] = bayar;
+                                    transactions[kodePasien - 1][2] = kembalian;
+
                                     do {
                                         System.out.print("=> Donasikan Kembalian  y/n : ");
                                         apaDonasi = input.nextLine();
@@ -470,15 +488,18 @@ public class KasirBeta2 {
 
                                         if (apaDonasiSemua.equalsIgnoreCase("y")) {
                                             donasi = kembalian;
+                                            transactions[kodePasien - 1][3] = donasi;   
                                         } else if (apaDonasiSemua.equalsIgnoreCase("n")) {
                                             System.out.print("=> Masukan Besar Donasi     : ");
                                             donasi = input.nextInt();
+                                            transactions[kodePasien - 1][3] = donasi;   
                                         }
                                         kembalianAkhir = kembalian - donasi;
                                     }
 
                                     else if (apaDonasi.equalsIgnoreCase("n")) {
-                                        donasi = 0;
+                                        transactions[kodePasien - 1][3] = 0;
+                                        kembalianAkhir = kembalian;
                                     }
 
                                     System.out.println(donasi);
@@ -908,18 +929,19 @@ public class KasirBeta2 {
                     // Menu Riwayat Transaksi
                     System.out.println("Menu Riwayat Transaksi");
 
-                    boolean semuaKosong = true;
                     for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
-                        if (biodataPasien[iGlobal][0 ] != null) {
-                            printBiodataPasien();
-                            semuaKosong = false;
+                        if (transactions[iGlobal][0] != 0) {
+                            System.out.println("Detail Transaksi untuk Pasien " + (iGlobal + 1));
+                            System.out.println("Total Tagihan: " + transactions[iGlobal][0]);
+                            System.out.println("Jumlah Pembayaran: " + transactions[iGlobal][1]);
+                            System.out.println("Kembalian: " + transactions[iGlobal][2]);
+                            System.out.println("Donasi: " + transactions[iGlobal][3]);
+                        } else {
+                            System.out.println("Tidak ada transaksi untuk pasien " + (iGlobal + 1));
                         }
-
+                        
                     }
-
-                    if (semuaKosong) {
-                        noActivePasien();
-                    }
+        
                     break;
 
                 case 3:
