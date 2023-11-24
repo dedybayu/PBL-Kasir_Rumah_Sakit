@@ -73,7 +73,7 @@ public class KasirBeta2 {
     private static String[][] biodataPasien = new String[100][10];
 
     // Deklarasi Untuk Riwayat Pasien
-    private static String[][] riwayatTransaksiPasienBio = new String[100][15];
+    private static String[][] detailRiwayatTransaksi = new String[100][15];
     // [0]nama [1]alamat [2]nohp [3]pnykt [4]bpjs [5]tglmsk [6]tglkluar [7]lmainap
     // [8]obat
     // [9]konsum [10]diskonbpjs [11]tagihan [12]donasi
@@ -305,8 +305,8 @@ public class KasirBeta2 {
                                         System.out.println("Selisih Hari = " + selisihHari);
 
                                         // Untuk Tagihan Kamar
-                                        int tagihanKamar = tagihanKamarPasien((kodePasien -1), selisihHari);
-                                        
+                                        int tagihanKamar = tagihanKamarPasien((kodePasien - 1), selisihHari);
+
                                         System.out.println(tagihanKamar);
 
                                         do {
@@ -454,10 +454,6 @@ public class KasirBeta2 {
                                         kembalian = bayar - (int) tagihan;
                                         System.out.println("== Kembalian                : " + kembalian);
                                         input.nextLine();
-                                        // uangMasuk[iUangMasuk][0] = Integer.toString((int)tagihan);
-                                        // uangMasuk[iUangMasuk][1] = biodataPasien[kodePasien - 1][5];
-
-                                        // iUangMasuk++;
 
                                         // Menyimpan transaksi
                                         transactions[kodePasien - 1][0] = tagihan;
@@ -904,18 +900,42 @@ public class KasirBeta2 {
                     // Menu Laporan Keuangan
                     System.out.println("Menu Laporan Keuangan");
                     System.out.println("========================================");
-                    System.out.println("Masukan kode pasien : ");
+                    System.out.println("Masukkan kode pasien: ");
                     System.out.println("========================================");
-                    String bayarPasien = input.nextLine();
+                    String kodePasien = input.nextLine();
                     System.out.println("========================================");
-                    System.out.println("|       Pasien Nomor " + biodataPasien[iGlobal][7]);
-                    System.out.println("|=> Nama Pasien     : " + biodataPasien[iGlobal][0]);
-                    System.out.println("|=> Alamat Pasien   : " + biodataPasien[iGlobal][1]);
-                    System.out.println("|=> Nomer HP        : " + biodataPasien[iGlobal][2]);
-                    System.out.println("|=> Penyakit Pasien : " + biodataPasien[iGlobal][3]);
-                    System.out.println("|=> Kode Pasien     : " + biodataPasien[iGlobal][7]);
-                    System.out.println("========================================\n");
 
+                    // mencari kode pasien
+                    int indexPasien = -1;
+                    for (int i = 0; i < biodataPasien.length; i++) {
+                        if (biodataPasien[i][7].equals(kodePasien)) {
+                            indexPasien = i;
+                            break; // Correct usage of break inside the loop
+                        }
+                    }
+                    
+                    if (indexPasien != -1) {
+                        System.out.println("=========================================");
+                        System.out.println("|       Pasien Nomor " + biodataPasien[indexPasien][7]);
+                        System.out.println("|=> Nama Pasien     : " + biodataPasien[indexPasien][0]);
+                        System.out.println("|=> Alamat Pasien   : " + biodataPasien[indexPasien][1]);
+                        System.out.println("|=> Nomer HP        : " + biodataPasien[indexPasien][2]);
+                        System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
+                        System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
+                        System.out.println("========================================");
+                        // info detail 
+                        System.out.println("==========================================");
+                        System.out.println("Total Tagihan: " + transactions[iGlobal][0]);
+                        System.out.println("Jumlah Pembayaran: " + transactions[iGlobal][1]);
+                        System.out.println("Kembalian: " + transactions[iGlobal][2]);
+                        System.out.println("Donasi: " + transactions[iGlobal][3]);
+                        System.out.println("==========================================");
+                        
+                       
+                    } else {
+                        System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
+                    }
+                    
                     break;
 
                 case 2:
@@ -968,6 +988,27 @@ public class KasirBeta2 {
             tagihanKamar = 800000 * (int) hari;
         }
         return tagihanKamar;
+    }
+
+    static void cetakTransaksiDanHapusBiodata() {
+        // Nota/Bukti Pembayaran
+        System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("|              Bukti Pembayaran               |");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("| => Nama Pasien     : " );
+        System.out.println("| => Alamat Pasien   : " );
+        System.out.println("| => Nomer HP Pasien : " );
+        System.out.println("| => Penyakit Pasien : " );
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("| => Total Tagihan   : " );
+        System.out.println("| => Total Bayar     : " );
+        System.out.println("| => Total Kembalian : " );
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("| => Total Donasi    : " );
+        System.out.println("| => Kembalian Akhir : " );
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("|              Bukti Pembayaran               |");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
     }
 
     static void userPwSalah() {
