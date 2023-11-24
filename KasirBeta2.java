@@ -305,8 +305,8 @@ public class KasirBeta2 {
                                         System.out.println("Selisih Hari = " + selisihHari);
 
                                         // Untuk Tagihan Kamar
-                                        int tagihanKamar = tagihanKamarPasien((kodePasien -1), selisihHari);
-                                        
+                                        int tagihanKamar = tagihanKamarPasien((kodePasien - 1), selisihHari);
+
                                         System.out.println(tagihanKamar);
 
                                         do {
@@ -904,18 +904,39 @@ public class KasirBeta2 {
                     // Menu Laporan Keuangan
                     System.out.println("Menu Laporan Keuangan");
                     System.out.println("========================================");
-                    System.out.println("Masukan kode pasien : ");
+                    System.out.println("Masukkan kode pasien: ");
                     System.out.println("========================================");
-                    String bayarPasien = input.nextLine();
+                    String kodePasien = input.nextLine();
                     System.out.println("========================================");
-                    System.out.println("|       Pasien Nomor " + biodataPasien[iGlobal][7]);
-                    System.out.println("|=> Nama Pasien     : " + biodataPasien[iGlobal][0]);
-                    System.out.println("|=> Alamat Pasien   : " + biodataPasien[iGlobal][1]);
-                    System.out.println("|=> Nomer HP        : " + biodataPasien[iGlobal][2]);
-                    System.out.println("|=> Penyakit Pasien : " + biodataPasien[iGlobal][3]);
-                    System.out.println("|=> Kode Pasien     : " + biodataPasien[iGlobal][7]);
-                    System.out.println("========================================\n");
+                    // mencari kode pasien
+                    int indexPasien = -1;
+                    for (int i = 0; i < biodataPasien.length; i++) {
+                        if (biodataPasien[i][7].equals(kodePasien)) {
+                            indexPasien = i;
+                            break;
 
+                        }
+                    }
+                    if (indexPasien != -1) {
+                        System.out.println("|       Pasien Nomor " + biodataPasien[indexPasien][7]);
+                        System.out.println("|=> Nama Pasien     : " + biodataPasien[indexPasien][0]);
+                        System.out.println("|=> Alamat Pasien   : " + biodataPasien[indexPasien][1]);
+                        System.out.println("|=> Nomer HP        : " + biodataPasien[indexPasien][2]);
+                        System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
+                        System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
+                        System.out.println("========================================");
+                    
+                        // Add financial report details here
+                        System.out.println("========================================");
+                        System.out.println("Laporan Keuangan:");
+                        System.out.println("|=> Total Biaya    : " + kamarVIP[indexPasien][1]);
+                        System.out.println("|=> Pembayaran     : " + kamarVIP[indexPasien][2]);
+                        System.out.println("|=> Sisa Tagihan    : " + (Integer.parseInt(kamarVIP[indexPasien][1]) - Integer.parseInt(kamarVIP[indexPasien][2])));
+                        System.out.println("========================================\n");
+                    } else {
+                    System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
+                    }
+                    
                     break;
 
                 case 2:
