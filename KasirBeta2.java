@@ -352,7 +352,7 @@ public class KasirBeta2 {
                                         }
 
                                         // Rumus Tagihan
-                                        tagihan = (((obat * hargaObat) + hargaKatPenyakit) * keringanan) + tagihanKamar;
+                                        tagihan = (((obat * hargaObat) + hargaKatPenyakit) + tagihanKamar) * keringanan;
 
                                         System.out.println("=> Total Tagihan            : " + tagihan);
                                         System.out.print("=> Bayar Sekarang           : ");
