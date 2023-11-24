@@ -908,15 +908,16 @@ public class KasirBeta2 {
                     System.out.println("========================================");
                     String kodePasien = input.nextLine();
                     System.out.println("========================================");
+
                     // mencari kode pasien
                     int indexPasien = -1;
                     for (int i = 0; i < biodataPasien.length; i++) {
                         if (biodataPasien[i][7].equals(kodePasien)) {
                             indexPasien = i;
-                            break;
-
+                            break; // Correct usage of break inside the loop
                         }
                     }
+                    
                     if (indexPasien != -1) {
                         System.out.println("|       Pasien Nomor " + biodataPasien[indexPasien][7]);
                         System.out.println("|=> Nama Pasien     : " + biodataPasien[indexPasien][0]);
@@ -925,16 +926,16 @@ public class KasirBeta2 {
                         System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
                         System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
                         System.out.println("========================================");
-                    
-                        // Add financial report details here
-                        System.out.println("========================================");
-                        System.out.println("Laporan Keuangan:");
-                        System.out.println("|=> Total Biaya    : " + kamarVIP[indexPasien][1]);
-                        System.out.println("|=> Pembayaran     : " + kamarVIP[indexPasien][2]);
-                        System.out.println("|=> Sisa Tagihan    : " + (Integer.parseInt(kamarVIP[indexPasien][1]) - Integer.parseInt(kamarVIP[indexPasien][2])));
-                        System.out.println("========================================\n");
+                        // info detail 
+                         System.out.println("Detail Transaksi untuk Pasien " + (iGlobal + 1));
+                            System.out.println("Total Tagihan: " + transactions[iGlobal][0]);
+                            System.out.println("Jumlah Pembayaran: " + transactions[iGlobal][1]);
+                            System.out.println("Kembalian: " + transactions[iGlobal][2]);
+                            System.out.println("Donasi: " + transactions[iGlobal][3]);
+                       
+                       
                     } else {
-                    System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
+                        System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
                     }
                     
                     break;
