@@ -290,13 +290,6 @@ public class KasirBeta2 {
                                     System.out.println("|  Bayar Tagihan Pasien Nomor " + kodePasien);
                                     printBioKodePasien();
 
-                                    // Engko Ditambahi Tagian Pasien
-                                    // Deklarasi variabel buat logika Pembayaran
-                                    // int obat = 0, hargaObat = 0, hargaKatPenyakit = 0, kembalian = 0, bayar = 0;
-                                    // double keringanan = 0, tagihan = 0;
-                                    // int donasi = 0, kembalianAkhir = 0;
-                                    // String penyakit, apaDonasi, apaDonasiSemua;
-
                                     // Blok Jika pasien Rawat Inap
                                     if (biodataPasien[kodePasien - 1][8] != null) {
                                         LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
@@ -313,13 +306,8 @@ public class KasirBeta2 {
 
                                         // Untuk Tagihan Kamar
                                         int tagihanKamar = tagihanKamarPasien((kodePasien -1), selisihHari);
-                                        // if (biodataPasien[kodePasien - 1][8] == "VIP") {
-                                        //     tagihanKamar = 1500000 * (int) selisihHari;
-                                        // } else if (biodataPasien[kodePasien - 1][8] == "Reguler") {
-                                        //     tagihanKamar = 800000 * (int) selisihHari;
-                                        // } else if (biodataPasien[kodePasien - 1][8] == "Bersama") {
-                                        //     tagihanKamar = 800000 * (int) selisihHari;
-                                        // }
+                                        
+                                        System.out.println(tagihanKamar);
 
                                         do {
                                             System.out.print("Kategori Penyakit   : ");
@@ -353,18 +341,18 @@ public class KasirBeta2 {
                                         }
 
                                         if (penyakit.equalsIgnoreCase("sedang")) {
-                                            hargaKatPenyakit = 50000;
-                                            hargaObat = 30000;
-                                        } else if (penyakit.equalsIgnoreCase("berat")) {
                                             hargaKatPenyakit = 100000;
                                             hargaObat = 50000;
+                                        } else if (penyakit.equalsIgnoreCase("berat")) {
+                                            hargaKatPenyakit = 400000;
+                                            hargaObat = 200000;
                                         } else if (penyakit.equalsIgnoreCase("kronis")) {
-                                            hargaKatPenyakit = 200000;
-                                            hargaObat = 100000;
+                                            hargaKatPenyakit = 1000000;
+                                            hargaObat = 500000;
                                         }
 
-                                        // Logika Tagihan
-                                        tagihan = ((obat * hargaObat) + hargaKatPenyakit) * keringanan;
+                                        // Rumus Tagihan
+                                        tagihan = (((obat * hargaObat) + hargaKatPenyakit) * keringanan) + tagihanKamar;
 
                                         System.out.println("=> Total Tagihan            : " + tagihan);
                                         System.out.print("=> Bayar Sekarang           : ");
@@ -372,10 +360,6 @@ public class KasirBeta2 {
                                         kembalian = bayar - (int) tagihan;
                                         System.out.println("== Kembalian                : " + kembalian);
                                         input.nextLine();
-                                        // uangMasuk[iUangMasuk][0] = Integer.toString((int)tagihan);
-                                        // uangMasuk[iUangMasuk][1] = biodataPasien[kodePasien - 1][5];
-
-                                        // iUangMasuk++;
 
                                         // Menyimpan transaksi
                                         transactions[kodePasien - 1][0] = tagihan;
