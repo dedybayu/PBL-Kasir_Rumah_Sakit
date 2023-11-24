@@ -919,6 +919,7 @@ public class KasirBeta2 {
                     }
                     
                     if (indexPasien != -1) {
+                        System.out.println("=========================================");
                         System.out.println("|       Pasien Nomor " + biodataPasien[indexPasien][7]);
                         System.out.println("|=> Nama Pasien     : " + biodataPasien[indexPasien][0]);
                         System.out.println("|=> Alamat Pasien   : " + biodataPasien[indexPasien][1]);
@@ -927,12 +928,13 @@ public class KasirBeta2 {
                         System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
                         System.out.println("========================================");
                         // info detail 
-                         System.out.println("Detail Transaksi untuk Pasien " + (iGlobal + 1));
-                            System.out.println("Total Tagihan: " + transactions[iGlobal][0]);
-                            System.out.println("Jumlah Pembayaran: " + transactions[iGlobal][1]);
-                            System.out.println("Kembalian: " + transactions[iGlobal][2]);
-                            System.out.println("Donasi: " + transactions[iGlobal][3]);
-                       
+                        System.out.println("==========================================");
+                        System.out.println("Total Tagihan: " + transactions[iGlobal][0]);
+                        System.out.println("Jumlah Pembayaran: " + transactions[iGlobal][1]);
+                        System.out.println("Kembalian: " + transactions[iGlobal][2]);
+                        System.out.println("Donasi: " + transactions[iGlobal][3]);
+                        System.out.println("==========================================");
+                        
                        
                     } else {
                         System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
