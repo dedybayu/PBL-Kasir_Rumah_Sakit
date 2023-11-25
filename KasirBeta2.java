@@ -90,7 +90,7 @@ public class KasirBeta2 {
     private static int penghasilan = 0;
 
     // Deklarasi Untuk Total Transaksi
-    private static double[][] transactions = new double[biodataPasien.length][4];
+    private static int[][] transactions = new int[biodataPasien.length][4];
     // [][0] = total tagihan, [][1] = jumlah yang dibayar, [][2] = kembalian, [][3]
     // = donasi
 
@@ -292,7 +292,7 @@ public class KasirBeta2 {
 
                                     // Blok Jika pasien Rawat Inap
                                     if (biodataPasien[kodePasien - 1][8] != null) {
-                                        System.out.println("|=> Pasien Kamar "+ biodataPasien[kodePasien-1][8]);
+                                        System.out.println("|=> Pasien Kamar "+ biodataPasien[kodePasien-1][8]+" "+biodataPasien[kodePasien-1][9]);
                                         System.out.println("========================================");
 
                                         LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
@@ -961,7 +961,7 @@ public class KasirBeta2 {
     }
 
     static void menyimpanTransaksi() {
-        transactions[kodePasien - 1][0] = tagihan;
+        transactions[kodePasien - 1][0] = (int)tagihan;
         transactions[kodePasien - 1][1] = bayar;
         transactions[kodePasien - 1][2] = kembalian;
         transactions[kodePasien - 1][3] = donasi;
