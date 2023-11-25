@@ -206,8 +206,11 @@ public class KasirBeta2 {
                                     System.out.println("Masukan y atau n");
                                 }
                             }
+                            // Mengambil tanggal sistem saat ini
+                            // System.out.println("=>");
+                            LocalDate tanggalMasuk = LocalDate.now();
 
-                            LocalDate tanggalMasuk = inputTanggal("Tanggal Masuk : ", formatter, input);
+                            // LocalDate tanggalMasuk = inputTanggal("Tanggal Masuk : ", formatter, input);
                             biodataPasien[idx][5] = tanggalMasuk.format(formatter); // 5 Tanggal Masuk 6 Tanggal
                                                                                     // Keluar
                             // System.out.print("=> Masukan Tanggal Masuk : ");
