@@ -292,6 +292,9 @@ public class KasirBeta2 {
 
                                     // Blok Jika pasien Rawat Inap
                                     if (biodataPasien[kodePasien - 1][8] != null) {
+                                        System.out.println("|=> Pasien Kamar "+ biodataPasien[kodePasien-1][8]);
+                                        System.out.println("========================================");
+
                                         LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
                                         biodataPasien[kodePasien - 1][6] = tanggalKeluar.format(formatter);
 
@@ -534,6 +537,7 @@ public class KasirBeta2 {
                                                         kamarVIP[i][j] = biodataPasien[kodePasien - 1][j];
                                                     }
                                                     System.out.println("Pasien didaftarkan di KamarVIP " + (i + 1));
+                                                    biodataPasien[kodePasien-1][9] = Integer.toString((i + 1));
                                                     break;
                                                 } else if (kamarVIP[i][0] != null) {
                                                     continue;
@@ -557,6 +561,7 @@ public class KasirBeta2 {
                                                         kamarReguler[i][j] = biodataPasien[kodePasien - 1][j];
                                                     }
                                                     System.out.println("Pasien didaftarkan di KamarReguler " + (i + 1));
+                                                    biodataPasien[kodePasien-1][9] = Integer.toString((i + 1));
                                                     break;
                                                 } else if (kamarReguler[i][0] != null) {
                                                     continue;
@@ -582,6 +587,7 @@ public class KasirBeta2 {
                                                         }
                                                         System.out.println(
                                                                 "Pasien didaftarkan di KamarBersama " + (i + 1));
+                                                        biodataPasien[kodePasien-1][9] = Integer.toString((i + 1));
 
                                                         break;
                                                     }
