@@ -354,7 +354,7 @@ public class KasirBeta2 {
                                         // Rumus Tagihan
                                         tagihan = (((obat * hargaObat) + hargaKatPenyakit) + tagihanKamar) * keringanan;
 
-                                        System.out.println("=> Total Tagihan            : " + (int)tagihan);
+                                        System.out.println("=> Total Tagihan            : " + (int) tagihan);
                                         System.out.print("=> Bayar Sekarang           : ");
                                         bayar = input.nextInt();
                                         kembalian = bayar - (int) tagihan;
@@ -363,12 +363,12 @@ public class KasirBeta2 {
 
                                         apakahDonasi(input);
                                         // Menyimpan transaksi
-                                        transactions[kodePasien - 1][0] = tagihan;
-                                        transactions[kodePasien - 1][1] = bayar;
-                                        transactions[kodePasien - 1][2] = kembalian;
-                                        transactions[kodePasien - 1][3] = donasi;
-                                        
-                                        
+                                        menyimpanTransaksi();
+                                        // transactions[kodePasien - 1][0] = tagihan;
+                                        // transactions[kodePasien - 1][1] = bayar;
+                                        // transactions[kodePasien - 1][2] = kembalian;
+                                        // transactions[kodePasien - 1][3] = donasi;
+
                                     }
 
                                     // Blok Jika Pasien Tidak Rawat Inap
@@ -419,19 +419,21 @@ public class KasirBeta2 {
                                         // Logika Tagihan
                                         tagihan = ((obat * hargaObat) + hargaKatPenyakit) * keringanan;
 
-                                        System.out.println("=> Total Tagihan            : " + (int)tagihan);
+                                        System.out.println("=> Total Tagihan            : " + (int) tagihan);
                                         System.out.print("=> Bayar Sekarang           : ");
                                         bayar = input.nextInt();
                                         kembalian = bayar - (int) tagihan;
                                         System.out.println("== Kembalian                : " + kembalian);
                                         input.nextLine();
 
-                                        // Menyimpan transaksi
-                                        transactions[kodePasien - 1][0] = tagihan;
-                                        transactions[kodePasien - 1][1] = bayar;
-                                        transactions[kodePasien - 1][2] = kembalian;
-
                                         apakahDonasi(input);
+                                        // Menyimpan transaksi
+                                        menyimpanTransaksi();
+                                        // transactions[kodePasien - 1][0] = tagihan;
+                                        // transactions[kodePasien - 1][1] = bayar;
+                                        // transactions[kodePasien - 1][2] = kembalian;
+
+                                        
 
                                     }
 
@@ -952,23 +954,28 @@ public class KasirBeta2 {
                 System.out.print("=> Masukan Besar Donasi     : ");
                 donasi = input.nextInt();
                 // transactions[kodePasien - 1][3] = donasi;
+                input.nextLine();
             }
             kembalianAkhir = kembalian - donasi;
-            input.nextLine();
+
         }
 
         else if (apaDonasi.equalsIgnoreCase("n")) {
             donasi = 0;
-            
+
             kembalianAkhir = kembalian;
         }
 
         System.out.println(donasi);
-        
 
     }
 
-    // static void menyimpanTransaksi(){
+    static void menyimpanTransaksi() {
+        transactions[kodePasien - 1][0] = tagihan;
+        transactions[kodePasien - 1][1] = bayar;
+        transactions[kodePasien - 1][2] = kembalian;
+        transactions[kodePasien - 1][3] = donasi;
+    }
 
     static void cetakTransaksiDanHapusBiodata() {
         // Nota/Bukti Pembayaran
