@@ -354,20 +354,9 @@ public class KasirBeta2 {
                                         // Rumus Tagihan
                                         tagihan = (((obat * hargaObat) + hargaKatPenyakit) + tagihanKamar) * keringanan;
 
-                                        System.out.println("=> Total Tagihan            : " + (int) tagihan);
-                                        System.out.print("=> Bayar Sekarang           : ");
-                                        bayar = input.nextInt();
-                                        kembalian = bayar - (int) tagihan;
-                                        System.out.println("== Kembalian                : " + kembalian);
-                                        input.nextLine();
-
-                                        apakahDonasi(input);
+                                        TagihanDanApakahDonasi(input);
                                         // Menyimpan transaksi
                                         menyimpanTransaksi();
-                                        // transactions[kodePasien - 1][0] = tagihan;
-                                        // transactions[kodePasien - 1][1] = bayar;
-                                        // transactions[kodePasien - 1][2] = kembalian;
-                                        // transactions[kodePasien - 1][3] = donasi;
 
                                     }
 
@@ -419,21 +408,9 @@ public class KasirBeta2 {
                                         // Logika Tagihan
                                         tagihan = ((obat * hargaObat) + hargaKatPenyakit) * keringanan;
 
-                                        System.out.println("=> Total Tagihan            : " + (int) tagihan);
-                                        System.out.print("=> Bayar Sekarang           : ");
-                                        bayar = input.nextInt();
-                                        kembalian = bayar - (int) tagihan;
-                                        System.out.println("== Kembalian                : " + kembalian);
-                                        input.nextLine();
-
-                                        apakahDonasi(input);
+                                        TagihanDanApakahDonasi(input);
                                         // Menyimpan transaksi
                                         menyimpanTransaksi();
-                                        // transactions[kodePasien - 1][0] = tagihan;
-                                        // transactions[kodePasien - 1][1] = bayar;
-                                        // transactions[kodePasien - 1][2] = kembalian;
-
-                                        
 
                                     }
 
@@ -931,7 +908,14 @@ public class KasirBeta2 {
         return tagihanKamar;
     }
 
-    static void apakahDonasi(Scanner input) {
+    static void TagihanDanApakahDonasi(Scanner input) {
+        System.out.println("=> Total Tagihan            : " + (int) tagihan);
+        System.out.print("=> Bayar Sekarang           : ");
+        bayar = input.nextInt();
+        kembalian = bayar - (int) tagihan;
+        System.out.println("== Kembalian                : " + kembalian);
+        input.nextLine();
+
         do {
             System.out.print("=> Donasikan Kembalian  y/n : ");
             apaDonasi = input.nextLine();
