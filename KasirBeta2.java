@@ -869,11 +869,11 @@ public class KasirBeta2 {
                 System.out.println("| => Penyakit Pasien : " + biodataPasien[indexPasien][3]);
                 System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
                 
-                // Input total tagihan, total bayar, total kembalian, total donasi
-                int totalTagihan = 0;  // Replace this with the correct logic to get the total tagihan
-                int totalBayar = 0;    // Replace this with the correct logic to get the total bayar
-                int totalKembalian = 0; // Replace this with the correct logic to get the total kembalian
-                int totalDonasi = 0;    // Replace this with the correct logic to get the total donasi
+                // Input total tagihan, total bayar, total kembalian, total donasi nyoba aja 
+                int totalTagihan = 0;  
+                int totalBayar = 0;    
+                int totalKembalian = 0; 
+                int totalDonasi = 0;    
                 
                 System.out.println("| => Total Tagihan   : " + totalTagihan);
                 System.out.println("| => Total Bayar     : " + totalBayar);
