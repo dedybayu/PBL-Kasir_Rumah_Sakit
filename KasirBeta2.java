@@ -846,6 +846,7 @@ public class KasirBeta2 {
 
                     if (indexPasien != -1) {
                         System.out.println("=========================================");
+                        System.out.println("|Laporan Keuangan Pasien Rumah Sakit cinta Java");
                         System.out.println("|       Pasien Nomor " + biodataPasien[indexPasien][7]);
                         System.out.println("|=> Nama Pasien     : " + biodataPasien[indexPasien][0]);
                         System.out.println("|=> Alamat Pasien   : " + biodataPasien[indexPasien][1]);
@@ -853,13 +854,19 @@ public class KasirBeta2 {
                         System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
                         System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
                         System.out.println("========================================");
-                        // info detail
-                        System.out.println("==========================================");
-                        System.out.println("Total Tagihan: " + transactions[iGlobal][0]);
-                        System.out.println("Jumlah Pembayaran: " + transactions[iGlobal][1]);
-                        System.out.println("Kembalian: " + transactions[iGlobal][2]);
-                        System.out.println("Donasi: " + transactions[iGlobal][3]);
-                        System.out.println("==========================================");
+                        // info detail Laporan keuangan 
+                       System.out.println("================================================");
+                       System.out.println("Laporan Keuangan Secara Detail ");
+                       System.out.println("================================================");
+                       System.out.println("Nama Paisen : " + biodataPasien[indexPasien][0] );
+                       System.out.println("kode Pasien : " + biodataPasien[indexPasien][7] );
+                       System.out.println("Kamar Pasien : "  );
+                       System.out.println("Pasien Memakai BPJS (Y/N) : " + biodataPasien[4]);
+                       System.out.println("Jumlah Layanan Obat Pasien  :");
+                       System.out.println("Jumlah Harga dibayar Pasien  :");
+                       System.out.println("Kembalian Pasien  :");
+                       System.out.println( "Donasi Pasien  :");
+                       System.out.println("================================================");
 
                     } else {
                         System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
