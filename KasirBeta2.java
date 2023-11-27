@@ -855,19 +855,7 @@ public class KasirBeta2 {
                         System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
                         System.out.println("========================================");
                         // info detail Laporan keuangan 
-                       System.out.println("================================================");
-                       System.out.println("Laporan Keuangan Secara Detail ");
-                       System.out.println("================================================");
-                       System.out.println("Nama Paisen : " + biodataPasien[indexPasien][0] );
-                       System.out.println("kode Pasien : " + biodataPasien[indexPasien][7] );
-                       System.out.println("Kamar Pasien : "  );
-                       System.out.println("Pasien Memakai BPJS (Y/N) : " + biodataPasien[4]);
-                       System.out.println("Jumlah Layanan Obat Pasien  :");
-                       System.out.println("Jumlah Harga dibayar Pasien  :");
-                       System.out.println("Kembalian Pasien  :");
-                       System.out.println( "Donasi Pasien  :");
-                       System.out.println("================================================");
-
+                       
                     } else {
                         System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
                     }
