@@ -770,9 +770,6 @@ public class KasirBeta2 {
     }
 
     // Method untuk login sebagai Manager
-    /**
-     * @param input
-     */
     private static void loginManager(Scanner input) {
 
         // Scanner input = new Scanner(System.in);
