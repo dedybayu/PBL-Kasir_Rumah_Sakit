@@ -316,6 +316,7 @@ public class KasirBeta2 {
                                         System.out.println(tagihanKamar);
 
                                         do {
+                                            System.out.println("Kategori (sedang/berat/kronis)");
                                             System.out.print("Kategori Penyakit   : ");
                                             penyakit = input.nextLine();
                                             if (penyakit.equalsIgnoreCase("sedang")
@@ -370,6 +371,7 @@ public class KasirBeta2 {
                                     else if (biodataPasien[kodePasien - 1][8] == null) {
 
                                         do {
+                                            System.out.println("Kategori (biasa/sedang/berat)");
                                             System.out.print("Kategori Penyakit   : ");
                                             penyakit = input.nextLine();
                                             if (penyakit.equalsIgnoreCase("biasa")
