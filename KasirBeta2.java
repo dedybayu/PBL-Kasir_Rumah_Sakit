@@ -366,6 +366,8 @@ public class KasirBeta2 {
                                         // Menyimpan transaksi
                                         menyimpanTransaksi();
 
+                                        cetakTransaksiDanHapusBiodata(selisihHari);
+
                                         riwayat++;
 
                                     }
@@ -996,22 +998,33 @@ public class KasirBeta2 {
         transactions[kodePasien - 1][3] = donasi;
     }
 
-    static void cetakTransaksiDanHapusBiodata() {
+    static void cetakTransaksiDanHapusBiodata(long selisihHari) {
+        for(int i = 0; i <= 6; i++){
+            detailRiwayatTransaksi[riwayat][i] = biodataPasien[kodePasien-1][i];
+        }
+        detailRiwayatTransaksi[riwayat][7] = String.valueOf(selisihHari);
+        detailRiwayatTransaksi[riwayat][8] = Integer.toString(obat);
+        detailRiwayatTransaksi[riwayat][9] = Integer.toString((int)tagihan);
+        detailRiwayatTransaksi[riwayat][10] = Integer.toString(bayar);
+        detailRiwayatTransaksi[riwayat][11] = Integer.toString(kembalian);
+        detailRiwayatTransaksi[riwayat][12] = Integer.toString(donasi);
+        detailRiwayatTransaksi[riwayat][13] = Integer.toString(kembalianAkhir);
+
         // Nota/Bukti Pembayaran
         System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("|              Bukti Pembayaran               |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("| => Nama Pasien     : ");
-        System.out.println("| => Alamat Pasien   : ");
-        System.out.println("| => Nomer HP Pasien : ");
-        System.out.println("| => Penyakit Pasien : ");
+        System.out.println("| => Nama Pasien     : "+ detailRiwayatTransaksi[riwayat][0]);
+        System.out.println("| => Alamat Pasien   : "+ detailRiwayatTransaksi[riwayat][1]);
+        System.out.println("| => Nomer HP Pasien : "+ detailRiwayatTransaksi[riwayat][2]);
+        System.out.println("| => Penyakit Pasien : "+ detailRiwayatTransaksi[riwayat][3]);
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("| => Total Tagihan   : ");
-        System.out.println("| => Total Bayar     : ");
-        System.out.println("| => Total Kembalian : ");
+        System.out.println("| => Total Tagihan   : "+ detailRiwayatTransaksi[riwayat][9]);
+        System.out.println("| => Total Bayar     : "+ detailRiwayatTransaksi[riwayat][10]);
+        System.out.println("| => Total Kembalian : "+ detailRiwayatTransaksi[riwayat][11]);
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("| => Total Donasi    : ");
-        System.out.println("| => Kembalian Akhir : ");
+        System.out.println("| => Total Donasi    : "+ detailRiwayatTransaksi[riwayat][12]);
+        System.out.println("| => Kembalian Akhir : "+ detailRiwayatTransaksi[riwayat][13]);
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("|              Bukti Pembayaran               |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
