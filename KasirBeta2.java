@@ -95,7 +95,7 @@ public class KasirBeta2 {
     // = donasi
 
     // Deklarasi untuk looping
-    private static int riwayat = -1; // untuk loping smua riwayat riwayat
+    private static int riwayat = 0; // untuk loping smua riwayat riwayat
     private static int iGlobal, kodePasien;
     // private static Char
 
@@ -105,6 +105,7 @@ public class KasirBeta2 {
     private static double keringanan = 0, tagihan = 0;
     private static int donasi = 0, kembalianAkhir = 0;
     private static String penyakit, apaDonasi, apaDonasiSemua;
+    private static long selisihHari;
 
     // Method untuk login sebagai Admin
     private static void loginAdmin(Scanner input) {
@@ -307,7 +308,7 @@ public class KasirBeta2 {
                                         LocalDate tanggalCheckOut = LocalDate.parse(biodataPasien[kodePasien - 1][6],
                                                 formatter);
 
-                                        long selisihHari = hitungSelisihHari(tanggalCheskIn, tanggalCheckOut);
+                                        selisihHari = hitungSelisihHari(tanggalCheskIn, tanggalCheckOut);
 
                                         System.out.println("Selisih Hari = " + selisihHari);
 
@@ -424,6 +425,9 @@ public class KasirBeta2 {
                                         TagihanDanApakahDonasi(input);
                                         // Menyimpan transaksi
                                         menyimpanTransaksi();
+
+                                        selisihHari = 0;
+                                        //Mencetak Nota transaksi dan menghapus data pasien                                        cetakTransaksiDanHapusBiodata(selisihHari);
 
                                         riwayat++;
 
@@ -1028,6 +1032,10 @@ public class KasirBeta2 {
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("|              Bukti Pembayaran               |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+
+        for (int i = 0; i < biodataPasien[kodePasien-1].length; i++){
+            biodataPasien[kodePasien-1][i] = null;
+        }
 
     }
 
