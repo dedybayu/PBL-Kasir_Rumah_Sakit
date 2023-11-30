@@ -87,7 +87,7 @@ public class KasirBeta2 {
 
     // Deklarasi untuk Pembayaran
     private static int[] uangMasuk = new int[20];
-    private static int penghasilan = 0;
+    private static int totalPendapatan = 0, totalDonasi =  0;
 
     // Deklarasi Untuk Total Transaksi
     private static int[][] transactions = new int[biodataPasien.length][4];
@@ -426,8 +426,10 @@ public class KasirBeta2 {
                                         // Menyimpan transaksi
                                         menyimpanTransaksi();
 
-                                        selisihHari = 0;
-                                        //Mencetak Nota transaksi dan menghapus data pasien                                        cetakTransaksiDanHapusBiodata(selisihHari);
+                                        selisihHari = 1;
+
+                                        //Mencetak Nota transaksi dan menghapus data pasien
+                                        cetakTransaksiDanHapusBiodata(selisihHari);                                        cetakTransaksiDanHapusBiodata(selisihHari);
 
                                         riwayat++;
 
@@ -1000,6 +1002,9 @@ public class KasirBeta2 {
         transactions[kodePasien - 1][1] = bayar;
         transactions[kodePasien - 1][2] = kembalian;
         transactions[kodePasien - 1][3] = donasi;
+
+        totalPendapatan += (int)tagihan;
+        totalDonasi += donasi;
     }
 
     static void cetakTransaksiDanHapusBiodata(long selisihHari) {
