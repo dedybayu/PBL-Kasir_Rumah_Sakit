@@ -844,8 +844,13 @@ public class KasirBeta2 {
             switch (menuManager) {
                 case 1:
                     // Menu Laporan Keuangan
+                    System.out.println("=========================================");
+                    System.out.println("            Menu Laporan Pasien          ");
+                    System.out.println("=========================================");
                     System.out.println("Total Pendapatan : "+ totalPendapatan);
                     System.out.println("Total Donasi   : "+ totalDonasi);
+                    System.out.println("=========================================");
+
 
                     break;
                     
