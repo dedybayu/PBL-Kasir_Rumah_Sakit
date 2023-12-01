@@ -949,8 +949,8 @@ public class KasirBeta2 {
                     System.out.println("3. Menu Help :");
                     System.out.println("Menu Help  digunakan untuk melihat Bantuan ");
                     System.out.println("4. Menu Logout :");
+                    System.out.println("=================================");
                     System.out.println("Menu logout  digunakan untuk keluar dari Manger ke menu pilihan Login ");
-                    System.out.println("====================================================================");
                     
                 case 4:
                     // Logout dan kembali ke menu login
