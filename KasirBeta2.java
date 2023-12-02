@@ -919,7 +919,8 @@ public class KasirBeta2 {
                             System.out.println("Jumlah Pembayaran: " + transactions[iGlobal][1]);
                             System.out.println("Kembalian: " + transactions[iGlobal][2]);
                             System.out.println("Donasi: " + transactions[iGlobal][3]);
-                        } else {
+                        } 
+                        else {
                             System.out.println("Tidak ada transaksi untuk pasien " + (iGlobal + 1));
                         }
 
