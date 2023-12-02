@@ -860,21 +860,47 @@ public class KasirBeta2 {
                 case 2:
                     // Menu Riwayat Transaksi
                     System.out.println("Menu Riwayat Transaksi");
+                    System.out.println("========================================");
+                    System.out.println("Masukkan kode pasien: ");
+                    System.out.println("========================================");
+                    kodePasien = input.nextLine();
+                    System.out.println("========================================");
 
-                    for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
-                        if (transactions[iGlobal][0] != 0) {
-                            System.out.println("Detail Transaksi untuk Pasien " + (iGlobal + 1));
-                            System.out.println("Total Tagihan: " + transactions[iGlobal][0]);
-                            System.out.println("Jumlah Pembayaran: " + transactions[iGlobal][1]);
-                            System.out.println("Kembalian: " + transactions[iGlobal][2]);
-                            System.out.println("Donasi: " + transactions[iGlobal][3]);
-                        } 
-                        else {
-                            System.out.println("Tidak ada transaksi untuk pasien " + (iGlobal + 1));
+                    indexPasien = -1;
+                    for (int i = 0; i < biodataPasien.length; i++) {
+                        if (biodataPasien[i][7].equals(kodePasien)) {
+                            indexPasien = i; 
+                            break;
                         }
-
                     }
 
+                    if (indexPasien != -1) {
+                        System.out.println("=========================================");
+                        System.out.println("| Riwayat Pembayaran Pasien ");
+                        System.out.println("|       Pasien Nomor " + biodataPasien[indexPasien][7]);
+                        System.out.println("|=> Nama Pasien     : " + biodataPasien[indexPasien][0]);
+                        System.out.println("|=> Alamat Pasien   : " + biodataPasien[indexPasien][1]);
+                        System.out.println("|=> Nomer HP        : " + biodataPasien[indexPasien][2]);
+                        System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
+                        System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
+                        System.out.println("========================================");
+                
+
+            
+                    System.out.println("========================================");
+                    System.out.println("|         Riwayat Pembayaran Pasien     |");
+                    System.out.println("========================================");
+                    for (int i = 0; i < dataPembayaran.length; i++) {
+                        if (dataPembayaran[i][0] != 0) {
+                            System.out.println("Kode Pasien: " + dataPembayaran[i][0]);
+                            System.out.println("Total Tagihan: " + dataPembayaran[i][1]);
+                            System.out.println("Uang Dibayar: " + dataPembayaran[i][2]);
+                            System.out.println("Kembalian: " + (dataPembayaran[i][2] - dataPembayaran[i][1]));
+                            System.out.println("Uang didonasikan: " + dataPembayaran[i][3]);
+                            System.out.println("----------------------------------------");
+                        }
+                    }
+                }
                     break;
 
                 case 3:
