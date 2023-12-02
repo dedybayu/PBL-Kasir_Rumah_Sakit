@@ -856,65 +856,7 @@ public class KasirBeta2 {
 
                     break;
                     
-                    // System.out.println("Menu Laporan Keuangan");
-                    // System.out.println("========================================");
-                    // System.out.println("Masukkan kode pasien: ");
-                    // System.out.println("========================================");
-                    // String kodePasien = input.nextLine();
-                    // System.out.println("========================================");
-
-                    // // Mencari kode pasien
-                    // int indexPasien = -1;
-                    // for (int i = 0; i < biodataPasien.length; i++) {
-                    //     if (biodataPasien[i][7].equals(kodePasien)) {
-                    //         indexPasien = i;
-                    //         break;
-                    //     }
-                    // }
-
-                    // if (indexPasien != -1) {
-                    // System.out.println("=========================================");
-                    // System.out.println("| Laporan Keuangan Pasien Rumah Sakit Cinta Java");
-                    // System.out.println("| Pasien Nomor " + biodataPasien[indexPasien][7]);
-                    // System.out.println("|=> Nama Pasien : " + biodataPasien[indexPasien][0]);
-                    // System.out.println("|=> Alamat Pasien : " + biodataPasien[indexPasien][1]);
-                    // System.out.println("|=> Nomer HP : " + biodataPasien[indexPasien][2]);
-                    // System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
-                    // System.out.println("|=> Kode Pasien : " + biodataPasien[indexPasien][7]);
-                    // System.out.println("========================================");
-
-                    // // Info detail Laporan keuangan
-                    // System.out.println("================================================");
-                    // System.out.println("Laporan Keuangan Secara Detail ");
-                    // System.out.println("================================================");
-                    // System.out.println("| => Nama Pasien : " + biodataPasien[indexPasien][0]);
-                    // System.out.println("| => Alamat Pasien : " + biodataPasien[indexPasien][1]);
-                    // System.out.println("| => Nomer HP Pasien : " +
-                    // biodataPasien[indexPasien][2]);
-                    // System.out.println("| => Penyakit Pasien : " +
-                    // biodataPasien[indexPasien][3]);
-                    // System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-
-                    // // Input total tagihan, total bayar, total kembalian, total donasi nyoba aja
-                    // int totalTagihan = 0;
-                    // int totalBayar = 0;
-                    // int totalKembalian = 0;
-                    // int totalDonasi = 0;
-
-                    // System.out.println("| => Total Tagihan : " + totalTagihan);
-                    // System.out.println("| => Total Bayar : " + totalBayar);
-                    // System.out.println("| => Total Kembalian : " + totalKembalian);
-                    // System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                    // System.out.println("| => Total Donasi : " + totalDonasi);
-                    // System.out.println("| => Kembalian Akhir : " + (totalBayar - totalTagihan +
-                    // totalDonasi));
-                    // System.out.println("================================================");
-
-                    // } else {
-                    // System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
-                    // }
-
-                    // break;
+                    
                 case 2:
                     // Menu Riwayat Transaksi
                     System.out.println("Menu Riwayat Transaksi");
