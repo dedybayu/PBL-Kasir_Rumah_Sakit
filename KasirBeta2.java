@@ -87,7 +87,7 @@ public class KasirBeta2 {
 
     // Deklarasi untuk Pembayaran
     private static int[] uangMasuk = new int[20];
-    private static int penghasilan = 0;
+    private static int totalPendapatan = 0, totalDonasi = 0;
 
     // Deklarasi Untuk Total Transaksi
     private static int[][] transactions = new int[biodataPasien.length][4];
@@ -300,8 +300,9 @@ public class KasirBeta2 {
 
                                     // Blok Jika pasien Rawat Inap
                                     if (biodataPasien[kodePasien - 1][8] != null) {
-                                        System.out.println("|=> Pasien Kamar "+ biodataPasien[kodePasien-1][8]+" "+biodataPasien[kodePasien-1][9]);
-                                        System.out.println("=> Tanggal Masuk : "+ biodataPasien[kodePasien-1][5]);
+                                        System.out.println("|=> Pasien Kamar " + biodataPasien[kodePasien - 1][8] + " "
+                                                + biodataPasien[kodePasien - 1][9]);
+                                        System.out.println("=> Tanggal Masuk : " + biodataPasien[kodePasien - 1][5]);
                                         System.out.println("========================================");
 
                                         LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
@@ -430,8 +431,11 @@ public class KasirBeta2 {
                                         // Menyimpan transaksi
                                         menyimpanTransaksi();
 
-                                        selisihHari = 0;
-                                        //Mencetak Nota transaksi dan menghapus data pasien                                        cetakTransaksiDanHapusBiodata(selisihHari);
+                                        selisihHari = 1;
+
+                                        // Mencetak Nota transaksi dan menghapus data pasien
+                                        cetakTransaksiDanHapusBiodata(selisihHari);
+                                        cetakTransaksiDanHapusBiodata(selisihHari);
 
                                         riwayat++;
 
@@ -557,7 +561,7 @@ public class KasirBeta2 {
                                                         kamarVIP[i][j] = biodataPasien[kodePasien - 1][j];
                                                     }
                                                     System.out.println("Pasien didaftarkan di KamarVIP " + (i + 1));
-                                                    biodataPasien[kodePasien-1][9] = Integer.toString((i + 1));
+                                                    biodataPasien[kodePasien - 1][9] = Integer.toString((i + 1));
                                                     break;
                                                 } else if (kamarVIP[i][0] != null) {
                                                     continue;
@@ -581,7 +585,7 @@ public class KasirBeta2 {
                                                         kamarReguler[i][j] = biodataPasien[kodePasien - 1][j];
                                                     }
                                                     System.out.println("Pasien didaftarkan di KamarReguler " + (i + 1));
-                                                    biodataPasien[kodePasien-1][9] = Integer.toString((i + 1));
+                                                    biodataPasien[kodePasien - 1][9] = Integer.toString((i + 1));
                                                     break;
                                                 } else if (kamarReguler[i][0] != null) {
                                                     continue;
@@ -607,7 +611,7 @@ public class KasirBeta2 {
                                                         }
                                                         System.out.println(
                                                                 "Pasien didaftarkan di KamarBersama " + (i + 1));
-                                                        biodataPasien[kodePasien-1][9] = Integer.toString((i + 1));
+                                                        biodataPasien[kodePasien - 1][9] = Integer.toString((i + 1));
 
                                                         break;
                                                     }
@@ -821,7 +825,8 @@ public class KasirBeta2 {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|              1. Laporan Keuangan            |");
             System.out.println("|              2. Riwayat Transaksi           |");
-            System.out.println("|              3. Logout                      |");
+            System.out.println("|              3. Help                        |");
+            System.out.println("|              4. Logout                      |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int menuManager;
 
@@ -829,10 +834,10 @@ public class KasirBeta2 {
                 System.out.print("=> Pilih Menu : ");
                 if (input.hasNextInt()) {
                     menuManager = input.nextInt();
-                    if (menuManager >= 1 && menuManager <= 3) {
+                    if (menuManager >= 1 && menuManager <= 4) {
                         break; // Keluar dari perulangan jika masukan sesuai
                     } else {
-                        System.out.println("Tidak Tersedia. Masukan Angka 1 - 3 Sesuai Menu");
+                        System.out.println("Tidak Tersedia. Masukan Angka 1 - 4 Sesuai Menu");
                     }
                 } else {
                     input.next(); // Membersihkan masukan yang tidak valid
@@ -844,63 +849,18 @@ public class KasirBeta2 {
             switch (menuManager) {
                 case 1:
                     // Menu Laporan Keuangan
-                    System.out.println("Menu Laporan Keuangan");
-                    System.out.println("========================================");
-                    System.out.println("Masukkan kode pasien: ");
-                    System.out.println("========================================");
-                    String kodePasien = input.nextLine();
-                    System.out.println("========================================");
+                    System.out.println("=========================================");
+                    System.out.println("            Menu Laporan Pasien          ");
+                    System.out.println("=========================================");
+                    System.out.println("Total Pendapatan Pasien: "+ totalPendapatan);
+                    System.out.println("Total Donasi   : "+ totalDonasi);
+                    System.out.println("Uang Masuk  : "+ uangMasuk);
+                    System.out.println("=========================================");
 
 
-                    // Mencari kode pasien
-                    int indexPasien = -1;
-                    for (int i = 0; i < biodataPasien.length; i++) {
-                if (biodataPasien[i][7].equals(kodePasien)) {
-                    indexPasien = i;
                     break;
-                }
-            }
-
-            if (indexPasien != -1) {
-                System.out.println("=========================================");
-                System.out.println("| Laporan Keuangan Pasien Rumah Sakit Cinta Java");
-                System.out.println("|       Pasien Nomor " + biodataPasien[indexPasien][7]);
-                System.out.println("|=> Nama Pasien     : " + biodataPasien[indexPasien][0]);
-                System.out.println("|=> Alamat Pasien   : " + biodataPasien[indexPasien][1]);
-                System.out.println("|=> Nomer HP        : " + biodataPasien[indexPasien][2]);
-                System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
-                System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
-                System.out.println("========================================");
-        
-                // Info detail Laporan keuangan 
-                System.out.println("================================================");
-                System.out.println("Laporan Keuangan Secara Detail ");
-                System.out.println("================================================");
-                System.out.println("| => Nama Pasien     : " + biodataPasien[indexPasien][0]);
-                System.out.println("| => Alamat Pasien   : " + biodataPasien[indexPasien][1]);
-                System.out.println("| => Nomer HP Pasien : " + biodataPasien[indexPasien][2]);
-                System.out.println("| => Penyakit Pasien : " + biodataPasien[indexPasien][3]);
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                
-                // Input total tagihan, total bayar, total kembalian, total donasi nyoba aja 
-                int totalTagihan = 0;  
-                int totalBayar = 0;    
-                int totalKembalian = 0; 
-                int totalDonasi = 0;    
-                
-                System.out.println("| => Total Tagihan   : " + totalTagihan);
-                System.out.println("| => Total Bayar     : " + totalBayar);
-                System.out.println("| => Total Kembalian : " + totalKembalian);
-                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-                System.out.println("| => Total Donasi    : " + totalDonasi);
-                System.out.println("| => Kembalian Akhir : " + (totalBayar - totalTagihan + totalDonasi));
-                System.out.println("================================================");
-        
-            } else {
-                System.out.println("Pasien dengan kode " + kodePasien + " tidak ditemukan.");
-            }
-        
-            break;
+                    
+                    
                 case 2:
                     // Menu Riwayat Transaksi
                     System.out.println("Menu Riwayat Transaksi");
@@ -948,6 +908,24 @@ public class KasirBeta2 {
                     break;
 
                 case 3:
+                    // help
+                    System.out.println("=================================");
+                    System.out.println("      Menu Help                  ");
+                    System.out.println("=================================");
+                    System.out.println("Keguanaan pilihan di manager     :");
+                    System.out.println("=================================");
+                    System.out.println("Pilihah salah 1 untuk mengakses pilihan yg ada di menu");
+                    System.out.println("1. Laporan Keuangan :");
+                    System.out.println("Laporan keuangan untuk mengampilkan laporan keuangan");
+                    System.out.println("2. Menu riwayat Tranksaksi :");
+                    System.out.println("Menu riwayat Transkaksi di gunakan untuk melihat riwayat Pasien  ");
+                    System.out.println("3. Menu Help :");
+                    System.out.println("Menu Help  digunakan untuk melihat Bantuan ");
+                    System.out.println("4. Menu Logout :");
+                    System.out.println("=================================");
+                    System.out.println("Menu logout  digunakan untuk keluar dari Manger ke menu pilihan Login ");
+                    continue ;
+                case 4:
                     // Logout dan kembali ke menu login
                     do {
                         System.out.print("Konfirmasi Logout y/n : ");
@@ -1033,19 +1011,22 @@ public class KasirBeta2 {
     }
 
     static void menyimpanTransaksi() {
-        transactions[kodePasien - 1][0] = (int)tagihan;
+        transactions[kodePasien - 1][0] = (int) tagihan;
         transactions[kodePasien - 1][1] = bayar;
         transactions[kodePasien - 1][2] = kembalian;
         transactions[kodePasien - 1][3] = donasi;
+
+        totalPendapatan += (int) tagihan;
+        totalDonasi += donasi;
     }
 
     static void cetakTransaksiDanHapusBiodata(long selisihHari) {
-        for(int i = 0; i <= 6; i++){
-            detailRiwayatTransaksi[riwayat][i] = biodataPasien[kodePasien-1][i];
+        for (int i = 0; i <= 6; i++) {
+            detailRiwayatTransaksi[riwayat][i] = biodataPasien[kodePasien - 1][i];
         }
         detailRiwayatTransaksi[riwayat][7] = String.valueOf(selisihHari);
         detailRiwayatTransaksi[riwayat][8] = Integer.toString(obat);
-        detailRiwayatTransaksi[riwayat][9] = Integer.toString((int)tagihan);
+        detailRiwayatTransaksi[riwayat][9] = Integer.toString((int) tagihan);
         detailRiwayatTransaksi[riwayat][10] = Integer.toString(bayar);
         detailRiwayatTransaksi[riwayat][11] = Integer.toString(kembalian);
         detailRiwayatTransaksi[riwayat][12] = Integer.toString(donasi);
@@ -1055,23 +1036,23 @@ public class KasirBeta2 {
         System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("|              Bukti Pembayaran               |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("| => Nama Pasien     : "+ detailRiwayatTransaksi[riwayat][0]);
-        System.out.println("| => Alamat Pasien   : "+ detailRiwayatTransaksi[riwayat][1]);
-        System.out.println("| => Nomer HP Pasien : "+ detailRiwayatTransaksi[riwayat][2]);
-        System.out.println("| => Penyakit Pasien : "+ detailRiwayatTransaksi[riwayat][3]);
+        System.out.println("| => Nama Pasien     : " + detailRiwayatTransaksi[riwayat][0]);
+        System.out.println("| => Alamat Pasien   : " + detailRiwayatTransaksi[riwayat][1]);
+        System.out.println("| => Nomer HP Pasien : " + detailRiwayatTransaksi[riwayat][2]);
+        System.out.println("| => Penyakit Pasien : " + detailRiwayatTransaksi[riwayat][3]);
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("| => Total Tagihan   : "+ detailRiwayatTransaksi[riwayat][9]);
-        System.out.println("| => Total Bayar     : "+ detailRiwayatTransaksi[riwayat][10]);
-        System.out.println("| => Total Kembalian : "+ detailRiwayatTransaksi[riwayat][11]);
+        System.out.println("| => Total Tagihan   : " + detailRiwayatTransaksi[riwayat][9]);
+        System.out.println("| => Total Bayar     : " + detailRiwayatTransaksi[riwayat][10]);
+        System.out.println("| => Total Kembalian : " + detailRiwayatTransaksi[riwayat][11]);
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("| => Total Donasi    : "+ detailRiwayatTransaksi[riwayat][12]);
-        System.out.println("| => Kembalian Akhir : "+ detailRiwayatTransaksi[riwayat][13]);
+        System.out.println("| => Total Donasi    : " + detailRiwayatTransaksi[riwayat][12]);
+        System.out.println("| => Kembalian Akhir : " + detailRiwayatTransaksi[riwayat][13]);
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("|              Bukti Pembayaran               |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
 
-        for (int i = 0; i < biodataPasien[kodePasien-1].length; i++){
-            biodataPasien[kodePasien-1][i] = null;
+        for (int i = 0; i < biodataPasien[kodePasien - 1].length; i++) {
+            biodataPasien[kodePasien - 1][i] = null;
         }
 
     }
