@@ -18,23 +18,8 @@ public class KasirBeta2 {
             System.out.println("|           2. Login Sebagai Manager          |");
             System.out.println("|           3. Keluar                         |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-            int loginSbg;
-
-            do { // Looping jika input tidak sesuai
-                System.out.print("=> Login Sebagai : ");
-                if (input.hasNextInt()) {
-                    loginSbg = input.nextInt();
-                    if (loginSbg >= 1 && loginSbg <= 3) {
-                        break; // Keluar dari perulangan jika masukan sesuai
-                    } else {
-                        System.out.println("Tidak Tersedia. Masukan Angka 1, 2 atau 3 Sesuai Menu");
-                    }
-                } else {
-                    input.next(); // Membersihkan masukan yang tidak valid
-                    System.out.println("Input Invalid. Harap masukkan angka.");
-                }
-            } while (true);
-            input.nextLine();
+            int menuLogSbg = 3;
+            int loginSbg = pilihMenu(menuLogSbg, input);
 
             switch (loginSbg) {
                 case 1:
@@ -162,23 +147,8 @@ public class KasirBeta2 {
             System.out.println("|          5. Cek Ketersediaan Kamar          |");
             System.out.println("|          6. Logout                          |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-            int menuAdmin;
-
-            do { // Looping jika input tidak sesuai
-                System.out.print("=> Pilih Menu : ");
-                if (input.hasNextInt()) {
-                    menuAdmin = input.nextInt();
-                    if (menuAdmin >= 1 && menuAdmin <= 6) {
-                        break; // Keluar dari perulangan jika masukan sesuai
-                    } else {
-                        System.out.println("Tidak Tersedia. Masukan Angka 1 - 6 Sesuai Menu");
-                    }
-                } else {
-                    input.next(); // Membersihkan masukan yang tidak valid
-                    System.out.println("Input Invalid. Harap masukkan angka.");
-                }
-            } while (true);
-            input.nextLine();
+            int menuAdminMaks = 6;
+            int menuAdmin = pilihMenu(menuAdminMaks, input);
 
             switch (menuAdmin) {
 
@@ -427,6 +397,8 @@ public class KasirBeta2 {
                                         // Logika Tagihan
                                         tagihan = ((obat * hargaObat) + hargaKatPenyakit) * keringanan;
 
+                                        biodataPasien[kodePasien - 1][6] = biodataPasien[kodePasien - 1][5];
+
                                         TagihanDanApakahDonasi(input);
                                         // Menyimpan transaksi
                                         menyimpanTransaksi();
@@ -434,7 +406,6 @@ public class KasirBeta2 {
                                         selisihHari = 1;
 
                                         // Mencetak Nota transaksi dan menghapus data pasien
-                                        cetakTransaksiDanHapusBiodata(selisihHari);
                                         cetakTransaksiDanHapusBiodata(selisihHari);
 
                                         riwayat++;
@@ -527,28 +498,10 @@ public class KasirBeta2 {
                                         System.out.println("|       2. Reguler (800.000,00/malam  )|");
                                         System.out.println("|       3. Bersama (400.000,00/malam  )|");
                                         System.out.println("========================================");
-                                        // Engko Logika Pesan Kamar Pasien array ke 8 Kamar Pasien
-                                        int pilihKamar;
+                                        int menuMaks = 3;
+                                        int pilihKamar = pilihMenu(menuMaks, input);
+
                                         boolean adaKamarVip = false, adaKamarReg = false, adaKamarBersm = false;
-
-                                        do { // Looping jika input tidak sesuai
-                                            System.out.print("=> Pilih Menu : ");
-                                            if (input.hasNextInt()) {
-                                                pilihKamar = input.nextInt();
-                                                if (pilihKamar >= 1 && pilihKamar <= 4) {
-                                                    input.nextLine(); // Membersihkan masukan yang tidak valid
-                                                    break; // Keluar dari perulangan jika masukan sesuai
-                                                } else {
-                                                    System.out
-                                                            .println("Tidak Tersedia. Masukan Angka 1 - 4 Sesuai Menu");
-                                                }
-
-                                            } else {
-                                                input.nextLine(); // Membersihkan masukan yang tidak valid
-                                                System.out.println("Input Invalid. Harap masukkan angka.");
-                                            }
-
-                                        } while (true);
 
                                         if (pilihKamar == 1) {
                                             System.out.println("Kamar VIP");
@@ -681,24 +634,8 @@ public class KasirBeta2 {
                         System.out.println("|        3. Kamar Bersama              |");
                         System.out.println("|        4. Kembali                    |");
                         System.out.println("========================================");
-                        // System.out.print("=> Masukan Pilihan : ");
-                        int cekKamar; // = input.nextInt();
-
-                        do { // Looping jika input tidak sesuai
-                            System.out.print("=> Masukan Pilihan : ");
-                            if (input.hasNextInt()) {
-                                cekKamar = input.nextInt();
-                                if (cekKamar >= 1 && cekKamar <= 4) {
-                                    break; // Keluar dari perulangan jika masukan sesuai
-                                } else {
-                                    System.out.println("Tidak Tersedia. Masukan Angka 1 - 4 Sesuai Menu");
-                                }
-                            } else {
-                                input.next(); // Membersihkan masukan yang tidak valid
-                                System.out.println("Input Invalid. Harap masukkan angka.");
-                            }
-                        } while (true);
-                        input.nextLine();
+                        int menuCekKamrMaks = 4;
+                        int cekKamar = pilihMenu(menuCekKamrMaks, input); // = input.nextInt();
 
                         boolean adaYangInap = false;
                         switch (cekKamar) {
@@ -818,7 +755,7 @@ public class KasirBeta2 {
         }
 
         while (true) {
-            System.out.println(riwayat);
+            // System.out.println(riwayat);
             System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|           Selamat Datang Manager            |");
             System.out.println("|           Rumah Sakit Cinta Java            |");
@@ -828,23 +765,25 @@ public class KasirBeta2 {
             System.out.println("|              3. Help                        |");
             System.out.println("|              4. Logout                      |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-            int menuManager;
+            int menuMaks = 4;
+            int menuManager = pilihMenu(menuMaks, input);
+            // int menuManager;
 
-            do { // Looping jika input tidak sesuai
-                System.out.print("=> Pilih Menu : ");
-                if (input.hasNextInt()) {
-                    menuManager = input.nextInt();
-                    if (menuManager >= 1 && menuManager <= 4) {
-                        break; // Keluar dari perulangan jika masukan sesuai
-                    } else {
-                        System.out.println("Tidak Tersedia. Masukan Angka 1 - 4 Sesuai Menu");
-                    }
-                } else {
-                    input.next(); // Membersihkan masukan yang tidak valid
-                    System.out.println("Input Invalid. Harap masukkan angka.");
-                }
-            } while (true);
-            input.nextLine();
+            // do { // Looping jika input tidak sesuai
+            // System.out.print("=> Pilih Menu : ");
+            // if (input.hasNextInt()) {
+            // menuManager = input.nextInt();
+            // if (menuManager >= 1 && menuManager <= 4) {
+            // break; // Keluar dari perulangan jika masukan sesuai
+            // } else {
+            // System.out.println("Tidak Tersedia. Masukan Angka 1 - 4 Sesuai Menu");
+            // }
+            // } else {
+            // input.next(); // Membersihkan masukan yang tidak valid
+            // System.out.println("Input Invalid. Harap masukkan angka.");
+            // }
+            // } while (true);
+            // input.nextLine();
 
             switch (menuManager) {
                 case 1:
@@ -852,59 +791,123 @@ public class KasirBeta2 {
                     System.out.println("=========================================");
                     System.out.println("            Menu Laporan Pasien          ");
                     System.out.println("=========================================");
-                    System.out.println("Total Pendapatan Pasien: "+ totalPendapatan);
-                    System.out.println("Total Donasi   : "+ totalDonasi);
-                    System.out.println("Uang Masuk  : "+ uangMasuk);
+                    System.out.println("Total Pendapatan Pasien: " + totalPendapatan);
+                    System.out.println("Total Donasi   : " + totalDonasi);
+                    System.out.println("Uang Masuk  : " + uangMasuk);
                     System.out.println("=========================================");
 
-
                     break;
-                    
-                    
+
                 case 2:
-                    // Menu Riwayat Transaksi
-                    System.out.println("Menu Riwayat Transaksi");
-                    System.out.println("========================================");
-                    System.out.println("Masukkan kode pasien: ");
-                    System.out.println("========================================");
-                    kodePasien = input.nextLine();
-                    System.out.println("========================================");
+                    System.out.println("=========================================");
+                    System.out.println("|     Menu Riwayat Transaksi Pasien     |");
+                    System.out.println("=========================================");
+                    System.out.println("|   1. Seluruh Riwayat Transaksi        |");
+                    System.out.println("|   2. Riwayat Pemasukan                |");
+                    System.out.println("|   3. Riwayat Donasi                   |");
+                    System.out.println("=========================================");
+                    int menuRiwayatMaks = 3;
+                    int riwayatTransaksi = pilihMenu(menuRiwayatMaks, input);
 
-                    indexPasien = -1;
-                    for (int i = 0; i < biodataPasien.length; i++) {
-                        if (biodataPasien[i][7].equals(kodePasien)) {
-                            indexPasien = i; 
+                    switch (riwayatTransaksi) {
+                        
+                        case 1:
+                            boolean adaRiwayat = false;
+                            int i = 0;
+                            while (detailRiwayatTransaksi[i][0] != null) {
+                                System.out.println("=========================================");
+                                System.out.println("| Transaksi Pasien Tanggal " + detailRiwayatTransaksi[i][6]);
+                                System.out.println("=========================================");
+                                System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[i][0]);
+                                System.out.println("|=> Tanggal     : " + detailRiwayatTransaksi[i][6]);
+                                System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[i][9]);
+                                System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[i][12]);
+                                System.out.println("========================================\n");
+                                adaRiwayat = true;
+                                i++;
+                            }
+                            if (adaRiwayat == false) {
+                                System.out.println("Belum ada Transaksi");
+                            }
                             break;
-                        }
+                        case 2:
+                            boolean adaRiwayatPemasukan = false;
+                            int  j = 0;
+                            while (detailRiwayatTransaksi[j][0] != null) {
+                                System.out.println("=========================================");
+                                System.out.println("| Transaksi Pasien Tanggal " + detailRiwayatTransaksi[j][6]);
+                                System.out.println("=========================================");
+                                System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[j][0]);
+                                System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[j][9]);
+                                System.out.println("========================================\n");
+                                adaRiwayatPemasukan = true;
+                                j++;
+                            }
+                            if (adaRiwayatPemasukan == false) {
+                                System.out.println("Belum ada Transaksi Pemasukan");
+                            }
+                            break; 
+                        case 3:
+                            boolean adaRiwayatDonasi = false;
+                            int  k = 0;
+                            while (detailRiwayatTransaksi[j][0] != null) {
+                                System.out.println("=========================================");
+                                System.out.println("| Transaksi Pasien Tanggal " + detailRiwayatTransaksi[k][6]);
+                                System.out.println("=========================================");
+                                System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[k][0]);
+                                System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[k][12]);
+                                System.out.println("========================================\n");
+                                adaRiwayatPemasukan = true;
+                                k++;
+                            }
+                            if (adaRiwayatDonasi == false) {
+                                System.out.println("Belum ada Riwayat Donasi");
+                            }
+                        default:
+                            break;
                     }
+                    // // Menu Riwayat Transaksi
+                    // System.out.println("Menu Riwayat Transaksi");
+                    // System.out.println("========================================");
+                    // System.out.println("Masukkan kode pasien: ");
+                    // System.out.println("========================================");
+                    // kodePasien = input.nextLine();
+                    // System.out.println("========================================");
 
-                    if (indexPasien != -1) {
-                        System.out.println("=========================================");
-                        System.out.println("| Riwayat Pembayaran Pasien ");
-                        System.out.println("|       Pasien Nomor " + biodataPasien[indexPasien][7]);
-                        System.out.println("|=> Nama Pasien     : " + biodataPasien[indexPasien][0]);
-                        System.out.println("|=> Alamat Pasien   : " + biodataPasien[indexPasien][1]);
-                        System.out.println("|=> Nomer HP        : " + biodataPasien[indexPasien][2]);
-                        System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
-                        System.out.println("|=> Kode Pasien     : " + biodataPasien[indexPasien][7]);
-                        System.out.println("========================================");
-                
+                    // indexPasien = -1;
+                    // for (int i = 0; i < biodataPasien.length; i++) {
+                    // if (biodataPasien[i][7].equals(kodePasien)) {
+                    // indexPasien = i;
+                    // break;
+                    // }
+                    // }
 
-            
-                    System.out.println("========================================");
-                    System.out.println("|         Riwayat Pembayaran Pasien     |");
-                    System.out.println("========================================");
-                    for (int i = 0; i < dataPembayaran.length; i++) {
-                        if (dataPembayaran[i][0] != 0) {
-                            System.out.println("Kode Pasien: " + dataPembayaran[i][0]);
-                            System.out.println("Total Tagihan: " + dataPembayaran[i][1]);
-                            System.out.println("Uang Dibayar: " + dataPembayaran[i][2]);
-                            System.out.println("Kembalian: " + (dataPembayaran[i][2] - dataPembayaran[i][1]));
-                            System.out.println("Uang didonasikan: " + dataPembayaran[i][3]);
-                            System.out.println("----------------------------------------");
-                        }
-                    }
-                }
+                    // if (indexPasien != -1) {
+                    // System.out.println("=========================================");
+                    // System.out.println("| Riwayat Pembayaran Pasien ");
+                    // System.out.println("| Pasien Nomor " + biodataPasien[indexPasien][7]);
+                    // System.out.println("|=> Nama Pasien : " + biodataPasien[indexPasien][0]);
+                    // System.out.println("|=> Alamat Pasien : " + biodataPasien[indexPasien][1]);
+                    // System.out.println("|=> Nomer HP : " + biodataPasien[indexPasien][2]);
+                    // System.out.println("|=> Penyakit Pasien : " + biodataPasien[indexPasien][3]);
+                    // System.out.println("|=> Kode Pasien : " + biodataPasien[indexPasien][7]);
+                    // System.out.println("========================================");
+
+                    // System.out.println("========================================");
+                    // System.out.println("| Riwayat Pembayaran Pasien |");
+                    // System.out.println("========================================");
+                    // for (int i = 0; i < dataPembayaran.length; i++) {
+                    // if (dataPembayaran[i][0] != 0) {
+                    // System.out.println("Kode Pasien: " + dataPembayaran[i][0]);
+                    // System.out.println("Total Tagihan: " + dataPembayaran[i][1]);
+                    // System.out.println("Uang Dibayar: " + dataPembayaran[i][2]);
+                    // System.out.println("Kembalian: " + (dataPembayaran[i][2] -
+                    // dataPembayaran[i][1]));
+                    // System.out.println("Uang didonasikan: " + dataPembayaran[i][3]);
+                    // System.out.println("----------------------------------------");
+                    // }
+                    // }
+                    // }
                     break;
 
                 case 3:
@@ -924,7 +927,7 @@ public class KasirBeta2 {
                     System.out.println("4. Menu Logout :");
                     System.out.println("=================================");
                     System.out.println("Menu logout  digunakan untuk keluar dari Manger ke menu pilihan Login ");
-                    continue ;
+                    continue;
                 case 4:
                     // Logout dan kembali ke menu login
                     do {
@@ -944,6 +947,26 @@ public class KasirBeta2 {
                     // System.out.println("Pilihan Tidak Tersedia");
             }
         }
+    }
+
+    static int pilihMenu(int menuMaks, Scanner input) {
+        int menu;
+        do { // Looping jika input tidak sesuai
+            System.out.print("=> Pilih Menu : ");
+            if (input.hasNextInt()) {
+                menu = input.nextInt();
+                if (menu >= 1 && menu <= menuMaks) {
+                    break; // Keluar dari perulangan jika masukan sesuai
+                } else {
+                    System.out.println("Tidak Tersedia. Masukan Angka 1 - " + menuMaks + " Sesuai Menu");
+                }
+            } else {
+                input.next(); // Membersihkan masukan yang tidak valid
+                System.out.println("Input Invalid. Harap masukkan angka.");
+            }
+        } while (true);
+        input.nextLine();
+        return menu;
     }
 
     static int tagihanKamarPasien(int kode, long hari) {
