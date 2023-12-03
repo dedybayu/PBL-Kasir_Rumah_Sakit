@@ -140,10 +140,11 @@ public class KasirBeta2 {
             System.out.println("|          2. Bayar Tagihan Pasien            |");
             System.out.println("|          3. Pesankan Kamar Pasien           |");
             System.out.println("|          4. Data Pasien                     |");
-            System.out.println("|          5. Cek Ketersediaan Kamar          |");
-            System.out.println("|          6. Logout                          |");
+            System.out.println("|          5. Cek Kamar                       |");
+            System.out.println("|          6. Bantuan                         |");
+            System.out.println("|          7. Logout                          |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-            int menuAdminMaks = 6;
+            int menuAdminMaks = 7;
             int menuAdmin = pilihMenu(menuAdminMaks, input);
 
             switch (menuAdmin) {
@@ -701,8 +702,25 @@ public class KasirBeta2 {
                     } while (backToMenu == false);
 
                     break;
-
+                
                 case 6:
+                    System.out.println("==========================================================");
+                    System.out.println("|                     Menu Bantuan                       |");
+                    System.out.println("==========================================================");
+                    System.out.println("|               Keguanaan Menu di Manager                |");
+                    System.out.println("==========================================================");
+                    System.out.println("|1. Daftarkan Pasien                                     |");
+                    System.out.println("|   Digunakan untuk mendaftarkan biodata pasien          |");
+                    System.out.println("|2. Bayar Tagihan Pasien                                 |");
+                    System.out.println("|   Berguna untuk membayar tagihan pasien yang terdaftar |");
+                    System.out.println("|3. Pesankan Kamar Pasien                                |");
+                    System.out.println("|   Digunakan untuk memesankan kamar bagi rawat inab     |");
+                    System.out.println("|4. Data Pasien                                          |");
+                    System.out.println("|   Digunakan untuk melihat daftar pasien yang terdaftar |");
+                    System.out.println("==========================================================");
+                    break;
+
+                case 7:
                     // Logout dan kembali ke menu login
                     do {
                         System.out.print("Konfirmasi Logout y/n : ");
@@ -761,7 +779,7 @@ public class KasirBeta2 {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|              1. Laporan Keuangan            |");
             System.out.println("|              2. Riwayat Transaksi           |");
-            System.out.println("|              3. Help                        |");
+            System.out.println("|              3. Bantuan                        |");
             System.out.println("|              4. Logout                      |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             int menuMaks = 4;
@@ -958,22 +976,21 @@ public class KasirBeta2 {
                     break;
 
                 case 3:
-                    // help
-                    System.out.println("=================================");
-                    System.out.println("      Menu Help                  ");
-                    System.out.println("=================================");
-                    System.out.println("Keguanaan pilihan di manager     :");
-                    System.out.println("=================================");
-                    System.out.println("Pilihah salah 1 untuk mengakses pilihan yg ada di menu");
-                    System.out.println("1. Laporan Keuangan :");
-                    System.out.println("Laporan keuangan untuk mengampilkan laporan keuangan");
-                    System.out.println("2. Menu riwayat Tranksaksi :");
-                    System.out.println("Menu riwayat Transkaksi di gunakan untuk melihat riwayat Pasien  ");
-                    System.out.println("3. Menu Help :");
-                    System.out.println("Menu Help  digunakan untuk melihat Bantuan ");
-                    System.out.println("4. Menu Logout :");
-                    System.out.println("=================================");
-                    System.out.println("Menu logout  digunakan untuk keluar dari Manger ke menu pilihan Login ");
+                    // Bantuan
+                    System.out.println("==========================================================");
+                    System.out.println("|                     Menu Bantuan                       |");
+                    System.out.println("==========================================================");
+                    System.out.println("|               Keguanaan Menu di Manager                |");
+                    System.out.println("==========================================================");
+                    System.out.println("|1. Laporan Keuangan                                     |");
+                    System.out.println("|   Laporan keuangan untuk mengampilkan laporan keuangan |");
+                    System.out.println("|2. Menu riwayat Tranksaksi                              |");
+                    System.out.println("|   Digunakan untuk melihat riwayat transaksi selama ini |");
+                    System.out.println("|3. Menu Bantuan                                            |");
+                    System.out.println("|   Digunakan untuk melihat Bantuan                      |");
+                    System.out.println("|4. Menu Logout                                          |");
+                    System.out.println("|   Menu logout digunakan untuk keluar dari menu manager |");
+                    System.out.println("==========================================================");
                     continue;
                 case 4:
                     // Logout dan kembali ke menu login
