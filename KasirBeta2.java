@@ -774,21 +774,63 @@ public class KasirBeta2 {
             switch (menuManager) {
                 case 1:
                     // Menu Laporan Keuangan
-                    System.out.println("=========================================");
-                    System.out.println("            Menu Laporan Pasien          ");
-                    System.out.println("=========================================");
-                    System.out.println("Total Pendapatan Pasien: " + totalPendapatan);
-                    System.out.println("Total Donasi   : " + totalDonasi);
-                    System.out.println("Uang Masuk  : " + uangMasuk);
-                    System.out.println("=========================================");
+                    boolean kmbliDriLaporan = false;
+                    do {
+                        System.out.println("\n=========================================");
+                        System.out.println("|         Menu Laporan Keuangan         |");
+                        System.out.println("=========================================");
+                        System.out.println("|=> Total Pendapatan : " + totalPendapatan);
+                        System.out.println("|=> Total Donasi     : " + totalDonasi);
+                        System.out.println("=========================================");
+                        System.out.println("|   1. Riwayat Pemasukan                |");
+                        System.out.println("|   2. Riwayat Pemasukan Donasi         |");
+                        System.out.println("|   3. Kembali                          |");
+                        System.out.println("=========================================");
+                        int menuLaporanMaks = 3;
+                        int menuLapKeuangan = pilihMenu(menuLaporanMaks, input);
+                        switch (menuLapKeuangan) {
+                            case 1:
+                                if (detailRiwayatTransaksi[0][9] != null) {
+                                    for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
+                                        if (detailRiwayatTransaksi[i][9] != null) {
+                                            System.out
+                                                    .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Pemasukan : "
+                                                            + detailRiwayatTransaksi[i][9]);
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("Belum Ada Pemasukan");
+                                }
+                                input.nextLine();
+                                break;
 
+                            case 2:
+                                if (detailRiwayatTransaksi[0][12] != null && detailRiwayatTransaksi[0][12] != "0") {
+                                    for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
+                                        if (detailRiwayatTransaksi[i][9] != null) {
+                                            System.out
+                                                    .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Pemasukan : "
+                                                            + detailRiwayatTransaksi[i][9]);
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("Belum Ada Pemasukan");
+                                }
+                                input.nextLine();
+                                break;
+
+                            case 3:
+                                kmbliDriLaporan = true;
+                                break;
+                        }
+                    } while (kmbliDriLaporan == false);
                     break;
 
                 case 2:
                     if (detailRiwayatTransaksi[0][0] != null) {
                         boolean kembaliMenu = false;
                         do {
-                            System.out.println("=========================================");
+                            System.out.println("\n=========================================");
                             System.out.println("|     Menu Riwayat Transaksi Pasien     |");
                             System.out.println("=========================================");
                             System.out.println("|   1. Seluruh Riwayat Transaksi        |");
