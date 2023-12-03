@@ -81,10 +81,6 @@ public class KasirBeta2 {
     // [][0] = total tagihan, [][1] = jumlah yang dibayar, [][2] = kembalian, [][3]
     // = donasi
 
-    // Deklarasi untuk menyimpan info transaksi
-    private static int [][] dataPembayaran  = new int [biodataPasien.length][4];
-    // Kolom 0: Kode Pasien, Kolom 1: Total Tagihan, Kolom 2: Uang yang Dibayar, Kolom 3: Donasi
-
     // Deklarasi untuk looping
     private static int riwayat = 0; // untuk loping smua riwayat riwayat
     private static int iGlobal, kodePasien;
@@ -1191,12 +1187,6 @@ public class KasirBeta2 {
                 input.nextLine();
             }
             kembalianAkhir = kembalian - donasi;
-
-            // Simpan informasi pembayaran pasien
-            dataPembayaran[kodePasien - 1][0] = kodePasien;
-            dataPembayaran[kodePasien - 1][1] = (int) tagihan;
-            dataPembayaran[kodePasien - 1][2] = bayar;
-            dataPembayaran[kodePasien - 1][3] = donasi;
 
         }
 
