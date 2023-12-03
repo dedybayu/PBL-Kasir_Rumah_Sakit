@@ -51,6 +51,8 @@ public class KasirBeta2 {
         }
     }
 
+    // Username dan Password
+    private static String[][] usernamePassword = {{"alek", "alek"}, {"manager", "manager"}};
     // Deklarasi Format Tanggal
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -113,7 +115,7 @@ public class KasirBeta2 {
             System.out.print("=> Masukan Password : ");
             passAdm = input.nextLine();
 
-            if (!((userAdm.equals("alek")) && (passAdm.equals("alek")))) {
+            if (!((userAdm.equals(usernamePassword[0][0])) && (passAdm.equals(usernamePassword[0][1])))) {
                 attemptAdmin++;
                 userPwSalah();
             } else {
@@ -144,10 +146,12 @@ public class KasirBeta2 {
             System.out.println("|          2. Bayar Tagihan Pasien            |");
             System.out.println("|          3. Pesankan Kamar Pasien           |");
             System.out.println("|          4. Data Pasien                     |");
-            System.out.println("|          5. Cek Ketersediaan Kamar          |");
-            System.out.println("|          6. Logout                          |");
+            System.out.println("|          5. Cek Kamar                       |");
+            System.out.println("|          6. Bantuan                         |");
+            System.out.println("|          7. Ubah Password                   |");
+            System.out.println("|          8. Logout                          |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-            int menuAdminMaks = 6;
+            int menuAdminMaks = 8;
             int menuAdmin = pilihMenu(menuAdminMaks, input);
 
             switch (menuAdmin) {
@@ -705,8 +709,81 @@ public class KasirBeta2 {
                     } while (backToMenu == false);
 
                     break;
-
+                
                 case 6:
+                    System.out.println("==========================================================");
+                    System.out.println("|                     Menu Bantuan                       |");
+                    System.out.println("==========================================================");
+                    System.out.println("|               Keguanaan Menu di Manager                |");
+                    System.out.println("==========================================================");
+                    System.out.println("|1. Daftarkan Pasien                                     |");
+                    System.out.println("|   Digunakan untuk mendaftarkan biodata pasien          |");
+                    System.out.println("|2. Bayar Tagihan Pasien                                 |");
+                    System.out.println("|   Berguna untuk membayar tagihan pasien yang terdaftar |");
+                    System.out.println("|3. Pesankan Kamar Pasien                                |");
+                    System.out.println("|   Digunakan untuk memesankan kamar bagi rawat inab     |");
+                    System.out.println("|4. Data Pasien                                          |");
+                    System.out.println("|   Digunakan untuk melihat daftar pasien yang terdaftar |");
+                    System.out.println("|5. Cek Kamar                                            |");
+                    System.out.println("|   Digunakan untuk melihat ketersediaan kamar pasien    |");
+                    System.out.println("|   dan melihat data pasien yang menginab di kamar       |");
+                    System.out.println("|6. Bantuan                                              |");
+                    System.out.println("|   Digunakan untuk nampilkan bantuan pnggunaan aplikasi |");
+                    System.out.println("|7. Ubah Password                                        |");
+                    System.out.println("|   Digunakan untuk nampilkan bantuan pnggunaan aplikasi |");
+                    System.out.println("|8. Logout                                               |");
+                    System.out.println("|   Digunakan untuk keluar dari menu admin               |");
+                    System.out.println("==========================================================");
+                    break;
+                
+                case 7:
+                    String usrLama, passLama, usrBaru, passBaru, confrmPass;
+                    int attemptGanti = 0;
+                    System.out.println("\n=========================================");
+                    System.out.println("|          Ubah Password Admin          |");
+                    System.out.println("=========================================");
+                    do {
+                        System.out.print("=> Masukan Username Lama : ");
+                        usrLama = input.nextLine();
+                        System.out.print("=> Masukan Password Lama : ");
+                        passLama = input.nextLine();
+
+                        if (!(usrLama.equals(usernamePassword[0][0]) && passLama.equals(usernamePassword[0][1]))){
+                            attemptGanti++;
+                            userPwSalah();
+                        } else {
+                            System.out.println("=========================================");
+                            System.out.print("=> Masukan Username Baru    : ");
+                            usrBaru = input.nextLine();
+                            System.out.print("=> Masukan Password Baru    : ");
+                            passBaru = input.nextLine();
+                            do {
+                                System.out.print("=> Konfirmasi Password Baru : ");
+                                confrmPass = input.nextLine();
+                                if (!confrmPass.equals(passBaru)) {
+                                    System.out.println("=========================================");
+                                    System.out.println("|    Konfirmasi Password Tidak Sama     |");
+                                    System.out.println("=========================================");
+                                }
+                            } while (!confrmPass.equals(passBaru));
+                            
+                            usernamePassword[0][0] = usrBaru;
+                            usernamePassword[0][1] = confrmPass;
+
+                            System.out.println("=========================================");
+                            System.out.println("| Username dan Password Berhasil Diubah |");
+                            System.out.println("|        Silahkan Login Kembali         |");
+                            System.out.println("=========================================");
+                            return;
+                        }
+                    } while (attemptGanti < 3);
+                    if (attemptGanti == 3){
+                        System.out.println("Anda gagal 3 kali, kembali ke menu");
+                        break;
+                    }
+                     
+
+                case 8:
                     // Logout dan kembali ke menu login
                     do {
                         System.out.print("Konfirmasi Logout y/n : ");
@@ -745,7 +822,7 @@ public class KasirBeta2 {
             System.out.print("=> Masukan Password : ");
             passMan = input.nextLine();
 
-            if (!((userMan.equals("manager")) && (passMan.equals("manager")))) {
+            if (!((userMan.equals(usernamePassword[1][0])) && (passMan.equals(usernamePassword[1][1])))) {
                 attemptManager++;
                 userPwSalah();
             } else {
@@ -765,10 +842,11 @@ public class KasirBeta2 {
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println("|              1. Laporan Keuangan            |");
             System.out.println("|              2. Riwayat Transaksi           |");
-            System.out.println("|              3. Help                        |");
-            System.out.println("|              4. Logout                      |");
+            System.out.println("|              3. Bantuan                     |");
+            System.out.println("|              4. Ubah Password               |");
+            System.out.println("|              5. Logout                      |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-            int menuMaks = 4;
+            int menuMaks = 5;
             int menuManager = pilihMenu(menuMaks, input);
 
             switch (menuManager) {
@@ -962,24 +1040,72 @@ public class KasirBeta2 {
                     break;
 
                 case 3:
-                    // help
-                    System.out.println("=================================");
-                    System.out.println("      Menu Help                  ");
-                    System.out.println("=================================");
-                    System.out.println("Keguanaan pilihan di manager     :");
-                    System.out.println("=================================");
-                    System.out.println("Pilihah salah 1 untuk mengakses pilihan yg ada di menu");
-                    System.out.println("1. Laporan Keuangan :");
-                    System.out.println("Laporan keuangan untuk mengampilkan laporan keuangan");
-                    System.out.println("2. Menu riwayat Tranksaksi :");
-                    System.out.println("Menu riwayat Transkaksi di gunakan untuk melihat riwayat Pasien  ");
-                    System.out.println("3. Menu Help :");
-                    System.out.println("Menu Help  digunakan untuk melihat Bantuan ");
-                    System.out.println("4. Menu Logout :");
-                    System.out.println("=================================");
-                    System.out.println("Menu logout  digunakan untuk keluar dari Manger ke menu pilihan Login ");
-                    continue;
+                    // Bantuan
+                    System.out.println("==========================================================");
+                    System.out.println("|                     Menu Bantuan                       |");
+                    System.out.println("==========================================================");
+                    System.out.println("|               Keguanaan Menu di Manager                |");
+                    System.out.println("==========================================================");
+                    System.out.println("|1. Menu Laporan Keuangan                                |");
+                    System.out.println("|   Laporan keuangan untuk mengampilkan laporan keuangan |");
+                    System.out.println("|2. Menu riwayat Tranksaksi                              |");
+                    System.out.println("|   Digunakan untuk melihat riwayat transaksi selama ini |");
+                    System.out.println("|3. Menu Bantuan                                         |");
+                    System.out.println("|   Digunakan untuk melihat Bantuan                      |");
+                    System.out.println("|4. Menu Ubah Password                                   |");
+                    System.out.println("|   Digunakan untuk mengubah username atau password      |");
+                    System.out.println("|5. Menu Logout                                          |");
+                    System.out.println("|   Menu logout digunakan untuk keluar dari menu manager |");
+                    System.out.println("==========================================================");
+                    break;
+
                 case 4:
+                    String usrLama, passLama, usrBaru, passBaru, confrmPass;
+                    int attemptGanti = 0;
+                    System.out.println("\n=========================================");
+                    System.out.println("|         Ubah Password Manager         |");
+                    System.out.println("=========================================");
+                    do {
+                        System.out.print("=> Masukan Username Lama : ");
+                        usrLama = input.nextLine();
+                        System.out.print("=> Masukan Password Lama : ");
+                        passLama = input.nextLine();
+
+                        if (!(usrLama.equals(usernamePassword[1][0]) && passLama.equals(usernamePassword[1][1]))){
+                            attemptGanti++;
+                            userPwSalah();
+                        } else {
+                            System.out.println("=========================================");
+                            System.out.print("=> Masukan Username Baru    : ");
+                            usrBaru = input.nextLine();
+                            System.out.print("=> Masukan Password Baru    : ");
+                            passBaru = input.nextLine();
+                            do {
+                                System.out.print("=> Konfirmasi Password Baru : ");
+                                confrmPass = input.nextLine();
+                                if (!confrmPass.equals(passBaru)) {
+                                    System.out.println("=========================================");
+                                    System.out.println("|    Konfirmasi Password Tidak Sama     |");
+                                    System.out.println("=========================================");
+                                }
+                            } while (!confrmPass.equals(passBaru));
+                            
+                            usernamePassword[1][0] = usrBaru;
+                            usernamePassword[1][1] = confrmPass;
+
+                            System.out.println("=========================================");
+                            System.out.println("| Username dan Password Berhasil Diubah |");
+                            System.out.println("|        Silahkan Login Kembali         |");
+                            System.out.println("=========================================");
+                            return;
+                        }
+                    } while (attemptGanti < 3);
+                    if (attemptGanti == 3){
+                        System.out.println("Anda gagal 3 kali, kembali ke menu");
+                        break;
+                    }
+                    break;
+                case 5:
                     // Logout dan kembali ke menu login
                     do {
                         System.out.print("Konfirmasi Logout y/n : ");
