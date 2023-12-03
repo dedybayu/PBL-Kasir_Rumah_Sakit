@@ -51,6 +51,8 @@ public class KasirBeta2 {
         }
     }
 
+    // Username dan Password
+    private static String[][] usernamePassword = {{"alek", "alek"}, {"manager", "manager"}};
     // Deklarasi Format Tanggal
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -109,7 +111,7 @@ public class KasirBeta2 {
             System.out.print("=> Masukan Password : ");
             passAdm = input.nextLine();
 
-            if (!((userAdm.equals("alek")) && (passAdm.equals("alek")))) {
+            if (!((userAdm.equals(usernamePassword[0][0])) && (passAdm.equals(usernamePassword[0][1])))) {
                 attemptAdmin++;
                 userPwSalah();
             } else {
@@ -142,9 +144,10 @@ public class KasirBeta2 {
             System.out.println("|          4. Data Pasien                     |");
             System.out.println("|          5. Cek Kamar                       |");
             System.out.println("|          6. Bantuan                         |");
-            System.out.println("|          7. Logout                          |");
+            System.out.println("|          7. Ubah Password                   |");
+            System.out.println("|          8. Logout                          |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-            int menuAdminMaks = 7;
+            int menuAdminMaks = 8;
             int menuAdmin = pilihMenu(menuAdminMaks, input);
 
             switch (menuAdmin) {
@@ -717,10 +720,66 @@ public class KasirBeta2 {
                     System.out.println("|   Digunakan untuk memesankan kamar bagi rawat inab     |");
                     System.out.println("|4. Data Pasien                                          |");
                     System.out.println("|   Digunakan untuk melihat daftar pasien yang terdaftar |");
+                    System.out.println("|5. Cek Kamar                                            |");
+                    System.out.println("|   Digunakan untuk melihat ketersediaan kamar pasien    |");
+                    System.out.println("|   dan melihat data pasien yang menginab di kamar       |");
+                    System.out.println("|6. Bantuan                                              |");
+                    System.out.println("|   Digunakan untuk nampilkan bantuan pnggunaan aplikasi |");
+                    System.out.println("|7. Ubah Password                                        |");
+                    System.out.println("|   Digunakan untuk nampilkan bantuan pnggunaan aplikasi |");
+                    System.out.println("|8. Logout                                               |");
+                    System.out.println("|   Digunakan untuk keluar dari menu admin               |");
                     System.out.println("==========================================================");
                     break;
-
+                
                 case 7:
+                    String usrAdmLama, passAdmLama, usrAdmBaru, passAdmBaru, confrmPassAdm;
+                    int attemptGantiAdmin = 0;
+                    System.out.println("\n=========================================");
+                    System.out.println("|          Ubah Password Admin          |");
+                    System.out.println("=========================================");
+                    do {
+                        System.out.print("=> Masukan Username Lama : ");
+                        usrAdmLama = input.nextLine();
+                        System.out.print("=> Masukan Password Lama : ");
+                        passAdmLama = input.nextLine();
+
+                        if (!(usrAdmLama.equals(usernamePassword[0][0]) && passAdmLama.equals(usernamePassword[0][1]))){
+                            attemptGantiAdmin++;
+                            userPwSalah();
+                        } else {
+                            System.out.println("=========================================");
+                            System.out.print("=> Masukan Username Baru    : ");
+                            usrAdmBaru = input.nextLine();
+                            System.out.print("=> Masukan Password Baru    : ");
+                            passAdmBaru = input.nextLine();
+                            do {
+                                System.out.print("=> Konfirmasi Password Baru : ");
+                                confrmPassAdm = input.nextLine();
+                                if (!confrmPassAdm.equals(passAdmBaru)) {
+                                    System.out.println("=========================================");
+                                    System.out.println("|    Konfirmasi Password Tidak Sama     |");
+                                    System.out.println("=========================================");
+                                }
+                            } while (!confrmPassAdm.equals(passAdmBaru));
+                            
+                            usernamePassword[0][0] = usrAdmBaru;
+                            usernamePassword[0][1] = confrmPassAdm;
+
+                            System.out.println("=========================================");
+                            System.out.println("| Username dan Password Berhasil Diubah |");
+                            System.out.println("|        Silahkan Login Kembali         |");
+                            System.out.println("=========================================");
+                            return;
+                        }
+                    } while (attemptGantiAdmin < 3);
+                    if (attemptGantiAdmin == 3){
+                        System.out.println("Anda gagal 3 kali, kembali ke menu");
+                        break;
+                    }
+                     
+
+                case 8:
                     // Logout dan kembali ke menu login
                     do {
                         System.out.print("Konfirmasi Logout y/n : ");
@@ -759,7 +818,7 @@ public class KasirBeta2 {
             System.out.print("=> Masukan Password : ");
             passMan = input.nextLine();
 
-            if (!((userMan.equals("manager")) && (passMan.equals("manager")))) {
+            if (!((userMan.equals(usernamePassword[1][0])) && (passMan.equals(usernamePassword[1][1])))) {
                 attemptManager++;
                 userPwSalah();
             } else {
