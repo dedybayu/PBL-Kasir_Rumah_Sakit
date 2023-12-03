@@ -245,7 +245,8 @@ public class KasirBeta2 {
                                 boolean ditemukan = false;
                                 for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
                                     if (biodataPasien[iGlobal][0] != null
-                                            && biodataPasien[iGlobal][0].toLowerCase().contains(cariPasien.toLowerCase())) { // Diganti contains
+                                            && biodataPasien[iGlobal][0].toLowerCase()
+                                                    .contains(cariPasien.toLowerCase())) { // Diganti contains
 
                                         printBiodataPasien();
 
@@ -441,6 +442,7 @@ public class KasirBeta2 {
                     for (int i = 0; i < biodataPasien.length; i++) {
                         if (biodataPasien[i][0] != null) {
                             adaPasien3 = true;
+                            break;
                         }
                     }
 
@@ -462,7 +464,8 @@ public class KasirBeta2 {
                                 boolean ditemukan = false;
                                 for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
                                     if (biodataPasien[iGlobal][0] != null
-                                            && biodataPasien[iGlobal][0].toLowerCase().contains(cariPasien.toLowerCase())) {
+                                            && biodataPasien[iGlobal][0].toLowerCase()
+                                                    .contains(cariPasien.toLowerCase())) {
 
                                         printBiodataPasien();
                                         ditemukan = true;
@@ -782,92 +785,137 @@ public class KasirBeta2 {
                     break;
 
                 case 2:
-                    boolean kembaliMenu = false;
-                    do {
-                        System.out.println("=========================================");
-                        System.out.println("|     Menu Riwayat Transaksi Pasien     |");
-                        System.out.println("=========================================");
-                        System.out.println("|   1. Seluruh Riwayat Transaksi        |");
-                        System.out.println("|   2. Riwayat Pemasukan                |");
-                        System.out.println("|   3. Riwayat Donasi                   |");
-                        System.out.println("|   4. kembali                          |");
-                        System.out.println("=========================================");
-                        int menuRiwayatMaks = 4;
-                        int riwayatTransaksi = pilihMenu(menuRiwayatMaks, input);
+                    if (detailRiwayatTransaksi[0][0] != null) {
+                        boolean kembaliMenu = false;
+                        do {
+                            System.out.println("=========================================");
+                            System.out.println("|     Menu Riwayat Transaksi Pasien     |");
+                            System.out.println("=========================================");
+                            System.out.println("|   1. Seluruh Riwayat Transaksi        |");
+                            System.out.println("|   2. Riwayat Pemasukan                |");
+                            System.out.println("|   3. Riwayat Donasi                   |");
+                            System.out.println("|   4. Cari Riwayat Transaksi (Nama)    |");
+                            System.out.println("|   5. Cari Riwayat Transaksi (Tanggal) |");
+                            System.out.println("|   5. kembali                          |");
+                            System.out.println("=========================================");
+                            int menuRiwayatMaks = 5;
+                            int riwayatTransaksi = pilihMenu(menuRiwayatMaks, input);
 
-                        switch (riwayatTransaksi) {
+                            switch (riwayatTransaksi) {
 
-                            case 1:
-                                boolean adaRiwayat = false;
-                                int i = 0;
-                                while (detailRiwayatTransaksi[i][0] != null) {
-                                    System.out.println("=========================================");
-                                    System.out.println("| Transaksi Pasien Tanggal " + detailRiwayatTransaksi[i][6]);
-                                    System.out.println("=========================================");
-                                    System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[i][0]);
-                                    System.out.println("|=> Tanggal     : " + detailRiwayatTransaksi[i][6]);
-                                    System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[i][9]);
-                                    System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[i][12]);
-                                    System.out.println("========================================\n");
-                                    adaRiwayat = true;
-                                    i++;
-                                }
-                                if (adaRiwayat == false) {
-                                    System.out.println("Belum ada Transaksi");
-                                }
-                                break;
-                            case 2:
-                                boolean adaRiwayatPemasukan = false;
-                                int j = 0;
-                                while (detailRiwayatTransaksi[j][0] != null) {
-                                    System.out.println("=========================================");
-                                    System.out.println("| Transaksi Pasien Tanggal " + detailRiwayatTransaksi[j][6]);
-                                    System.out.println("=========================================");
-                                    System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[j][0]);
-                                    System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[j][9]);
-                                    System.out.println("========================================\n");
-                                    adaRiwayatPemasukan = true;
-                                    j++;
-                                }
-                                if (adaRiwayatPemasukan == false) {
-                                    System.out.println("Belum ada Transaksi Pemasukan");
-                                }
-                                break;
-                            case 3:
-                                boolean adaRiwayatDonasi = false;
-                                int k = 0;
-                                while (detailRiwayatTransaksi[k][0] != null) {
-                                    System.out.println("=========================================");
-                                    System.out.println("| Transaksi Pasien Tanggal " + detailRiwayatTransaksi[k][6]);
-                                    System.out.println("=========================================");
-                                    System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[k][0]);
-                                    System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[k][12]);
-                                    System.out.println("========================================\n");
-                                    adaRiwayatPemasukan = true;
-                                    k++;
-                                }
-                                if (adaRiwayatDonasi == false) {
-                                    System.out.println("Belum ada Riwayat Donasi");
-                                }
-                            case 4:
-                                char kembali;
-                                while (true) { // Perulangan jika input bukan y/n
-                                    System.out.print("=> Konfirmasi Kembali (y/n): ");
-                                    kembali = input.nextLine().charAt(0);
-                                    if ((kembali == 'y' || kembali == 'Y')
-                                            || (kembali == 'n' || kembali == 'N')) { // Apakah ingin mendaftarkan lagi
-                                        break;
-                                    } else {
-                                        System.out.println("input invalid Masukan y/n");
+                                case 1:
+                                    iGlobal = 0;
+                                    while (detailRiwayatTransaksi[iGlobal][0] != null) {
+                                        printRiwayatTransaksi();
+
+                                        iGlobal++;
                                     }
-                                }
+                                    input.nextLine();
+                                    break;
 
-                                if (kembali == 'y' || kembali == 'Y') {
-                                    kembaliMenu = true;
-                                }
-                                break;
-                        }
-                    } while (kembaliMenu == false);
+                                case 2:
+                                    int j = 0;
+                                    while (detailRiwayatTransaksi[j][0] != null) {
+                                        System.out.println("=========================================");
+                                        System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[j][6]);
+                                        System.out.println("=========================================");
+                                        System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[j][0]);
+                                        System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[j][9]);
+                                        System.out.println("========================================\n");
+                                        j++;
+                                    }
+                                    input.nextLine();
+                                    break;
+
+                                case 3:
+                                    int k = 0;
+                                    while (detailRiwayatTransaksi[k][0] != null) {
+                                        System.out.println("=========================================");
+                                        System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[k][6]);
+                                        System.out.println("=========================================");
+                                        System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[k][0]);
+                                        System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[k][12]);
+                                        System.out.println("========================================\n");
+                                        k++;
+                                    }
+                                    input.nextLine();
+                                    break;
+
+                                case 4:
+
+                                    char cariNamaLagi;
+                                    do {
+                                        boolean adaRwytNama = false;
+                                        System.out.println("=========================================");
+                                        System.out.println("|    Cari Riwayat Berdasarkan Nama      |");
+                                        System.out.println("=========================================");
+                                        System.out.print("=> Masukan Nama Pasien : ");
+                                        String cariRiwayat = input.nextLine();
+                                        for (iGlobal = 0; iGlobal < detailRiwayatTransaksi.length; iGlobal++) {
+                                            if (detailRiwayatTransaksi[iGlobal][0] != null
+                                                    && detailRiwayatTransaksi[iGlobal][0]
+                                                            .toLowerCase().contains(cariRiwayat.toLowerCase())) {
+
+                                                printRiwayatTransaksi();
+                                                adaRwytNama = true;
+                                            }
+                                        }
+                                        if (adaRwytNama == false) {
+                                            System.out.println("Transaksi Tidak Ditemukan\n");
+                                        }
+                                        System.out.print("Cari Lagi? y/n : ");
+                                        cariNamaLagi = input.nextLine().charAt(0);
+                                    } while (!(cariNamaLagi == 'n' || cariNamaLagi == 'N'));
+                                    break;
+
+                                case 5:
+                                    char cariTanggalLagi;
+                                    do {
+                                        boolean adaRwytTanggal = false;
+                                        System.out.println("=========================================");
+                                        System.out.println("|   Cari Riwayat Berdasarkan Tanggal    |");
+                                        System.out.println("=========================================");
+                                        LocalDate tanggal = inputTanggal("=> Tanggal Keluar: ", formatter, input);
+                                        String cariTanggal = tanggal.format(formatter);
+
+                                        for (iGlobal = 0; iGlobal < detailRiwayatTransaksi.length; iGlobal++) {
+                                            if (detailRiwayatTransaksi[iGlobal][0] != null
+                                                    && detailRiwayatTransaksi[iGlobal][6].equals(cariTanggal)) {
+                                                printRiwayatTransaksi();
+                                                adaRwytTanggal = true;
+                                            }
+                                        }
+                                        if (adaRwytTanggal == false) {
+                                            System.out.println("Transaksi Tidak Ditemukan\n");
+                                        }
+                                        System.out.print("Cari Lagi? y/n : ");
+                                        cariTanggalLagi = input.nextLine().charAt(0);
+                                    } while (!(cariTanggalLagi == 'n' || cariTanggalLagi == 'N'));
+                                    break;
+
+                                case 6:
+                                    char kembali;
+                                    while (true) { // Perulangan jika input bukan y/n
+                                        System.out.print("=> Konfirmasi Kembali (y/n): ");
+                                        kembali = input.nextLine().charAt(0);
+                                        if ((kembali == 'y' || kembali == 'Y')
+                                                || (kembali == 'n' || kembali == 'N')) { // Apakah ingin mendaftarkan
+                                                                                         // lagi
+                                            break;
+                                        } else {
+                                            System.out.println("input invalid Masukan y/n");
+                                        }
+                                    }
+
+                                    if (kembali == 'y' || kembali == 'Y') {
+                                        kembaliMenu = true;
+                                    }
+                                    break;
+                            }
+                        } while (kembaliMenu == false);
+                    } else {
+                        System.out.println("Belum Ada Transaksi");
+                    }
 
                     break;
 
@@ -995,10 +1043,10 @@ public class KasirBeta2 {
     }
 
     static void menyimpanTransaksi() {
-        transactions[kodePasien - 1][0] = (int) tagihan;
-        transactions[kodePasien - 1][1] = bayar;
-        transactions[kodePasien - 1][2] = kembalian;
-        transactions[kodePasien - 1][3] = donasi;
+        // transactions[kodePasien - 1][0] = (int) tagihan;
+        // transactions[kodePasien - 1][1] = bayar;
+        // transactions[kodePasien - 1][2] = kembalian;
+        // transactions[kodePasien - 1][3] = donasi;
 
         totalPendapatan += (int) tagihan;
         totalDonasi += donasi;
@@ -1072,6 +1120,17 @@ public class KasirBeta2 {
         System.out.println("|=> Penyakit Pasien : " + biodataPasien[kodePasien - 1][3]);
         System.out.println("|=> Kode Pasien     : " + biodataPasien[kodePasien - 1][7]);
         System.out.println("========================================");
+    }
+
+    static void printRiwayatTransaksi() {
+        System.out.println("=========================================");
+        System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[iGlobal][6]);
+        System.out.println("=========================================");
+        System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[iGlobal][0]);
+        System.out.println("|=> Tanggal     : " + detailRiwayatTransaksi[iGlobal][6]);
+        System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[iGlobal][9]);
+        System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[iGlobal][12]);
+        System.out.println("========================================\n");
     }
 
     private static long hitungSelisihHari(LocalDate tanggalCheskIn, LocalDate tanggalCheckOut) {
