@@ -638,49 +638,77 @@ public class KasirBeta2 {
                         System.out.println("|        4. Kembali                    |");
                         System.out.println("========================================");
                         int menuCekKamrMaks = 4;
-                        int cekKamar = pilihMenu(menuCekKamrMaks, input); // = input.nextInt();
+                        int kamarKosong = 0, kamarTerisi = 0;
+                        int cekKamar = pilihMenu(menuCekKamrMaks, input); // = input.nextInt();                        
 
                         boolean adaYangInap = false;
                         switch (cekKamar) {
                             case 1:
+                                System.out.println("========================================");
+                                System.out.println("|     Daftar Nama Pasien Kamar VIP     |");
+                                System.out.println("========================================");
                                 for (int i = 0; i < kamarVIP.length; i++) {
                                     if (kamarVIP[i][0] != null) {
-                                        System.out.println("Nama Pasien : " + kamarVIP[i][0]);
+                                        System.out.println("|=> VIP "+(i+1)+", Pasien "+kamarVIP[i][7]+" : " + kamarVIP[i][0]);
                                         adaYangInap = true;
+                                        kamarTerisi++;
+                                    } else {
+                                        kamarKosong++;
                                     }
                                 }
 
                                 if (adaYangInap == false) {
-                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                    System.out.println("|    Belum Ada Yang Menginap di VIP    |");
                                 }
+                                System.out.println("========================================");
+                                System.out.println("|  Kamar Kosong: "+kamarKosong+"    Kamar Terisi: "+kamarTerisi);
+                                System.out.println("========================================");
                                 break;
 
                             case 2:
+                                System.out.println("========================================");
+                                System.out.println("|   Daftar Nama Pasien Kamar Reguler   |");
+                                System.out.println("========================================");
                                 for (int i = 0; i < kamarReguler.length; i++) {
                                     if (kamarReguler[i][0] != null) {
-                                        System.out.println("Nama Pasien : " + kamarReguler[i][0]);
+                                        System.out.println("|=> Reguler "+(i+1)+", Pasien "+kamarReguler[i][7]+" : " + kamarReguler[i][0]);
                                         adaYangInap = true;
+                                        kamarTerisi++;
+                                    } else {
+                                        kamarKosong++;
                                     }
                                 }
 
                                 if (adaYangInap == false) {
-                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                    System.out.println("|  Belum Ada Yang Menginap di Reguler  |");
                                 }
+                                System.out.println("========================================");
+                                System.out.println("|  Kamar Kosong: "+kamarKosong+"    Kamar Terisi: "+kamarTerisi);
+                                System.out.println("========================================");
                                 break;
 
                             case 3:
+                                System.out.println("========================================");
+                                System.out.println("|   Daftar Nama Pasien Kamar Bersama   |");
+                                System.out.println("========================================");
                                 for (int i = 0; i < kamarBersama.length; i++) {
                                     for (int j = 0; j < kamarBersama[i].length; j++) {
                                         if (kamarBersama[i][j][0] != null) {
-                                            System.out.println("Nama Pasien : " + kamarBersama[i][j][0]);
+                                            System.out.println("=> Bersama "+(i+1)+", Pasien "+kamarBersama[i][j][7]+" : " + kamarBersama[i][j][0]);
                                             adaYangInap = true;
+                                            kamarTerisi++;
+                                        } else {
+                                            kamarKosong++;
                                         }
                                     }
                                 }
 
                                 if (adaYangInap == false) {
-                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                    System.out.println("|  Belum Ada Yang Menginab di Bersama  |");
                                 }
+                                System.out.println("========================================");
+                                System.out.println("|  Bed Kosong: "+kamarKosong+"    Bed Terisi: "+kamarTerisi);
+                                System.out.println("========================================");
                                 break;
 
                             case 4:
