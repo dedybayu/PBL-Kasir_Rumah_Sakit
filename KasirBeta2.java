@@ -57,7 +57,7 @@ public class KasirBeta2 {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     // Deklarasi Variable Array untuk Menyimpan Data Pasien
-    private static String[][] biodataPasien = new String[100][10];
+    private static String[][] biodataPasien = new String[100][11];
 
     // Deklarasi Untuk Riwayat Pasien
     private static String[][] detailRiwayatTransaksi = new String[100][15];
@@ -66,9 +66,9 @@ public class KasirBeta2 {
     // [9]konsum [10]diskonbpjs [11]tagihan [12]donasi
 
     // Deklarasi Untuk Pasien yang menginab
-    private static String[][] kamarVIP = new String[5][10]; // Ada 5 Kamar VIP
-    private static String[][] kamarReguler = new String[10][10]; // Ada 10 Kamar Reguler
-    private static String[][][] kamarBersama = new String[10][2][10]; // Ada 10 Kamar Bersama 1kmr 2orng
+    private static String[][] kamarVIP = new String[5][11]; // Ada 5 Kamar VIP
+    private static String[][] kamarReguler = new String[10][11]; // Ada 10 Kamar Reguler
+    private static String[][][] kamarBersama = new String[10][2][11]; // Ada 10 Kamar Bersama 1kmr 2orng
     // Penjelasan Array [kamar][biodata pasien] untuk 2D
     // Penjelasan Array[kamar][pasien 1,2][biodata pasien] untuk 3D
 
@@ -567,6 +567,7 @@ public class KasirBeta2 {
                                                         System.out.println(
                                                                 "Pasien didaftarkan di KamarBersama " + (i + 1));
                                                         biodataPasien[kodePasien - 1][9] = Integer.toString((i + 1));
+                                                        biodataPasien[kodePasien - 1][10] = Integer.toString((j + 1));
 
                                                         break;
                                                     }
@@ -1050,10 +1051,10 @@ public class KasirBeta2 {
                                         }
 
                                     }
-                                    if (adaDonasi == false){
+                                    if (adaDonasi == false) {
                                         System.out.println("Belum Pemasukan Donasi");
                                     }
-                                    
+
                                     input.nextLine();
                                     break;
 
@@ -1311,6 +1312,23 @@ public class KasirBeta2 {
     }
 
     static void cetakTransaksiDanHapusBiodata(long selisihHari) {
+        //Menghapus data di Kamar Pasien Jika inap
+        if (biodataPasien[kodePasien - 1][8] != null) {
+            if (biodataPasien[kodePasien - 1][8] == "VIP") {
+                for (int i = 0; i < kamarVIP[0].length; i++) {
+                    kamarVIP[(Integer.parseInt(biodataPasien[kodePasien - 1][9]) - 1)][i] = null;
+                }
+            } else if (biodataPasien[kodePasien - 1][8] == "Reguler") {
+                for (int i = 0; i < kamarReguler.length; i++) {
+                    kamarReguler[(Integer.parseInt(biodataPasien[kodePasien - 1][9]) - 1)][i] = null;
+                }
+            } else if (biodataPasien[kodePasien - 1][8] == "Bersama") {
+                for (int i = 0; i < kamarBersama[0][0].length; i++) {
+                    kamarBersama[(Integer.parseInt(biodataPasien[kodePasien - 1][9]) - 1)][(Integer.parseInt(biodataPasien[kodePasien - 1][10]) - 1)][i] = null;
+                }
+            }
+        }
+
         for (int i = 0; i <= 6; i++) {
             detailRiwayatTransaksi[riwayat][i] = biodataPasien[kodePasien - 1][i];
         }
