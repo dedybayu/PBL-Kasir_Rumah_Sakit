@@ -249,7 +249,6 @@ public class KasirBeta2 {
                                                     .contains(cariPasien.toLowerCase())) { // Diganti contains
 
                                         printBiodataPasien();
-                                        System.out.println();
                                         ditemukan = true;
                                     }
                                 }
@@ -468,7 +467,6 @@ public class KasirBeta2 {
                                                     .contains(cariPasien.toLowerCase())) {
 
                                         printBiodataPasien();
-                                        System.out.println();
                                         ditemukan = true;
                                     }
                                 }
