@@ -33,7 +33,7 @@ public class KasirBeta2 {
                     break;
 
                 case 3:
-                    System.out.print("Konfirmasi Keluar y/n : ");
+                    System.out.print("=> Konfirmasi Keluar y/n : ");
                     char exit = input.nextLine().charAt(0);
 
                     if ((exit == 'n') || (exit == 'N')) {
@@ -57,7 +57,7 @@ public class KasirBeta2 {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     // Deklarasi Variable Array untuk Menyimpan Data Pasien
-    private static String[][] biodataPasien = new String[100][10];
+    private static String[][] biodataPasien = new String[100][11];
 
     // Deklarasi Untuk Riwayat Pasien
     private static String[][] detailRiwayatTransaksi = new String[100][15];
@@ -66,9 +66,9 @@ public class KasirBeta2 {
     // [9]konsum [10]diskonbpjs [11]tagihan [12]donasi
 
     // Deklarasi Untuk Pasien yang menginab
-    private static String[][] kamarVIP = new String[5][10]; // Ada 5 Kamar VIP
-    private static String[][] kamarReguler = new String[10][10]; // Ada 10 Kamar Reguler
-    private static String[][][] kamarBersama = new String[10][2][10]; // Ada 10 Kamar Bersama 1kmr 2orng
+    private static String[][] kamarVIP = new String[5][11]; // Ada 5 Kamar VIP
+    private static String[][] kamarReguler = new String[10][11]; // Ada 10 Kamar Reguler
+    private static String[][][] kamarBersama = new String[10][2][11]; // Ada 10 Kamar Bersama 1kmr 2orng
     // Penjelasan Array [kamar][biodata pasien] untuk 2D
     // Penjelasan Array[kamar][pasien 1,2][biodata pasien] untuk 3D
 
@@ -249,7 +249,6 @@ public class KasirBeta2 {
                                                     .contains(cariPasien.toLowerCase())) { // Diganti contains
 
                                         printBiodataPasien();
-                                        System.out.println();
                                         ditemukan = true;
                                     }
                                 }
@@ -273,7 +272,7 @@ public class KasirBeta2 {
                                     if (biodataPasien[kodePasien - 1][8] != null) {
                                         System.out.println("|=> Pasien Kamar " + biodataPasien[kodePasien - 1][8] + " "
                                                 + biodataPasien[kodePasien - 1][9]);
-                                        System.out.println("=> Tanggal Masuk : " + biodataPasien[kodePasien - 1][5]);
+                                        System.out.println("|=> Tanggal Masuk : " + biodataPasien[kodePasien - 1][5]);
                                         System.out.println("========================================");
 
                                         LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
@@ -286,12 +285,12 @@ public class KasirBeta2 {
 
                                         selisihHari = hitungSelisihHari(tanggalCheskIn, tanggalCheckOut);
 
-                                        System.out.println("Selisih Hari = " + selisihHari);
+                                        // System.out.println("Selisih Hari = " + selisihHari);
 
                                         // Untuk Tagihan Kamar
                                         int tagihanKamar = tagihanKamarPasien((kodePasien - 1), selisihHari);
 
-                                        System.out.println(tagihanKamar);
+                                        // System.out.println(tagihanKamar);
 
                                         do {
                                             System.out.println("Kategori (sedang/berat/kronis)");
@@ -468,7 +467,6 @@ public class KasirBeta2 {
                                                     .contains(cariPasien.toLowerCase())) {
 
                                         printBiodataPasien();
-                                        System.out.println();
                                         ditemukan = true;
                                     }
                                 }
@@ -569,6 +567,7 @@ public class KasirBeta2 {
                                                         System.out.println(
                                                                 "Pasien didaftarkan di KamarBersama " + (i + 1));
                                                         biodataPasien[kodePasien - 1][9] = Integer.toString((i + 1));
+                                                        biodataPasien[kodePasien - 1][10] = Integer.toString((j + 1));
 
                                                         break;
                                                     }
@@ -662,11 +661,11 @@ public class KasirBeta2 {
                                                         + " " + biodataPasien[iGlobal][9]);
                                                 System.out.println("========================================");
 
-                                            } 
+                                            }
                                             namaDitemukan = true;
                                         }
                                     }
-                                    if (namaDitemukan == false){
+                                    if (namaDitemukan == false) {
                                         System.out.println("Nama Pasien Tidak Ditemukan");
                                     }
                                     input.nextLine();
@@ -1005,9 +1004,9 @@ public class KasirBeta2 {
                             System.out.println("|   3. Riwayat Donasi                   |");
                             System.out.println("|   4. Cari Riwayat Transaksi (Nama)    |");
                             System.out.println("|   5. Cari Riwayat Transaksi (Tanggal) |");
-                            System.out.println("|   5. kembali                          |");
+                            System.out.println("|   6. kembali                          |");
                             System.out.println("=========================================");
-                            int menuRiwayatMaks = 5;
+                            int menuRiwayatMaks = 6;
                             int riwayatTransaksi = pilihMenu(menuRiwayatMaks, input);
 
                             switch (riwayatTransaksi) {
@@ -1037,16 +1036,25 @@ public class KasirBeta2 {
                                     break;
 
                                 case 3:
-                                    int k = 0;
-                                    while (detailRiwayatTransaksi[k][0] != null) {
-                                        System.out.println("=========================================");
-                                        System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[k][6]);
-                                        System.out.println("=========================================");
-                                        System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[k][0]);
-                                        System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[k][12]);
-                                        System.out.println("========================================\n");
-                                        k++;
+                                    boolean adaDonasi = false;
+                                    for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
+                                        if ((detailRiwayatTransaksi[i][0] != null)
+                                                && !detailRiwayatTransaksi[i][12].equals("0")) {
+                                            System.out.println("=========================================");
+                                            System.out.println(
+                                                    "| Transaksi pada Tanggal " + detailRiwayatTransaksi[i][6]);
+                                            System.out.println("=========================================");
+                                            System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[i][0]);
+                                            System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[i][12]);
+                                            System.out.println("========================================\n");
+                                            adaDonasi = true;
+                                        }
+
                                     }
+                                    if (adaDonasi == false) {
+                                        System.out.println("Belum Pemasukan Donasi");
+                                    }
+
                                     input.nextLine();
                                     break;
 
@@ -1304,6 +1312,23 @@ public class KasirBeta2 {
     }
 
     static void cetakTransaksiDanHapusBiodata(long selisihHari) {
+        //Menghapus data di Kamar Pasien Jika inap
+        if (biodataPasien[kodePasien - 1][8] != null) {
+            if (biodataPasien[kodePasien - 1][8] == "VIP") {
+                for (int i = 0; i < kamarVIP[0].length; i++) {
+                    kamarVIP[(Integer.parseInt(biodataPasien[kodePasien - 1][9]) - 1)][i] = null;
+                }
+            } else if (biodataPasien[kodePasien - 1][8] == "Reguler") {
+                for (int i = 0; i < kamarReguler.length; i++) {
+                    kamarReguler[(Integer.parseInt(biodataPasien[kodePasien - 1][9]) - 1)][i] = null;
+                }
+            } else if (biodataPasien[kodePasien - 1][8] == "Bersama") {
+                for (int i = 0; i < kamarBersama[0][0].length; i++) {
+                    kamarBersama[(Integer.parseInt(biodataPasien[kodePasien - 1][9]) - 1)][(Integer.parseInt(biodataPasien[kodePasien - 1][10]) - 1)][i] = null;
+                }
+            }
+        }
+
         for (int i = 0; i <= 6; i++) {
             detailRiwayatTransaksi[riwayat][i] = biodataPasien[kodePasien - 1][i];
         }
@@ -1374,14 +1399,14 @@ public class KasirBeta2 {
     }
 
     static void printRiwayatTransaksi() {
-        System.out.println("=========================================");
+        System.out.println("\n=========================================");
         System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[iGlobal][6]);
         System.out.println("=========================================");
         System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[iGlobal][0]);
         System.out.println("|=> Tanggal     : " + detailRiwayatTransaksi[iGlobal][6]);
         System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[iGlobal][9]);
         System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[iGlobal][12]);
-        System.out.println("========================================\n");
+        System.out.println("========================================");
     }
 
     private static long hitungSelisihHari(LocalDate tanggalCheskIn, LocalDate tanggalCheckOut) {
