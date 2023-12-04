@@ -52,7 +52,7 @@ public class KasirBeta2 {
     }
 
     // Username dan Password
-    private static String[][] usernamePassword = {{"alek", "alek"}, {"manager", "manager"}};
+    private static String[][] usernamePassword = { { "alek", "alek" }, { "manager", "manager" } };
     // Deklarasi Format Tanggal
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -188,7 +188,7 @@ public class KasirBeta2 {
                             // LocalDate tanggalMasuk = inputTanggal("Tanggal Masuk : ", formatter, input);
                             biodataPasien[idx][5] = tanggalMasuk.format(formatter); // 5 Tanggal Masuk 6 Tanggal
                                                                                     // Keluar
-                            // System.out.print("=> Masukan Tanggal Masuk : ");
+                            System.out.println("=> Tanggal Masuk        : " + biodataPasien[idx][5]);
                             // biodataPasien[idx][5] = input.nextLine();
 
                             biodataPasien[idx][7] = Integer.toString((idx + 1)); // menrubah int menjadi String
@@ -198,7 +198,7 @@ public class KasirBeta2 {
 
                             char daftarLagi;
                             while (true) { // Perulangan jika input bukan y/n
-                                System.out.print("=> Daftarkan Lagi (y/n): ");
+                                System.out.print("=> Daftarkan Lagi (y/n) : ");
                                 daftarLagi = input.nextLine().charAt(0);
                                 if ((daftarLagi == 'y' || daftarLagi == 'Y')
                                         || (daftarLagi == 'n' || daftarLagi == 'N')) { // Apakah ingin mendaftarkan lagi
@@ -249,7 +249,7 @@ public class KasirBeta2 {
                                                     .contains(cariPasien.toLowerCase())) { // Diganti contains
 
                                         printBiodataPasien();
-
+                                        System.out.println();
                                         ditemukan = true;
                                     }
                                 }
@@ -468,6 +468,7 @@ public class KasirBeta2 {
                                                     .contains(cariPasien.toLowerCase())) {
 
                                         printBiodataPasien();
+                                        System.out.println();
                                         ditemukan = true;
                                     }
                                 }
@@ -609,24 +610,84 @@ public class KasirBeta2 {
                     break;
 
                 case 4:
-                    // Menu Riwayat Pasien
-                    boolean semuaKosong = true;
-                    for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
-                        if (biodataPasien[iGlobal][0] != null) {
-                            printBiodataPasien();
-                            System.out.println(biodataPasien[iGlobal][8]);
-                            semuaKosong = false;
+                    // Menu Data Pasien
+                    boolean adaData = false;
+                    for (int i = 0; i < biodataPasien.length; i++) {
+                        if (biodataPasien[i][0] != null) {
+                            adaData = true;
                         }
-
                     }
+                    if (adaData == true) {
+                        boolean kembaliDariData = false;
+                        do {
+                            System.out.println("\n========================================");
+                            System.out.println("|           Cek Data Pasien            |");
+                            System.out.println("|   1. Tampilkan Semua Data Pasien     |");
+                            System.out.println("|   2. Cari Data Pasien                |");
+                            System.out.println("|   3. Kembali                         |");
+                            System.out.println("========================================");
+                            int menuCekDataMaks = 3;
+                            int menuCekData = pilihMenu(menuCekDataMaks, input);
 
-                    if (semuaKosong) {
+                            switch (menuCekData) {
+                                case 1:
+                                    for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
+                                        if (biodataPasien[iGlobal][0] != null) {
+                                            printBiodataPasien();
+                                            if (biodataPasien[iGlobal][8] != null) {
+                                                System.out.println("|=> Kamar Pasien    : " + biodataPasien[iGlobal][8]
+                                                        + " " + biodataPasien[iGlobal][9]);
+                                                System.out.println("========================================");
+
+                                            }
+                                        }
+
+                                    }
+                                    input.nextLine();
+                                    break;
+
+                                case 2:
+                                    String cariNama;
+                                    boolean namaDitemukan = false;
+                                    System.out.print("=> Masukan Nama Pasien : ");
+                                    cariNama = input.nextLine();
+                                    for (iGlobal = 0; iGlobal < biodataPasien.length; iGlobal++) {
+                                        if (biodataPasien[iGlobal][0] != null
+                                                && biodataPasien[iGlobal][0].toLowerCase()
+                                                        .contains(cariNama.toLowerCase())) { // Diganti contains
+
+                                            printBiodataPasien();
+                                            if (biodataPasien[iGlobal][8] != null) {
+                                                System.out.println("|=> Kamar Pasien    : " + biodataPasien[iGlobal][8]
+                                                        + " " + biodataPasien[iGlobal][9]);
+                                                System.out.println("========================================");
+
+                                            } 
+                                            namaDitemukan = true;
+                                        }
+                                    }
+                                    if (namaDitemukan == false){
+                                        System.out.println("Nama Pasien Tidak Ditemukan");
+                                    }
+                                    input.nextLine();
+                                    break;
+
+                                case 3:
+                                    System.out.print("Kembali ke Menu");
+                                    kembaliDariData = true;
+                                    break;
+                            }
+
+                        } while (kembaliDariData == false);
+
+                    } else {
                         noActivePasien();
                     }
+
                     break;
 
                 case 5:
-                    System.out.println("Cek Kamar");
+                    // System.out.println("Cek Kamar");
                     boolean backToMenu = false;
                     do {
                         System.out.println("\n========================================");
@@ -638,49 +699,82 @@ public class KasirBeta2 {
                         System.out.println("|        4. Kembali                    |");
                         System.out.println("========================================");
                         int menuCekKamrMaks = 4;
-                        int cekKamar = pilihMenu(menuCekKamrMaks, input); // = input.nextInt();
+                        int kamarKosong = 0, kamarTerisi = 0;
+                        int cekKamar = pilihMenu(menuCekKamrMaks, input);
 
                         boolean adaYangInap = false;
                         switch (cekKamar) {
                             case 1:
+                                System.out.println("========================================");
+                                System.out.println("|     Daftar Nama Pasien Kamar VIP     |");
+                                System.out.println("========================================");
                                 for (int i = 0; i < kamarVIP.length; i++) {
                                     if (kamarVIP[i][0] != null) {
-                                        System.out.println("Nama Pasien : " + kamarVIP[i][0]);
+                                        System.out.println("|=> VIP " + (i + 1) + ", Pasien " + kamarVIP[i][7] + " : "
+                                                + kamarVIP[i][0]);
                                         adaYangInap = true;
+                                        kamarTerisi++;
+                                    } else {
+                                        kamarKosong++;
                                     }
                                 }
 
                                 if (adaYangInap == false) {
-                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                    System.out.println("|    Belum Ada Yang Menginap di VIP    |");
                                 }
+                                System.out.println("========================================");
+                                System.out.println(
+                                        "|  Kamar Kosong: " + kamarKosong + "    Kamar Terisi: " + kamarTerisi);
+                                System.out.println("========================================");
                                 break;
 
                             case 2:
+                                System.out.println("========================================");
+                                System.out.println("|   Daftar Nama Pasien Kamar Reguler   |");
+                                System.out.println("========================================");
                                 for (int i = 0; i < kamarReguler.length; i++) {
                                     if (kamarReguler[i][0] != null) {
-                                        System.out.println("Nama Pasien : " + kamarReguler[i][0]);
+                                        System.out.println("|=> Reguler " + (i + 1) + ", Pasien " + kamarReguler[i][7]
+                                                + " : " + kamarReguler[i][0]);
                                         adaYangInap = true;
+                                        kamarTerisi++;
+                                    } else {
+                                        kamarKosong++;
                                     }
                                 }
 
                                 if (adaYangInap == false) {
-                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                    System.out.println("|  Belum Ada Yang Menginap di Reguler  |");
                                 }
+                                System.out.println("========================================");
+                                System.out.println(
+                                        "|  Kamar Kosong: " + kamarKosong + "    Kamar Terisi: " + kamarTerisi);
+                                System.out.println("========================================");
                                 break;
 
                             case 3:
+                                System.out.println("========================================");
+                                System.out.println("|   Daftar Nama Pasien Kamar Bersama   |");
+                                System.out.println("========================================");
                                 for (int i = 0; i < kamarBersama.length; i++) {
                                     for (int j = 0; j < kamarBersama[i].length; j++) {
                                         if (kamarBersama[i][j][0] != null) {
-                                            System.out.println("Nama Pasien : " + kamarBersama[i][j][0]);
+                                            System.out.println("=> Bersama " + (i + 1) + ", Pasien "
+                                                    + kamarBersama[i][j][7] + " : " + kamarBersama[i][j][0]);
                                             adaYangInap = true;
+                                            kamarTerisi++;
+                                        } else {
+                                            kamarKosong++;
                                         }
                                     }
                                 }
 
                                 if (adaYangInap == false) {
-                                    System.out.println("Belum Ada Pasien Yang Menginab");
+                                    System.out.println("|  Belum Ada Yang Menginab di Bersama  |");
                                 }
+                                System.out.println("========================================");
+                                System.out.println("|  Bed Kosong: " + kamarKosong + "    Bed Terisi: " + kamarTerisi);
+                                System.out.println("========================================");
                                 break;
 
                             case 4:
@@ -705,7 +799,7 @@ public class KasirBeta2 {
                     } while (backToMenu == false);
 
                     break;
-                
+
                 case 6:
                     System.out.println("==========================================================");
                     System.out.println("|                     Menu Bantuan                       |");
@@ -731,7 +825,7 @@ public class KasirBeta2 {
                     System.out.println("|   Digunakan untuk keluar dari menu admin               |");
                     System.out.println("==========================================================");
                     break;
-                
+
                 case 7:
                     String usrLama, passLama, usrBaru, passBaru, confrmPass;
                     int attemptGanti = 0;
@@ -744,7 +838,7 @@ public class KasirBeta2 {
                         System.out.print("=> Masukan Password Lama : ");
                         passLama = input.nextLine();
 
-                        if (!(usrLama.equals(usernamePassword[0][0]) && passLama.equals(usernamePassword[0][1]))){
+                        if (!(usrLama.equals(usernamePassword[0][0]) && passLama.equals(usernamePassword[0][1]))) {
                             attemptGanti++;
                             userPwSalah();
                         } else {
@@ -762,7 +856,7 @@ public class KasirBeta2 {
                                     System.out.println("=========================================");
                                 }
                             } while (!confrmPass.equals(passBaru));
-                            
+
                             usernamePassword[0][0] = usrBaru;
                             usernamePassword[0][1] = confrmPass;
 
@@ -773,11 +867,10 @@ public class KasirBeta2 {
                             return;
                         }
                     } while (attemptGanti < 3);
-                    if (attemptGanti == 3){
+                    if (attemptGanti == 3) {
                         System.out.println("Anda gagal 3 kali, kembali ke menu");
                         break;
                     }
-                     
 
                 case 8:
                     // Logout dan kembali ke menu login
@@ -1067,7 +1160,7 @@ public class KasirBeta2 {
                         System.out.print("=> Masukan Password Lama : ");
                         passLama = input.nextLine();
 
-                        if (!(usrLama.equals(usernamePassword[1][0]) && passLama.equals(usernamePassword[1][1]))){
+                        if (!(usrLama.equals(usernamePassword[1][0]) && passLama.equals(usernamePassword[1][1]))) {
                             attemptGanti++;
                             userPwSalah();
                         } else {
@@ -1085,7 +1178,7 @@ public class KasirBeta2 {
                                     System.out.println("=========================================");
                                 }
                             } while (!confrmPass.equals(passBaru));
-                            
+
                             usernamePassword[1][0] = usrBaru;
                             usernamePassword[1][1] = confrmPass;
 
@@ -1096,7 +1189,7 @@ public class KasirBeta2 {
                             return;
                         }
                     } while (attemptGanti < 3);
-                    if (attemptGanti == 3){
+                    if (attemptGanti == 3) {
                         System.out.println("Anda gagal 3 kali, kembali ke menu");
                         break;
                     }
@@ -1255,14 +1348,14 @@ public class KasirBeta2 {
     }
 
     static void printBiodataPasien() {
-        System.out.println("========================================");
+        System.out.println("\n========================================");
         System.out.println("|       Pasien Nomor " + biodataPasien[iGlobal][7]);
         System.out.println("|=> Nama Pasien     : " + biodataPasien[iGlobal][0]);
         System.out.println("|=> Alamat Pasien   : " + biodataPasien[iGlobal][1]);
         System.out.println("|=> Nomer HP        : " + biodataPasien[iGlobal][2]);
         System.out.println("|=> Penyakit Pasien : " + biodataPasien[iGlobal][3]);
         System.out.println("|=> Kode Pasien     : " + biodataPasien[iGlobal][7]);
-        System.out.println("========================================\n");
+        System.out.println("========================================");
     }
 
     static void noActivePasien() {
