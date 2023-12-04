@@ -660,11 +660,11 @@ public class KasirBeta2 {
                                                         + " " + biodataPasien[iGlobal][9]);
                                                 System.out.println("========================================");
 
-                                            } 
+                                            }
                                             namaDitemukan = true;
                                         }
                                     }
-                                    if (namaDitemukan == false){
+                                    if (namaDitemukan == false) {
                                         System.out.println("Nama Pasien Tidak Ditemukan");
                                     }
                                     input.nextLine();
@@ -1035,16 +1035,25 @@ public class KasirBeta2 {
                                     break;
 
                                 case 3:
-                                    int k = 0;
-                                    while ((detailRiwayatTransaksi[k][0] != null) && !detailRiwayatTransaksi[k][12].equals("0")) {
-                                        System.out.println("=========================================");
-                                        System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[k][6]);
-                                        System.out.println("=========================================");
-                                        System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[k][0]);
-                                        System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[k][12]);
-                                        System.out.println("========================================\n");
-                                        k++;
+                                    boolean adaDonasi = false;
+                                    for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
+                                        if ((detailRiwayatTransaksi[i][0] != null)
+                                                && !detailRiwayatTransaksi[i][12].equals("0")) {
+                                            System.out.println("=========================================");
+                                            System.out.println(
+                                                    "| Transaksi pada Tanggal " + detailRiwayatTransaksi[i][6]);
+                                            System.out.println("=========================================");
+                                            System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[i][0]);
+                                            System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[i][12]);
+                                            System.out.println("========================================\n");
+                                            adaDonasi = true;
+                                        }
+
                                     }
+                                    if (adaDonasi == false){
+                                        System.out.println("Belum Pemasukan Donasi");
+                                    }
+                                    
                                     input.nextLine();
                                     break;
 
@@ -1372,14 +1381,14 @@ public class KasirBeta2 {
     }
 
     static void printRiwayatTransaksi() {
-        System.out.println("=========================================");
+        System.out.println("\n=========================================");
         System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[iGlobal][6]);
         System.out.println("=========================================");
         System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[iGlobal][0]);
         System.out.println("|=> Tanggal     : " + detailRiwayatTransaksi[iGlobal][6]);
         System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[iGlobal][9]);
         System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[iGlobal][12]);
-        System.out.println("========================================\n");
+        System.out.println("========================================");
     }
 
     private static long hitungSelisihHari(LocalDate tanggalCheskIn, LocalDate tanggalCheckOut) {
