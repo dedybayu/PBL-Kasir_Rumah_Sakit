@@ -33,7 +33,7 @@ public class KasirBeta2 {
                     break;
 
                 case 3:
-                    System.out.print("Konfirmasi Keluar y/n : ");
+                    System.out.print("=> Konfirmasi Keluar y/n : ");
                     char exit = input.nextLine().charAt(0);
 
                     if ((exit == 'n') || (exit == 'N')) {
@@ -1003,7 +1003,7 @@ public class KasirBeta2 {
                             System.out.println("|   3. Riwayat Donasi                   |");
                             System.out.println("|   4. Cari Riwayat Transaksi (Nama)    |");
                             System.out.println("|   5. Cari Riwayat Transaksi (Tanggal) |");
-                            System.out.println("|   5. kembali                          |");
+                            System.out.println("|   6. kembali                          |");
                             System.out.println("=========================================");
                             int menuRiwayatMaks = 6;
                             int riwayatTransaksi = pilihMenu(menuRiwayatMaks, input);
