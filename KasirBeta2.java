@@ -272,7 +272,7 @@ public class KasirBeta2 {
                                     if (biodataPasien[kodePasien - 1][8] != null) {
                                         System.out.println("|=> Pasien Kamar " + biodataPasien[kodePasien - 1][8] + " "
                                                 + biodataPasien[kodePasien - 1][9]);
-                                        System.out.println("=> Tanggal Masuk : " + biodataPasien[kodePasien - 1][5]);
+                                        System.out.println("|=> Tanggal Masuk : " + biodataPasien[kodePasien - 1][5]);
                                         System.out.println("========================================");
 
                                         LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
@@ -285,12 +285,12 @@ public class KasirBeta2 {
 
                                         selisihHari = hitungSelisihHari(tanggalCheskIn, tanggalCheckOut);
 
-                                        System.out.println("Selisih Hari = " + selisihHari);
+                                        // System.out.println("Selisih Hari = " + selisihHari);
 
                                         // Untuk Tagihan Kamar
                                         int tagihanKamar = tagihanKamarPasien((kodePasien - 1), selisihHari);
 
-                                        System.out.println(tagihanKamar);
+                                        // System.out.println(tagihanKamar);
 
                                         do {
                                             System.out.println("Kategori (sedang/berat/kronis)");
@@ -1005,7 +1005,7 @@ public class KasirBeta2 {
                             System.out.println("|   5. Cari Riwayat Transaksi (Tanggal) |");
                             System.out.println("|   5. kembali                          |");
                             System.out.println("=========================================");
-                            int menuRiwayatMaks = 5;
+                            int menuRiwayatMaks = 6;
                             int riwayatTransaksi = pilihMenu(menuRiwayatMaks, input);
 
                             switch (riwayatTransaksi) {
@@ -1036,7 +1036,7 @@ public class KasirBeta2 {
 
                                 case 3:
                                     int k = 0;
-                                    while (detailRiwayatTransaksi[k][0] != null) {
+                                    while ((detailRiwayatTransaksi[k][0] != null) && !detailRiwayatTransaksi[k][12].equals("0")) {
                                         System.out.println("=========================================");
                                         System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[k][6]);
                                         System.out.println("=========================================");
