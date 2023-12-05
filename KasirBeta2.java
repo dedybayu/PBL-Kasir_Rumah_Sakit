@@ -1028,7 +1028,7 @@ public class KasirBeta2 {
                                         System.out.println("| Transaksi pada Tanggal " + detailRiwayatTransaksi[j][6]);
                                         System.out.println("=========================================");
                                         System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[j][0]);
-                                        System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[j][9]);
+                                        System.out.println("|=> Pemasukan   : " + detailRiwayatTransaksi[j][9]);
                                         System.out.println("========================================\n");
                                         j++;
                                     }
