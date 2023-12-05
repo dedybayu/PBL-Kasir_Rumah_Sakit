@@ -62,31 +62,23 @@ public class KasirBeta2 {
     // Deklarasi Untuk Riwayat Pasien
     private static String[][] detailRiwayatTransaksi = new String[100][15];
     // [0]nama [1]alamat [2]nohp [3]pnykt [4]bpjs [5]tglmsk [6]tglkluar [7]lmainap
-    // [8]obat
-    // [9]konsum [10]diskonbpjs [11]tagihan [12]donasi
+    // [8]obat [9]tagihan [10]bayar [11]kembalian [12]donasi [13]kembalianAKhir
 
     // Deklarasi Untuk Pasien yang menginab
     private static String[][] kamarVIP = new String[5][11]; // Ada 5 Kamar VIP
     private static String[][] kamarReguler = new String[10][11]; // Ada 10 Kamar Reguler
     private static String[][][] kamarBersama = new String[10][2][11]; // Ada 10 Kamar Bersama 1kmr 2orng
-    // Penjelasan Array [kamar][biodata pasien] untuk 2D
+    // Penjelasan Array[kamar][biodata pasien] untuk 2D
     // Penjelasan Array[kamar][pasien 1,2][biodata pasien] untuk 3D
 
     // Deklarasi untuk Pembayaran
-    private static int[] uangMasuk = new int[20];
     private static int totalPendapatan = 0, totalDonasi = 0;
-
-    // Deklarasi Untuk Total Transaksi
-    private static int[][] transactions = new int[biodataPasien.length][4];
-    // [][0] = total tagihan, [][1] = jumlah yang dibayar, [][2] = kembalian, [][3]
-    // = donasi
 
     // Deklarasi untuk looping
     private static int riwayat = 0; // untuk loping smua riwayat riwayat
     private static int iGlobal, kodePasien;
     // private static Char
 
-    // Deklarasi Untuk Pembayaran
     // Deklarasi variabel buat logika Pembayaran
     private static int obat = 0, hargaObat = 0, hargaKatPenyakit = 0, kembalian = 0, bayar = 0;
     private static double keringanan = 0, tagihan = 0;
@@ -181,15 +173,11 @@ public class KasirBeta2 {
                                     System.out.println("Masukan y atau n");
                                 }
                             }
-                            // Mengambil tanggal sistem saat ini
-                            // System.out.println("=>");
-                            // LocalDate tanggalMasuk = LocalDate.now();
 
                             // LocalDate tanggalMasuk = inputTanggal("Tanggal Masuk : ", formatter, input);
                             biodataPasien[idx][5] = tanggalMasuk.format(formatter); // 5 Tanggal Masuk 6 Tanggal
                                                                                     // Keluar
                             System.out.println("=> Tanggal Masuk        : " + biodataPasien[idx][5]);
-                            // biodataPasien[idx][5] = input.nextLine();
 
                             biodataPasien[idx][7] = Integer.toString((idx + 1)); // menrubah int menjadi String
                             System.out.println("=> Kode Pasien Adalah   : " + (biodataPasien[idx][7])); // 7 : Kode
@@ -285,12 +273,8 @@ public class KasirBeta2 {
 
                                         selisihHari = hitungSelisihHari(tanggalCheskIn, tanggalCheckOut);
 
-                                        // System.out.println("Selisih Hari = " + selisihHari);
-
                                         // Untuk Tagihan Kamar
                                         int tagihanKamar = tagihanKamarPasien((kodePasien - 1), selisihHari);
-
-                                        // System.out.println(tagihanKamar);
 
                                         do {
                                             System.out.println("Kategori (sedang/berat/kronis)");
@@ -1217,9 +1201,7 @@ public class KasirBeta2 {
                             System.out.println("Input invalid masukan y/n");
                         }
                     } while (true);
-
-                    // default:
-                    // System.out.println("Pilihan Tidak Tersedia");
+                    break;
             }
         }
     }
@@ -1300,11 +1282,6 @@ public class KasirBeta2 {
     }
 
     static void menyimpanTransaksi() {
-        // transactions[kodePasien - 1][0] = (int) tagihan;
-        // transactions[kodePasien - 1][1] = bayar;
-        // transactions[kodePasien - 1][2] = kembalian;
-        // transactions[kodePasien - 1][3] = donasi;
-
         totalPendapatan += (int) tagihan;
         totalDonasi += donasi;
     }
