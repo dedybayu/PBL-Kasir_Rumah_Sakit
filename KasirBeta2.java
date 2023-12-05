@@ -272,10 +272,10 @@ public class KasirBeta2 {
                                     if (biodataPasien[kodePasien - 1][8] != null) {
                                         System.out.println("|=> Pasien Kamar " + biodataPasien[kodePasien - 1][8] + " "
                                                 + biodataPasien[kodePasien - 1][9]);
-                                        System.out.println("|=> Tanggal Masuk : " + biodataPasien[kodePasien - 1][5]);
+                                        System.out.println("|=> Tanggal Masuk   : " + biodataPasien[kodePasien - 1][5]);
                                         System.out.println("========================================");
 
-                                        LocalDate tanggalKeluar = inputTanggal("Tanggal Keluar: ", formatter, input);
+                                        LocalDate tanggalKeluar = inputTanggal("=> Tanggal Keluar      : ", formatter, input);
                                         biodataPasien[kodePasien - 1][6] = tanggalKeluar.format(formatter);
 
                                         LocalDate tanggalCheskIn = LocalDate.parse(biodataPasien[kodePasien - 1][5],
@@ -294,7 +294,7 @@ public class KasirBeta2 {
 
                                         do {
                                             System.out.println("Kategori (sedang/berat/kronis)");
-                                            System.out.print("Kategori Penyakit   : ");
+                                            System.out.print("=> Kategori Penyakit   : ");
                                             penyakit = input.nextLine();
                                             if (penyakit.equalsIgnoreCase("sedang")
                                                     || penyakit.equalsIgnoreCase("berat")
@@ -307,7 +307,7 @@ public class KasirBeta2 {
                                         } while (true);
 
                                         do {
-                                            System.out.print("=> Jumlah Layanan Obat  : ");
+                                            System.out.print("=> Jumlah Layanan Obat : ");
                                             if (input.hasNextInt()) {
                                                 obat = input.nextInt();
                                                 break;
@@ -353,7 +353,7 @@ public class KasirBeta2 {
 
                                         do {
                                             System.out.println("Kategori (biasa/sedang/berat)");
-                                            System.out.print("Kategori Penyakit   : ");
+                                            System.out.print("=> Kategori Penyakit   : ");
                                             penyakit = input.nextLine();
                                             if (penyakit.equalsIgnoreCase("biasa")
                                                     || penyakit.equalsIgnoreCase("sedang")
@@ -366,7 +366,7 @@ public class KasirBeta2 {
                                         } while (true);
 
                                         do {
-                                            System.out.print("=> Jumlah Layanan Obat  : ");
+                                            System.out.print("=> Jumlah Layanan Obat : ");
                                             if (input.hasNextInt()) {
                                                 obat = input.nextInt();
                                                 break;
@@ -723,7 +723,7 @@ public class KasirBeta2 {
                                 }
                                 System.out.println("========================================");
                                 System.out.println(
-                                        "|  Kamar Kosong: " + kamarKosong + "    Kamar Terisi: " + kamarTerisi);
+                                        "|  Kamar Kosong: " + kamarKosong + "   Kamar Terisi: " + kamarTerisi);
                                 System.out.println("========================================");
                                 break;
 
@@ -747,7 +747,7 @@ public class KasirBeta2 {
                                 }
                                 System.out.println("========================================");
                                 System.out.println(
-                                        "|  Kamar Kosong: " + kamarKosong + "    Kamar Terisi: " + kamarTerisi);
+                                        "|  Kamar Kosong: " + kamarKosong + "   Kamar Terisi: " + kamarTerisi);
                                 System.out.println("========================================");
                                 break;
 
@@ -772,7 +772,7 @@ public class KasirBeta2 {
                                     System.out.println("|  Belum Ada Yang Menginab di Bersama  |");
                                 }
                                 System.out.println("========================================");
-                                System.out.println("|  Bed Kosong: " + kamarKosong + "    Bed Terisi: " + kamarTerisi);
+                                System.out.println("|  Bed Kosong: " + kamarKosong + "   Bed Terisi: " + kamarTerisi);
                                 System.out.println("========================================");
                                 break;
 
@@ -975,8 +975,8 @@ public class KasirBeta2 {
                                     for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
                                         if (detailRiwayatTransaksi[i][9] != null) {
                                             System.out
-                                                    .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Pemasukan : "
-                                                            + detailRiwayatTransaksi[i][9]);
+                                                    .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Donasi : "
+                                                            + detailRiwayatTransaksi[i][12]);
                                         }
                                     }
                                 } else {
@@ -1154,6 +1154,7 @@ public class KasirBeta2 {
                     System.out.println("|5. Menu Logout                                          |");
                     System.out.println("|   Menu logout digunakan untuk keluar dari menu manager |");
                     System.out.println("==========================================================");
+                    input.nextLine();
                     break;
 
                 case 4:
@@ -1260,7 +1261,7 @@ public class KasirBeta2 {
         System.out.print("=> Bayar Sekarang           : ");
         bayar = input.nextInt();
         kembalian = bayar - (int) tagihan;
-        System.out.println("== Kembalian                : " + kembalian);
+        System.out.println("=> Kembalian                : " + kembalian);
         input.nextLine();
 
         do {
@@ -1296,9 +1297,6 @@ public class KasirBeta2 {
 
             kembalianAkhir = kembalian;
         }
-
-        System.out.println(donasi);
-
     }
 
     static void menyimpanTransaksi() {
