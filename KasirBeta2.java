@@ -80,7 +80,7 @@ public class KasirBeta2 {
     // private static Char
 
     // Deklarasi variabel buat logika Pembayaran
-    private static int obat = 0, hargaObat = 0, hargaKatPenyakit = 0, kembalian = 0, bayar = 0;
+    private static int obat = 0, hargaObat = 0, hargaKatPenyakit = 0, kembalian = 0, bayar = 0, tagihanKamar = 0;
     private static double keringanan = 0, tagihan = 0;
     private static int donasi = 0, kembalianAkhir = 0;
     private static String penyakit, apaDonasi, apaDonasiSemua;
@@ -274,7 +274,7 @@ public class KasirBeta2 {
                                         selisihHari = hitungSelisihHari(tanggalCheskIn, tanggalCheckOut);
 
                                         // Untuk Tagihan Kamar
-                                        int tagihanKamar = tagihanKamarPasien((kodePasien - 1), selisihHari);
+                                        tagihanKamar = tagihanKamarPasien((kodePasien - 1), selisihHari);
 
                                         do {
                                             System.out.println("Kategori (sedang/berat/kronis)");
@@ -387,7 +387,7 @@ public class KasirBeta2 {
                                         // Menyimpan transaksi
                                         menyimpanTransaksi();
 
-                                        selisihHari = 1;
+                                        selisihHari = 0;
 
                                         // Mencetak Nota transaksi dan menghapus data pasien
                                         cetakTransaksiDanHapusBiodata(selisihHari);
@@ -1317,12 +1317,19 @@ public class KasirBeta2 {
 
         // Nota/Bukti Pembayaran
         System.out.println("\n+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("|              Bukti Pembayaran               |");
+        System.out.println("|        Bukti Pembayaran RS CintaJava        |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("| => Nama Pasien     : " + detailRiwayatTransaksi[riwayat][0]);
         System.out.println("| => Alamat Pasien   : " + detailRiwayatTransaksi[riwayat][1]);
         System.out.println("| => Nomer HP Pasien : " + detailRiwayatTransaksi[riwayat][2]);
         System.out.println("| => Penyakit Pasien : " + detailRiwayatTransaksi[riwayat][3]);
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+        if (!detailRiwayatTransaksi[riwayat][7].equalsIgnoreCase("0")){
+            System.out.println("| => Tagihan Kamar   : " + tagihanKamar);
+        }
+        System.out.println("| => Harga Jasa      : " + hargaKatPenyakit);
+        System.out.println("| => Harga Obat      : " + hargaObat*obat);
+        System.out.println("| => Keringanan      : "+ (((obat * hargaObat) + hargaKatPenyakit) - (((obat * hargaObat) + hargaKatPenyakit) * keringanan)));
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("| => Total Tagihan   : " + detailRiwayatTransaksi[riwayat][9]);
         System.out.println("| => Total Bayar     : " + detailRiwayatTransaksi[riwayat][10]);
@@ -1331,7 +1338,7 @@ public class KasirBeta2 {
         System.out.println("| => Total Donasi    : " + detailRiwayatTransaksi[riwayat][12]);
         System.out.println("| => Kembalian Akhir : " + detailRiwayatTransaksi[riwayat][13]);
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("|              Bukti Pembayaran               |");
+        System.out.println("|        Bukti Pembayaran RS CintaJava        |");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
 
         for (int i = 0; i < biodataPasien[kodePasien - 1].length; i++) {
