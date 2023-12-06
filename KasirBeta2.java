@@ -263,7 +263,8 @@ public class KasirBeta2 {
                                         System.out.println("|=> Tanggal Masuk   : " + biodataPasien[kodePasien - 1][5]);
                                         System.out.println("========================================");
 
-                                        LocalDate tanggalKeluar = inputTanggal("=> Tanggal Keluar      : ", formatter, input);
+                                        LocalDate tanggalKeluar = inputTanggal("=> Tanggal Keluar      : ", formatter,
+                                                input);
                                         biodataPasien[kodePasien - 1][6] = tanggalKeluar.format(formatter);
 
                                         LocalDate tanggalCheskIn = LocalDate.parse(biodataPasien[kodePasien - 1][5],
@@ -1287,7 +1288,7 @@ public class KasirBeta2 {
     }
 
     static void cetakTransaksiDanHapusBiodata(long selisihHari) {
-        //Menghapus data di Kamar Pasien Jika inap
+        // Menghapus data di Kamar Pasien Jika inap
         if (biodataPasien[kodePasien - 1][8] != null) {
             if (biodataPasien[kodePasien - 1][8] == "VIP") {
                 for (int i = 0; i < kamarVIP[0].length; i++) {
@@ -1299,7 +1300,8 @@ public class KasirBeta2 {
                 }
             } else if (biodataPasien[kodePasien - 1][8] == "Bersama") {
                 for (int i = 0; i < kamarBersama[0][0].length; i++) {
-                    kamarBersama[(Integer.parseInt(biodataPasien[kodePasien - 1][9]) - 1)][(Integer.parseInt(biodataPasien[kodePasien - 1][10]) - 1)][i] = null;
+                    kamarBersama[(Integer.parseInt(biodataPasien[kodePasien - 1][9]) - 1)][(Integer
+                            .parseInt(biodataPasien[kodePasien - 1][10]) - 1)][i] = null;
                 }
             }
         }
@@ -1324,12 +1326,13 @@ public class KasirBeta2 {
         System.out.println("| => Nomer HP Pasien : " + detailRiwayatTransaksi[riwayat][2]);
         System.out.println("| => Penyakit Pasien : " + detailRiwayatTransaksi[riwayat][3]);
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-        if (!detailRiwayatTransaksi[riwayat][7].equalsIgnoreCase("0")){
+        if (!detailRiwayatTransaksi[riwayat][7].equalsIgnoreCase("0")) {
             System.out.println("| => Tagihan Kamar   : " + tagihanKamar);
         }
         System.out.println("| => Harga Jasa      : " + hargaKatPenyakit);
-        System.out.println("| => Harga Obat      : " + hargaObat*obat);
-        System.out.println("| => Keringanan      : "+ (((obat * hargaObat) + hargaKatPenyakit) - (((obat * hargaObat) + hargaKatPenyakit) * keringanan)));
+        System.out.println("| => Harga Obat      : " + hargaObat * obat);
+        System.out.println("| => Keringanan      : "
+                + (((obat * hargaObat) + hargaKatPenyakit) - (((obat * hargaObat) + hargaKatPenyakit) * keringanan)));
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("| => Total Tagihan   : " + detailRiwayatTransaksi[riwayat][9]);
         System.out.println("| => Total Bayar     : " + detailRiwayatTransaksi[riwayat][10]);
