@@ -892,11 +892,13 @@ public class KasirBeta2 {
                     System.out.println("|5. Cek Kamar                                            |");
                     System.out.println("|   Digunakan untuk melihat ketersediaan kamar pasien    |");
                     System.out.println("|   dan melihat data pasien yang menginab di kamar       |");
-                    System.out.println("|6. Bantuan                                              |");
+                    System.out.println("|6. Riwayat Transaksi                                    |");
+                    System.out.println("|   Digunakan untuk menampilkan Riwayat Transaksi pasien |");
+                    System.out.println("|7. Bantuan                                              |");
                     System.out.println("|   Digunakan untuk nampilkan bantuan pnggunaan aplikasi |");
-                    System.out.println("|7. Ubah Password                                        |");
+                    System.out.println("|8. Ubah Password                                        |");
                     System.out.println("|   Digunakan untuk nampilkan bantuan pnggunaan aplikasi |");
-                    System.out.println("|8. Logout                                               |");
+                    System.out.println("|9. Logout                                               |");
                     System.out.println("|   Digunakan untuk keluar dari menu admin               |");
                     System.out.println("==========================================================");
                     break;
