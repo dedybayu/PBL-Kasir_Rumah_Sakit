@@ -135,11 +135,12 @@ public class KasirBeta2 {
             System.out.println("|          3. Pesankan Kamar Pasien           |");
             System.out.println("|          4. Data Pasien                     |");
             System.out.println("|          5. Cek Kamar                       |");
-            System.out.println("|          6. Bantuan                         |");
-            System.out.println("|          7. Ubah Password                   |");
-            System.out.println("|          8. Logout                          |");
+            System.out.println("|          6. Riwayat Transaksi               |");
+            System.out.println("|          7. Bantuan                         |");
+            System.out.println("|          8. Ubah Password                   |");
+            System.out.println("|          9. Logout                          |");
             System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-            int menuAdminMaks = 8;
+            int menuAdminMaks = 9;
             int menuAdmin = pilihMenu(menuAdminMaks, input);
 
             switch (menuAdmin) {
@@ -785,6 +786,88 @@ public class KasirBeta2 {
                     break;
 
                 case 6:
+                    if (detailRiwayatTransaksi[0][0] != null) {
+                        System.out.println("========================================");
+                        System.out.println("|  1. Tampilkan Semua Riwayat          |");
+                        System.out.println("|  2. Cari Riwayat Transaksi (Nama)    |");
+                        System.out.println("|  3. Cari Riwayat Transaksi (Tanggal) |");
+                        System.out.println("========================================");
+                        int menuRwytAdmMaks = 4;
+                        int menuRwytAdm = pilihMenu(menuRwytAdmMaks, input);
+                        switch (menuRwytAdm) {
+                            case 1:
+                                for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
+                                    if (detailRiwayatTransaksi[i][0] != null){
+                                        riwayatTransaksiAdmin(i);
+                                    } else {
+                                        continue;
+                                    }
+                                }
+                                break;
+
+                            case 2:
+                                char cariNamaLagi;
+                                do {
+                                    boolean adaRwytNama = false;
+                                    System.out.println("=========================================");
+                                    System.out.println("|    Cari Riwayat Berdasarkan Nama      |");
+                                    System.out.println("=========================================");
+                                    System.out.print("=> Masukan Nama Pasien : ");
+                                    String cariRiwayat = input.nextLine();
+                                    for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
+                                        if (detailRiwayatTransaksi[i][0] != null
+                                                && detailRiwayatTransaksi[i][0]
+                                                        .toLowerCase().contains(cariRiwayat.toLowerCase())) {
+
+                                            riwayatTransaksiAdmin(i);
+                                            adaRwytNama = true;
+                                        }
+                                    }
+                                    if (adaRwytNama == false) {
+                                        System.out.println("Transaksi Tidak Ditemukan\n");
+                                    }
+                                    System.out.print("Cari Lagi? y/n : ");
+                                    cariNamaLagi = input.nextLine().charAt(0);
+                                } while (!(cariNamaLagi == 'n' || cariNamaLagi == 'N'));
+                                break;
+
+                            case 3:
+                                char cariTanggalLagi;
+                                do {
+                                    boolean adaRwytTanggal = false;
+                                    System.out.println("=========================================");
+                                    System.out.println("|   Cari Riwayat Berdasarkan Tanggal    |");
+                                    System.out.println("=========================================");
+                                    LocalDate tanggal = inputTanggal("=> Tanggal Keluar: ", formatter, input);
+                                    String cariTanggal = tanggal.format(formatter);
+
+                                    for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
+                                        if (detailRiwayatTransaksi[i][0] != null
+                                                && detailRiwayatTransaksi[i][6].equals(cariTanggal)) {
+                                            riwayatTransaksiAdmin(i);
+                                            adaRwytTanggal = true;
+                                        }
+                                    }
+                                    if (adaRwytTanggal == false) {
+                                        System.out.println("Transaksi Tidak Ditemukan\n");
+                                    }
+                                    System.out.print("Cari Lagi? y/n : ");
+                                    cariTanggalLagi = input.nextLine().charAt(0);
+                                } while (!(cariTanggalLagi == 'n' || cariTanggalLagi == 'N'));
+                                break;
+
+                            case 4:
+                                System.out.println("Kembali Ke Menu\n");
+                                break;
+                        }
+                    } else {
+                        System.out.println("========================================");
+                        System.out.println("|     Belum Ada Riwayat Transaksi      |");
+                        System.out.println("========================================");
+                    }
+                    break;
+
+                case 7:
                     System.out.println("==========================================================");
                     System.out.println("|                     Menu Bantuan                       |");
                     System.out.println("==========================================================");
@@ -810,7 +893,7 @@ public class KasirBeta2 {
                     System.out.println("==========================================================");
                     break;
 
-                case 7:
+                case 8:
                     String usrLama, passLama, usrBaru, passBaru, confrmPass;
                     int attemptGanti = 0;
                     System.out.println("\n=========================================");
@@ -856,7 +939,7 @@ public class KasirBeta2 {
                         break;
                     }
 
-                case 8:
+                case 9:
                     // Logout dan kembali ke menu login
                     do {
                         System.out.print("Konfirmasi Logout y/n : ");
@@ -1391,6 +1474,25 @@ public class KasirBeta2 {
         System.out.println("|=> Tanggal     : " + detailRiwayatTransaksi[iGlobal][6]);
         System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[iGlobal][9]);
         System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[iGlobal][12]);
+        System.out.println("========================================");
+    }
+
+    static void riwayatTransaksiAdmin(int i) {
+        System.out.println("\n========================================");
+        System.out.println("| Transaksi pada Tanggal ");
+        System.out.println("========================================");
+        System.out.println("|=> Nama Pasien : " + detailRiwayatTransaksi[i][0]);
+        System.out.println("|=> Alamat      : " + detailRiwayatTransaksi[i][1]);
+        System.out.println("|=> Nomor HP    : " + detailRiwayatTransaksi[i][2]);
+        System.out.println("|=> Penyakit    : " + detailRiwayatTransaksi[i][3]);
+        System.out.println("========================================");
+        if (!detailRiwayatTransaksi[i][7].equalsIgnoreCase("0")) {
+            System.out.println("|=> Lama Inap   : " + detailRiwayatTransaksi[i][7]);
+        }
+
+        System.out.println("|=> Obat        : " + detailRiwayatTransaksi[i][8]);
+        System.out.println("|=> Tagihan     : " + detailRiwayatTransaksi[i][9]);
+        System.out.println("|=> Donasi      : " + detailRiwayatTransaksi[i][12]);
         System.out.println("========================================");
     }
 
