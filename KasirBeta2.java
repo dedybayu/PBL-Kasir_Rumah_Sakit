@@ -879,7 +879,7 @@ public class KasirBeta2 {
                     System.out.println("==========================================================");
                     System.out.println("|                     Menu Bantuan                       |");
                     System.out.println("==========================================================");
-                    System.out.println("|               Keguanaan Menu di Manager                |");
+                    System.out.println("|               Kegunaan Menu di Admin                |");
                     System.out.println("==========================================================");
                     System.out.println("|1. Daftarkan Pasien                                     |");
                     System.out.println("|   Digunakan untuk mendaftarkan biodata pasien          |");
@@ -1219,7 +1219,7 @@ public class KasirBeta2 {
                     System.out.println("==========================================================");
                     System.out.println("|                     Menu Bantuan                       |");
                     System.out.println("==========================================================");
-                    System.out.println("|               Keguanaan Menu di Manager                |");
+                    System.out.println("|               Kegunaan Menu di Manager                |");
                     System.out.println("==========================================================");
                     System.out.println("|1. Menu Laporan Keuangan                                |");
                     System.out.println("|   Laporan keuangan untuk mengampilkan laporan keuangan |");
