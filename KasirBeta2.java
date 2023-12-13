@@ -897,7 +897,7 @@ public class KasirBeta2 {
                     System.out.println("|7. Bantuan                                              |");
                     System.out.println("|   Digunakan untuk nampilkan bantuan pnggunaan aplikasi |");
                     System.out.println("|8. Ubah Password                                        |");
-                    System.out.println("|   Digunakan untuk nampilkan bantuan pnggunaan aplikasi |");
+                    System.out.println("|   Digunakan untuk menggubah username dan password      |");
                     System.out.println("|9. Logout                                               |");
                     System.out.println("|   Digunakan untuk keluar dari menu admin               |");
                     System.out.println("==========================================================");
