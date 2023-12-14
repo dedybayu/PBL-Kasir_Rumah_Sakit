@@ -1,3 +1,5 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -786,7 +788,6 @@ public class KasirBeta2 {
                     break;
 
                 case 6:
-                    
 
                     if (detailRiwayatTransaksi[0][0] != null) {
                         boolean kmbaliRwytAdm = false;
@@ -1028,23 +1029,26 @@ public class KasirBeta2 {
                         System.out.println("=========================================");
                         System.out.println("|   1. Riwayat Pemasukan                |");
                         System.out.println("|   2. Riwayat Pemasukan Donasi         |");
-                        System.out.println("|   3. Kembali                          |");
+                        System.out.println("|   3. Riwayat Mutasi                   |");
+                        System.out.println("|   4. Kembali                          |");
                         System.out.println("=========================================");
-                        int menuLaporanMaks = 3;
+                        int menuLaporanMaks = 4;
                         int menuLapKeuangan = pilihMenu(menuLaporanMaks, input);
                         switch (menuLapKeuangan) {
                             case 1:
                                 if (detailRiwayatTransaksi[0][9] != null) {
                                     for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
                                         if (detailRiwayatTransaksi[i][9] != null) {
-                                            System.out.println("===========================================================");
+                                            System.out.println(
+                                                    "===========================================================");
                                             System.out
-                                            .println("Tanggal " + detailRiwayatTransaksi[i][5] + " Pemasukan : "
-                                            + detailRiwayatTransaksi[i][9]);
-                                            System.out
-                                            .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Pengeluaran : "
-                                            + detailRiwayatTransaksi[i][9]);
-                                            System.out.println("===========================================================");
+                                                    .println("Tanggal " + detailRiwayatTransaksi[i][5] + " Pemasukan : "
+                                                            + detailRiwayatTransaksi[i][9]);
+                                            System.out.println(
+                                                    "Tanggal " + detailRiwayatTransaksi[i][6] + " Pengeluaran : "
+                                                            + detailRiwayatTransaksi[i][9]);
+                                            System.out.println(
+                                                    "===========================================================");
                                         }
                                     }
                                 } else {
@@ -1054,12 +1058,12 @@ public class KasirBeta2 {
                                 break;
 
                             case 2:
-                                if (detailRiwayatTransaksi[0][12] != null && detailRiwayatTransaksi[0][12] != "0") {
+                                if (detailRiwayatTransaksi[0][12] != null
+                                        && !detailRiwayatTransaksi[0][12].equals("0")) {
                                     for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
                                         if (detailRiwayatTransaksi[i][9] != null) {
-                                            System.out
-                                                    .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Donasi : "
-                                                            + detailRiwayatTransaksi[i][12]);
+                                            System.out.println("Tanggal " + detailRiwayatTransaksi[i][6] + " Donasi : "
+                                                    + detailRiwayatTransaksi[i][12]);
                                         }
                                     }
                                 } else {
@@ -1069,11 +1073,48 @@ public class KasirBeta2 {
                                 break;
 
                             case 3:
+                        
+                                System.out.print("Masukkan tanggal awal : ");
+                                String tanggalAwal = input.nextLine();
+
+                                System.out.print("Masukkan tanggal akhir : ");
+                                String tanggalAkhir = input.nextLine();
+
+                                boolean foundData = false;
+
+                                for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
+                                    if (detailRiwayatTransaksi[i][9] != null) {
+                                        String tanggalTransaksi = detailRiwayatTransaksi[i][5];
+                                        if (tanggalTransaksi.compareTo(tanggalAwal) >= 0
+                                                && tanggalTransaksi.compareTo(tanggalAkhir) <= 0) {
+                                            System.out.println(
+                                                    "===========================================================");
+                                            System.out
+                                                    .println("Tanggal " + detailRiwayatTransaksi[i][5] + " Pemasukan : "
+                                                            + detailRiwayatTransaksi[i][9]);
+                                            System.out.println(
+                                                    "Tanggal " + detailRiwayatTransaksi[i][6] + " Pengeluaran : "
+                                                            + detailRiwayatTransaksi[i][9]);
+                                            System.out.println(
+                                                    "===========================================================");
+                                            foundData = true;
+                                        }
+                                    }
+                                }
+
+                                if (!foundData) {
+                                    System.out.println("Tidak ada transaksi dalam rentang tanggal tersebut.");
+                                }
+
+                                input.nextLine();
+                                break;
+
+                            case 4:
                                 kmbliDriLaporan = true;
                                 break;
                         }
-                    } while (kmbliDriLaporan == false);
-                    break;
+
+                    } while (!kmbliDriLaporan);
 
                 case 2:
                     if (detailRiwayatTransaksi[0][0] != null) {
@@ -1534,4 +1575,5 @@ public class KasirBeta2 {
 
         return tanggal;
     }
+
 }
