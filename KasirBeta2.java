@@ -1035,42 +1035,18 @@ public class KasirBeta2 {
                         switch (menuLapKeuangan) {
                             case 1:
                                 if (detailRiwayatTransaksi[0][9] != null) {
-                                    boolean adaPemasukan = false;
-                                    boolean adaPengeluaran = false;
-                        
-                                    // Arrays to store dates for Pemasukan and Pengeluaran
-                                    String[] tanggalPemasukan = new String[detailRiwayatTransaksi.length];
-                                    String[] tanggalPengeluaran = new String[detailRiwayatTransaksi.length];
-                        
                                     for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
                                         if (detailRiwayatTransaksi[i][9] != null) {
-                                            String jenisTransaksi = "Pemasukan";
-                                            double amount = Double.parseDouble(detailRiwayatTransaksi[i][9]);
-                        
-                                            if (amount < 0) {
-                                                jenisTransaksi = "Pengeluaran";
-                                                System.out.println("Tanggal " + detailRiwayatTransaksi[i][6] + " " + jenisTransaksi + " : " + amount);
-                                                // Store the date for Pengeluaran
-                                                tanggalPengeluaran[i] = detailRiwayatTransaksi[i][6];
-                                                adaPengeluaran = true;
-                                            } else {
-                                                System.out.println("Tanggal " + detailRiwayatTransaksi[i][6] + " " + jenisTransaksi + " : " + amount);
-                                                // Store the date for Pemasukan
-                                                tanggalPemasukan[i] = detailRiwayatTransaksi[i][6];
-                                                adaPemasukan = true;
-                                            }
+                                            System.out
+                                                    .println("Tanggal " + detailRiwayatTransaksi[i][5] + " Pemasukan : "
+                                                            + detailRiwayatTransaksi[i][9]);
+                                            System.out
+                                                    .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Pengeluaran : "
+                                                            + detailRiwayatTransaksi[i][9]);
                                         }
                                     }
-                        
-                                    if (!adaPemasukan) {
-                                        System.out.println("Belum Ada Pemasukan");
-                                    }
-                        
-                                    if (!adaPengeluaran) {
-                                        System.out.println("Belum Ada Pengeluaran");
-                                    }
                                 } else {
-                                    System.out.println("Belum Ada Transaksi");
+                                    System.out.println("Belum Ada Pemasukan");
                                 }
                                 input.nextLine();
                                 break;
