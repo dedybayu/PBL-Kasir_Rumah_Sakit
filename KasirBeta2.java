@@ -1037,12 +1037,14 @@ public class KasirBeta2 {
                                 if (detailRiwayatTransaksi[0][9] != null) {
                                     for (int i = 0; i < detailRiwayatTransaksi.length; i++) {
                                         if (detailRiwayatTransaksi[i][9] != null) {
+                                            System.out.println("===========================================================");
                                             System.out
-                                                    .println("Tanggal " + detailRiwayatTransaksi[i][5] + " Pemasukan : "
-                                                            + detailRiwayatTransaksi[i][9]);
+                                            .println("Tanggal " + detailRiwayatTransaksi[i][5] + " Pemasukan : "
+                                            + detailRiwayatTransaksi[i][9]);
                                             System.out
-                                                    .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Pengeluaran : "
-                                                            + detailRiwayatTransaksi[i][9]);
+                                            .println("Tanggal " + detailRiwayatTransaksi[i][6] + " Pengeluaran : "
+                                            + detailRiwayatTransaksi[i][9]);
+                                            System.out.println("===========================================================");
                                         }
                                     }
                                 } else {
