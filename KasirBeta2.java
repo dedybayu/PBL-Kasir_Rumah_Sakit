@@ -1073,7 +1073,9 @@ public class KasirBeta2 {
                                 break;
 
                             case 3:
-                        
+                                System.out.println("==============================================");
+                                System.out.println("             RIWAYAT MUTASI                   ");
+                                System.out.println("==============================================");
                                 System.out.print("Masukkan tanggal awal : ");
                                 String tanggalAwal = input.nextLine();
 
@@ -1574,6 +1576,7 @@ public class KasirBeta2 {
         } while (!formatValid);
 
         return tanggal;
+        
     }
 
 }
